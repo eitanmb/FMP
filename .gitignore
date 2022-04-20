@@ -1,0 +1,5 @@
+bitacora
+/json
+*.json
+old
+.env

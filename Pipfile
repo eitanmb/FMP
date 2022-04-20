@@ -1,0 +1,25 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+fmpsdk = "*"
+numpy = "*"
+pandas = "*"
+mysql-connector-python = "*"
+sqlalchemy = "*"
+fsspec = "*"
+pymysql = "*"
+jupyter = "*"
+openpyxl = "*"
+xlsxwriter = "*"
+pymongo = "*"
+cryptography = "*"
+psutil = "*"
+typing = "*"
+
+[requires]
+python_version = "3.8"
