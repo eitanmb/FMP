@@ -1,0 +1,49 @@
+convertDateStage = {
+    $addFields:
+          {
+             "convertedDates":
+                { $map:
+                   {
+                      input: "$financialsAnnual.income",
+                      as: "income",
+                      in: { $toDate: "$$income.date" }
+                   }
+                }
+           }
+
+  }
+
+yearStage = {
+    $addFields:
+          {
+             "year":
+                { $map:
+                   {
+                      input: "$convertedDates",
+                      as: "cYear",
+                      in: {  $year: "$$cYear" }
+                   }
+                }
+           }
+
+  }
+
+matchYear = {
+
+  $match: { year: {$eq: 2018 } }
+
+}
+
+limitStage = {
+
+  $limit : 1
+}
+
+db.outlook.aggregate([
+
+  convertDateStage,
+  yearStage,
+  matchYear,
+  limitStage
+
+])
