@@ -1,7 +1,6 @@
 # from ast import List
 import os
 import sys
-import typing
 from helpers.get_data_functions import *
 from helpers.db_basics import *
 sys.path.append("..")

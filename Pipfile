@@ -20,6 +20,7 @@ pymongo = "*"
 cryptography = "*"
 psutil = "*"
 typing = "*"
+dnspython = "*"
 
 [requires]
 python_version = "3.8"
