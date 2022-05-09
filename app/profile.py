@@ -2,7 +2,7 @@ import sys
 sys.path.append("..")
 
 from config.setup import DIRS, CONNECTION, TICKERS_PATH
-from db.db_definitions import TABLE_PROFILE_STRUCTURE
+from db.db_definitions import TABLE_PROFILE_STRUCTURE, PROFILE_INDEXES
 from helpers.db_basics import engine_connetion, execute_query
 from helpers.get_data_functions import *
 from helpers.utilities import *
@@ -21,7 +21,7 @@ def init() -> None:
       
       execute_query(f'DROP TABLE IF EXISTS {table_name}', engine)
       execute_query( TABLE_PROFILE_STRUCTURE, engine )
-      execute_query(f'ALTER TABLE {table_name} ADD FULLTEXT INDEX `Search` (`description` ASC)', engine)
+      execute_query( PROFILE_INDEXES, engine )
       get_fmp_data(tickers_list, profile_url, folder, 'profile')
       creat_dataframe_from_data ( folder, engine, table_name )
 
