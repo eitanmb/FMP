@@ -42,6 +42,7 @@ TABLE_PROFILE_STRUCTURE = f'CREATE TABLE profile ( \
 
 
 PROFILE_INDEXES = f'ALTER TABLE `profile` \
+                    ADD FULLTEXT INDEX `Search` (`description`) VISIBLE, \
                     ADD INDEX `ISector` (`sector` ASC) VISIBLE, \
                     ADD INDEX `ICountry` (`country` ASC) VISIBLE, \
                     ADD INDEX `IIndustry` (`industry` ASC) VISIBLE, \
