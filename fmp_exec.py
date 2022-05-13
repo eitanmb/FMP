@@ -42,7 +42,7 @@ else:
 
 
 if execution_func == "profile":
-    execution_routine('PROFILE', profile, None, 'IS')
+    execution_routine('PROFILE', profile, None, 'outlook')
 
 if execution_func == "outlook":
     execution_routine('COMPANY OUTLOOK', company_outlook, None, 'IS')
