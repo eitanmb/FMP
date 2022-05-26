@@ -6,7 +6,7 @@ from helpers.get_data_functions import *
 from helpers.utilities import *
 from helpers.db_basics import engine_connetion, execute_query
 from helpers.file_basics import *
-# from app import institutional_holders as holders, float_shares as floatshares
+from app import institutional_holders as holderpaints, float_shares as floatshares
 
 
 

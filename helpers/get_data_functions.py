@@ -71,7 +71,7 @@ def get_fmp_data( tickers_list: list, partial_url: str, folder: str, caller: str
          #eliminar caracteres no deseados
         ticker = re.sub("[\^\/]", "", tickers_list[i])
 
-        if( caller == "outlook"):
+        if( caller == "outlook" or caller == "floatshares"):
             url = f"{partial_url}{ticker}&apikey={apikey}"
         else:
             url = f"{partial_url}{ticker}?apikey={apikey}"
