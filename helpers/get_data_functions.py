@@ -52,7 +52,12 @@ def get_jsonparsed_data(url: str):
     return json.loads(data)
 
 
-def get_fmp_data( tickers_list: list, partial_url: str, folder: str, caller: str ) -> None:
+# def get_fmp_data( tickers_list: list, partial_url: str, folder: str, caller: str ) -> None:
+def get_fmp_data(domain) -> None:
+    tickers_list = domain.tickers_list
+    folder = domain.folder
+    partial_url = domain.url
+    caller = domain.domain
     data = []
     how_many_tickers = count_files_in_folder(folder)
 

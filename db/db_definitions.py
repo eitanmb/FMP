@@ -55,20 +55,27 @@ PROFILE_INDEXES = f'ALTER TABLE `profile` \
 
 
 IS_INDEXES = f'ALTER TABLE `incomeStatement` \
+              ADD COLUMN `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`), \
               ADD INDEX `IRevenue` (`revenue` ASC) VISIBLE, \
               ADD INDEX `ICostOfRevenue` (`costOfRevenue` ASC) VISIBLE, \
               ADD INDEX `IOperatingExpenses` (`operatingExpenses` ASC) VISIBLE, \
               ADD INDEX `IRevCostExpDate` (`revenue` ASC, `costOfRevenue` ASC, `operatingExpenses` ASC, `calendarYear` ASC) VISIBLE, \
-              ADD INDEX `IDate` (`calendarYear` ASC) VISIBLE;'
+              ADD INDEX `IDate` (`calendarYear` ASC) VISIBLE, \
+              CHANGE COLUMN `link` `linkIncomeStatement` TEXT NULL DEFAULT NULL , \
+              CHANGE COLUMN `finalLink` `finalLinkIncomeStatement` TEXT NULL DEFAULT NULL ;'
 
 BS_INDEXES = f'ALTER TABLE `balanceSheet` \
               ADD INDEX `IDate` (`calendarYear` ASC) VISIBLE, \
               ADD INDEX `IAssLiabInv` (`totalLiabilities` ASC, `totalAssets` ASC, `inventory` ASC) VISIBLE, \
               ADD INDEX `IAsstes` (`totalAssets` ASC) VISIBLE, \
               ADD INDEX `ILiab` (`totalLiabilities` ASC) VISIBLE, \
-              ADD INDEX `IInventory` (`inventory` ASC) VISIBLE;'
+              ADD INDEX `IInventory` (`inventory` ASC) VISIBLE, \
+              CHANGE COLUMN `link` `linkBalanceSheet` TEXT NULL DEFAULT NULL , \
+              CHANGE COLUMN `finalLink` `finalLinkBalanceSheet` TEXT NULL DEFAULT NULL ;'
 
-
+CF_INDEXES = f'ALTER TABLE cashFlow ADD COLUMN `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`), \
+              CHANGE COLUMN `link` `linkCashFlow` TEXT NULL DEFAULT NULL, \
+              CHANGE COLUMN `finalLink` `finalLinkCashFlow` TEXT NULL DEFAULT NULL;'
 
 
 
