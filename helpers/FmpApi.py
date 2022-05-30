@@ -4,10 +4,9 @@ import os
 import pandas as pd
 import re
 from urllib.request import urlopen
-import sys
 
 #Custom modules
-from helpers.file_basics import *
+from helpers import File 
 from helpers.db_basics import create_table_from_dataframe
 from helpers.utilities import *
 
@@ -28,7 +27,7 @@ class FmpAPI:
     @staticmethod
     def create_tickers_list_with_financial_info(PATH: str) -> None:
         #Tradeble symbol List with financial statement
-        write_json_file(f"{PATH}/tickers_financial_info.json", FmpAPI.get_jsonparsed_data(FmpAPI.url_base + f"/v3/financial-statement-symbol-lists?apikey={FmpAPI.apikey}"))
+        File.write_json(f"{PATH}/tickers_financial_info.json", FmpAPI.get_jsonparsed_data(FmpAPI.url_base + f"/v3/financial-statement-symbol-lists?apikey={FmpAPI.apikey}"))
     
     @staticmethod
     def create_tradeble_tickers_list(PATH: str) -> None:
@@ -37,7 +36,7 @@ class FmpAPI:
         for elemento in FmpAPI.get_jsonparsed_data(FmpAPI.url_base + f"/v3/available-traded/list?apikey={FmpAPI.apikey}"):
             tickers_list.append(elemento['symbol'])
 
-        write_json_file(f"{PATH}/tradeble_tickers.json",tickers_list)
+        File.write_json(f"{PATH}/tradeble_tickers.json",tickers_list)
 
     @staticmethod
     def create_symbol_list(PATH: str) -> None:
@@ -46,7 +45,7 @@ class FmpAPI:
         for elemento in FmpAPI.get_jsonparsed_data(FmpAPI.url_base + f"/v3/stock/list?apikey={FmpAPI.apikey}"):
             tickers_list.append(elemento['symbol'])
 
-        write_json_file(f"{PATH}/symbols.json", tickers_list)
+        File.write_json(f"{PATH}/symbols.json", tickers_list)
 
     @staticmethod
     def get_tickers_list(file):
@@ -59,7 +58,7 @@ class FmpAPI:
         partial_url = domain.url
         caller = domain.domain
         data = []
-        how_many_tickers = count_files_in_folder(folder)
+        how_many_tickers = File.count_files_in_folder(folder)
 
         # Si el script falla podemos iniciar el bucle for desde este valor
         if how_many_tickers == 0:
@@ -91,13 +90,13 @@ class FmpAPI:
 
                 if type(data) is list:
                     if len(data) > 0:
-                        write_json_file(file, data)
+                        File.write_json(file, data)
                     else:
                         print(f"No data para { ticker }")
                 
                 elif(isinstance(data, dict)):
                     if not "Not found! Please check the symbol" in data.values():
-                        write_json_file(file, data)                
+                        File.write_json(file, data)                
                     else:
                         print(f"Not found! Please check the symbol {ticker}")
             
@@ -118,7 +117,7 @@ class FmpAPI:
     def creat_dataframe_from_data ( folder: str, engine, table_name: str ):
 
         count = 1
-        for file in files_in_folder(folder):
+        for file in File.files_in_folder(folder):
             print(f"Counter financials = {count}")
 
             try:

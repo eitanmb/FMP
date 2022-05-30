@@ -1,12 +1,9 @@
-from urllib.request import urlopen
 import os
 from dotenv import load_dotenv
-import sys
-import typing
 import pandas as pd
 from datetime import datetime
 from helpers.db_basics import *
-from helpers.get_data_functions import *
+from helpers import FmpAPI
 from helpers.utilities import *
 from config.setup import CONNECTION
 
@@ -25,7 +22,7 @@ def init():
     # url_fx_all = url_base + f"symbol/available-forex-currency-pairs?apikey={apikey}"
     url_fx_all = url_base + f"symbol/available-forex-currency-pairs?apikey={apikey}"
 
-    fx_pairs = get_jsonparsed_data(url_fx_all)
+    fx_pairs = FmpAPI.get_jsonparsed_data(url_fx_all)
     pairs = []
 
     for pair in fx_pairs:
@@ -42,7 +39,7 @@ def init():
 
     for pair in pairs:
         url_fx = url_base + f"historical-price-full/{pair}?apikey={apikey}"
-        fx_values_temp.append(get_jsonparsed_data(url_fx))
+        fx_values_temp.append(FmpAPI.get_jsonparsed_data(url_fx))
         fx_values.append(fx_values_temp)
         fx_values_temp = []
 

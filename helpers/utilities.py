@@ -1,5 +1,5 @@
 from datetime import datetime
-from helpers.file_basics import read_file, write_file
+from helpers import File
 
 def set_datetime_now() -> str:
     return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -17,10 +17,10 @@ def string_to_tuple( cadena: str ) -> tuple:
     return tuple( cadena.split(',') )
 
 def write_lastTicker_file(last_ticker: str, caller: str, ticker_position: str) -> None:
-    write_file(last_ticker, f'{caller},{ticker_position}')
+    File.write(last_ticker, f'{caller},{ticker_position}')
 
 def lastTicker_string_to_tuple( last_ticker_file ):
-    last_ticker_string: str = read_file( last_ticker_file )
+    last_ticker_string: str = File.read( last_ticker_file )
     return string_to_tuple( last_ticker_string )
 
 def get_lastTicker_info( last_ticker_file ) -> tuple:

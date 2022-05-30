@@ -4,7 +4,7 @@ sys.path.append("..")
 from config.setup import DIRS, CONNECTION, TICKERS_PATH
 from db.db_definitions import TABLE_PROFILE_STRUCTURE, PROFILE_INDEXES
 from helpers.db_basics import engine_connetion, execute_query
-from helpers.get_data_functions import *
+from helpers import FmpAPI
 from helpers.utilities import *
 
 def init() -> None:
@@ -22,16 +22,16 @@ def init() -> None:
       execute_query(f'DROP TABLE IF EXISTS {table_name}', engine)
       execute_query( TABLE_PROFILE_STRUCTURE, engine )
       execute_query( PROFILE_INDEXES, engine )
-      get_fmp_data(tickers_list, profile_url, folder, 'profile')
-      creat_dataframe_from_data ( folder, engine, table_name )
+      FmpAPI.get_data(tickers_list, profile_url, folder, 'profile')
+      FmpAPI.creat_dataframe_from_data( folder, engine, table_name )
 
 
 
   print( set_init_time( data_name ) )
 
-  tickers_list = get_tickers_list(TICKERS_PATH['symbols'])
+  tickers_list = FmpAPI.get_tickers_list(TICKERS_PATH['symbols'])
 
-  profile_url =  f"{url_base}/v3/profile/"
+  profile_url =  f"{FmpAPI.url_base}/v3/profile/"
 
   get_profile( tickers_list, profile_url, folder )
 

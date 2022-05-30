@@ -1,11 +1,12 @@
 import sys
+import os
 sys.path.append("..")
 
 from config.setup import DIRS, CONNECTION
-from helpers.get_data_functions import *
+from helpers import FmpAPI
 from helpers.utilities import *
 from helpers.db_basics import engine_connetion, execute_query
-from helpers.file_basics import *
+from helpers import File
 from app import institutional_holders as holderpaints, float_shares as floatshares
 
 
@@ -43,13 +44,13 @@ def init() -> None:
             data['symbol'] = symbol
 
         #obtener listado de archivos a modificar
-        files = files_in_folder( f_holders_ori )
+        files = File.files_in_folder( f_holders_ori )
 
         #Extraer la data de cada archivo JSON
         for file in files:
             #Convertir json data a python data
             try:
-                data = read_json_file(path_to_file(file))
+                data = File.read(path_to_file(file))
             
             except Exception as e:
                 print(e)
@@ -65,7 +66,7 @@ def init() -> None:
             new_file = f"{f_holders_mod}/{symbol}.json"
 
             if not os.path.exists(new_file):
-                write_json_file( new_file, data )
+                File.write_json( new_file, data )
             else:
                 print(f'El archivo {symbol} ya fue modificado')
 
@@ -73,13 +74,13 @@ def init() -> None:
     def create_shareholders_table():
         #Eliminar la tabla si existe
         execute_query(f'DROP TABLE IF EXISTS {table_holders}', engine)
-        creat_dataframe_from_data ( f_holders_mod, engine, table_holders )
+        FmpAPI.creat_dataframe_from_data ( f_holders_mod, engine, table_holders )
         execute_query( f'ALTER TABLE {table_holders} ADD COLUMN `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`)', engine )
     
     def create_share_table():
          #Eliminar la tabla si existe
         execute_query(f'DROP TABLE IF EXISTS {table_shares}', engine)
-        creat_dataframe_from_data ( folder, engine, table_shares )
+        FmpAPI.creat_dataframe_from_data ( folder, engine, table_shares )
         execute_query( f'ALTER TABLE {table_shares} ADD COLUMN `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`)', engine )
 
     print( set_init_time( data_name ))

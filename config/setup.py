@@ -1,7 +1,7 @@
 # from ast import List
 import os
 import sys
-from helpers.get_data_functions import *
+from helpers import FmpAPI
 from helpers.db_basics import *
 sys.path.append("..")
 
@@ -53,21 +53,21 @@ def init() -> None:
    
   if not os.path.exists(TICKERS_PATH['tickers_financial_info']):
     try:
-      create_tickers_list_with_financial_info( DIRS['CURRENT_JSON_FOLDER'] )
+      FmpAPI.create_tickers_list_with_financial_info( DIRS['CURRENT_JSON_FOLDER'] )
       print("tickers_financial_info created")
     except FileExistsError:
       print("tickers_financial_info already exist")
 
   if not os.path.exists(TICKERS_PATH['tradable_tickers']):
     try:
-      create_tradeble_tickers_list(DIRS['CURRENT_JSON_FOLDER'])
+      FmpAPI.create_tradeble_tickers_list(DIRS['CURRENT_JSON_FOLDER'])
       print("tradable_tickers created")
     except FileExistsError:
       print("tradable_tickers already exist")
 
   if not os.path.exists(TICKERS_PATH['symbols']):
     try:
-      create_symbol_list(DIRS['CURRENT_JSON_FOLDER'])
+      FmpAPI.create_symbol_list(DIRS['CURRENT_JSON_FOLDER'])
       print("symbols created")
     
     except FileExistsError as e:
