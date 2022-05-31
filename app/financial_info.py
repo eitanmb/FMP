@@ -3,6 +3,7 @@ import sys
 sys.path.append("..")
 
 from config.setup import DIRS, CONNECTION, TICKERS_PATH
+from config.endpoints import ENDPOINTS
 from db.db_definitions import IS_INDEXES, BS_INDEXES, CF_INDEXES
 from helpers.db_basics import engine_connetion, execute_query
 from helpers import FmpAPI
@@ -18,17 +19,17 @@ def init( tipo_report:str ) -> None:
 
         # TODO: VERIFICAR SI NECESITAS mandar FmpAPI.url_base
         "IS": {
-            "url":f"{FmpAPI.url_base}/v3/income-statement/",
+            "endpoint":'{url_base}/v3/income-statement/{ticker}?apikey={api}',
             "table": "incomeStatement",
             "domain": "Income Statement"
         },
         "BS": {
-            "url":f"{FmpAPI.url_base}/v3/balance-sheet-statement/",
+            "endpoint":'{url_base}/v3/balance-sheet-statement/{ticker}?apikey={api}',
             "table": "balanceSheet",
             "domain": "Balance Sheet"
         },
         "CF": {
-            "url":f"{FmpAPI.url_base}/v3/cash-flow-statement/",
+            "endpoint":'{url_base}/v3/cash-flow-statement/{ticker}?apikey={api}',
             "table": "cashFlow",
             "domain": "Cash Flow"
         }
@@ -38,7 +39,7 @@ def init( tipo_report:str ) -> None:
     
     financial_report: object = {
         'tickers_list': tickers_list,
-        'url': report[tipo_report]['url'],
+        'endpoint': report[tipo_report]['endpoint'],
         'table': report[tipo_report]['table'],
         'folder': f"{folder}/{tipo_report}/",
         'domain': tipo_report

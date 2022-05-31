@@ -2,7 +2,7 @@ import sys
 sys.path.append("..")
 
 from config.setup import DIRS, TICKERS_PATH
-from helpers.get_data_functions import *
+from helpers import FmpAPI
 from helpers.utilities import *
 
 def init() -> None:
@@ -15,12 +15,12 @@ def init() -> None:
     print( set_init_time( data_name ) )
 
     # GET Tradeble tickers
-    tickers_list = get_tickers_list(TICKERS_PATH['tickers_financial_info'])
+    tickers_list = FmpAPI.get_tickers_list(TICKERS_PATH['tickers_financial_info'])
 
     #Preconfiurar url para obtener profiles
-    inthoder_url =  f"{url_base}/v3/institutional-holder/"
+    inthoder_url = "{url_base}/v3/institutional-holder/{ticker}?apikey={api}"
 
-    get_fmp_data( tickers_list, inthoder_url, folder, 'holders' )
+    FmpAPI.get_fmp_data( tickers_list, inthoder_url, folder, 'holders' )
 
     print( set_init_time( data_name ), set_end_time( data_name ) )
 

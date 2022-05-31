@@ -2,6 +2,7 @@ import sys
 sys.path.append("..")
 
 from config.setup import DIRS, CONNECTION, TICKERS_PATH
+from config.endpoints import ENDPOINTS
 from db.db_definitions import TABLE_PROFILE_STRUCTURE, PROFILE_INDEXES
 from helpers.db_basics import engine_connetion, execute_query
 from helpers import FmpAPI
@@ -31,7 +32,7 @@ def init() -> None:
 
   tickers_list = FmpAPI.get_tickers_list(TICKERS_PATH['symbols'])
 
-  profile_url =  f"{FmpAPI.url_base}/v3/profile/"
+  profile_url = "{url_base}/v3/profile/{ticker}?apikey={api}"
 
   get_profile( tickers_list, profile_url, folder )
 

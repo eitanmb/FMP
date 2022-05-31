@@ -53,10 +53,10 @@ class FmpAPI:
 
     @staticmethod
     def get_data(domain) -> None:
-        tickers_list = domain.tickers_list
-        folder = domain.folder
-        partial_url = domain.url
-        caller = domain.domain
+        tickers_list = domain[tickers_list]
+        folder = domain[folder]
+        endpoint = domain[endpoint]
+        caller = domain[domain]
         data = []
         how_many_tickers = File.count_files_in_folder(folder)
 
@@ -72,13 +72,11 @@ class FmpAPI:
         print(f"Desde: {_from}")
 
         for i in range( _from, len(tickers_list) ):
-            #eliminar caracteres no deseados
+           
+            # TODO: Crear una funcion para esto
             ticker = re.sub("[\^\/]", "", tickers_list[i])
 
-            if( caller == "outlook" or caller == "floatshares"):
-                url = f"{partial_url}{ticker}&apikey={FmpAPI.apikey}"
-            else:
-                url = f"{partial_url}{ticker}?apikey={FmpAPI.apikey}"
+            url = endpoint.format(utl_base=FmpAPI.url_base, ticker=ticker, api=FmpAPI.apikey)
             
             print(url)
 

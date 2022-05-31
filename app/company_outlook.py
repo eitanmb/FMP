@@ -1,6 +1,8 @@
 import sys
+from tkinter import E
 sys.path.append("..")
 
+from config.endpoints import ENDPOINTS
 from config.setup import DIRS, TICKERS_PATH
 from helpers.utilities import *
 from helpers import FmpAPI
@@ -12,14 +14,13 @@ def init() -> None:
   folder: str = f"{BASE_FOLDER}/outlook"
   data_name: str = "Company Outlook"
   tickers_file = TICKERS_PATH['tickers_financial_info']
-  url: str =  f"{FmpAPI.url_base}/v4/company-outlook?symbol="
   tickers_list: list = FmpAPI.get_tickers_list(tickers_file)
 
   outlook: object = {
+    'domain': 'outlook',
     'tickers_list': tickers_list,
-    'url': url,
-    'folder': folder,
-    'domain': 'outlook'
+    'endpoint': ENDPOINTS['outlook'],
+    'folder': folder
   }
 
   print(set_init_time(data_name))

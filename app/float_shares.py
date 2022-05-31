@@ -16,7 +16,7 @@ def init() -> None:
 
     tickers_list = FmpAPI.get_tickers_list(TICKERS_PATH['tickers_financial_info'])
 
-    float_url =  f"{ FmpAPI.url_base }/v4/shares_float?symbol="
+    float_url =  "{url_base}/v4/shares_float?symbol={ticker}&apikey={api}"
 
     FmpAPI.get_data( tickers_list, float_url, folder, 'floatshares' )
 
