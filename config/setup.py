@@ -6,6 +6,7 @@ from helpers.db_basics import *
 sys.path.append("..")
 
 from config.directory_structure import *
+from config.endpoints import ENDPOINTS
 
 
 BASE_DIR: str = os.path.dirname(os.path.abspath( 'fmp') )
@@ -53,21 +54,21 @@ def init() -> None:
    
   if not os.path.exists(TICKERS_PATH['tickers_financial_info']):
     try:
-      FmpAPI.create_tickers_list_with_financial_info( DIRS['CURRENT_JSON_FOLDER'] )
+      FmpAPI.create_tickers_list( DIRS['CURRENT_JSON_FOLDER'],ENDPOINTS['financial_list'], 'tickers_financial_info.json')
       print("tickers_financial_info created")
     except FileExistsError:
       print("tickers_financial_info already exist")
 
   if not os.path.exists(TICKERS_PATH['tradable_tickers']):
     try:
-      FmpAPI.create_tradeble_tickers_list(DIRS['CURRENT_JSON_FOLDER'])
+      FmpAPI.create_tradeble_tickers_list(DIRS['CURRENT_JSON_FOLDER'], ENDPOINTS['tradeble_list'], 'tradable_tickers.json')
       print("tradable_tickers created")
     except FileExistsError:
       print("tradable_tickers already exist")
 
   if not os.path.exists(TICKERS_PATH['symbols']):
     try:
-      FmpAPI.create_symbol_list(DIRS['CURRENT_JSON_FOLDER'])
+      FmpAPI.create_symbol_list(DIRS['CURRENT_JSON_FOLDER'],  ENDPOINTS['stock_list'], 'symbols.json')
       print("symbols created")
     
     except FileExistsError as e:

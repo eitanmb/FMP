@@ -38,18 +38,30 @@ class FmpAPI:
         if ticker == "":
             return endpoint.format(utl_base=FmpAPI.url_base, api=FmpAPI.apikey)
         return endpoint.format(utl_base=FmpAPI.url_base, ticker=ticker, api=FmpAPI.apikey)
+    
+    @staticmethod
+    def append_ticker(tickers):
+        tickers_list = []
+        for ticker in tickers:
+            tickers_list.append(ticker['symbol'])
+        return tickers_list
+
+    
+    @staticmethod
+    def are_financial_tickers(endpoint):
+        return endpoint.find("financial")
 
     @staticmethod
-    def create_tickers_list(PATH: str, partial_endpoint, file_name):
+    def create_tickers_list(PATH: str, partial_endpoint:str, file_name:str):
         endpoint = FmpAPI.configure_endpoint(partial_endpoint)
         tickers = FmpAPI.get_jsonparsed_data(endpoint)
         path_to_file = FmpAPI.get_path_to_file(PATH, file_name)
 
-        tickers_list = []
-        for ticker in tickers:
-            tickers_list.append(ticker['symbol'])
-
-        File.write_json(path_to_file, tickers_list)
+        if  FmpAPI.are_financial_tickers(endpoint) == -1:
+            tickers_list = FmpAPI.append_ticker(tickers)
+            File.write_json(path_to_file, tickers_list)
+        else:
+            File.write_json(path_to_file, tickers)
 
     @staticmethod
     def clean_ticker(ticker):
@@ -61,7 +73,6 @@ class FmpAPI:
         if how_many_tickers == 0:
             return 0
         return int(util.get_lastTicker_info(FmpAPI.last_ticker)[1])
-
 
     @staticmethod
     def does_not_exist(data):
