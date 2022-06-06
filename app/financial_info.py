@@ -17,19 +17,18 @@ def init( tipo_report:str ) -> None:
     
     report: object = {
 
-        # TODO: VERIFICAR SI NECESITAS mandar FmpAPI.url_base
         "IS": {
-            "endpoint":'{url_base}/v3/income-statement/{ticker}?apikey={api}',
+            "endpoint":ENDPOINTS["IS"],
             "table": "incomeStatement",
             "domain": "Income Statement"
         },
         "BS": {
-            "endpoint":'{url_base}/v3/balance-sheet-statement/{ticker}?apikey={api}',
+            "endpoint":ENDPOINTS["BS"],
             "table": "balanceSheet",
             "domain": "Balance Sheet"
         },
         "CF": {
-            "endpoint":'{url_base}/v3/cash-flow-statement/{ticker}?apikey={api}',
+            "endpoint":ENDPOINTS["CF"],
             "table": "cashFlow",
             "domain": "Cash Flow"
         }

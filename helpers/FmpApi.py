@@ -5,13 +5,14 @@ import pandas as pd
 import re
 from urllib.request import urlopen
 
-#Custom modules
-from helpers import File 
+# Custom modules
+from helpers import File
 from helpers.db_basics import create_table_from_dataframe
 from helpers.utilities import *
 from config.endpoints import ENDPOINTS
 
 load_dotenv()
+
 
 class FmpAPI:
     apikey = os.environ.get("APIKEY")
@@ -22,118 +23,118 @@ class FmpAPI:
     def get_jsonparsed_data(url: str):
         response = urlopen(url)
         data = response.read().decode("utf-8")
-
         return json.loads(data)
-    
-    @staticmethod
-    def configure_endpoint(endpoint, ticker):
-        if not ticker:
-            return endpoint.format(utl_base=FmpAPI.url_base, api=FmpAPI.apikey)
-        
-        return endpoint.format(utl_base=FmpAPI.url_base, ticker=ticker, api=FmpAPI.apikey)
-    
-    @staticmethod
-    def get_path_to_file(PATH:str, file:str):
-        return f"{PATH}/{file}"
-
-    
-    
-    @staticmethod
-    def create_tickers_list_file(PATH: str) -> None:
-        #Tradeble symbol List with financial statement
-        tickers_list = []
-        for elemento in FmpAPI.get_jsonparsed_data(FmpAPI.url_base + f"/v3/available-traded/list?apikey={FmpAPI.apikey}"):
-            tickers_list.append(elemento['symbol'])
-
-        File.write_json(f"{PATH}/tradeble_tickers.json",tickers_list)
-    
-
-    @staticmethod
-    def create_tickers_list_with_financial_info(PATH: str) -> None:
-        path_to_file = FmpAPI.get_path_to_file(PATH, 'tickers_financial_info.json')
-        data = 
-        File.write_json(path_to_file, )
-
-        
-    
-   
-
-    @staticmethod
-    def create_symbol_list(PATH: str) -> None:
-        #All symbols
-        tickers_list = []
-        for elemento in FmpAPI.get_jsonparsed_data(FmpAPI.url_base + f"/v3/stock/list?apikey={FmpAPI.apikey}"):
-            tickers_list.append(elemento['symbol'])
-
-        File.write_json(f"{PATH}/symbols.json", tickers_list)
 
     @staticmethod
     def get_tickers_list(file):
         return json.load(open(file))
 
-    
     @staticmethod
-    def download_companies_data(domain) -> None:
-        tickers_list = domain[tickers_list]
-        folder = domain[folder]
-        endpoint = domain[endpoint]
-        caller = domain[domain]
-        data = []
-        how_many_tickers = File.count_files_in_folder(folder)
+    def get_path_to_file(PATH: str, file: str):
+        return f"{PATH}/{file}"
 
+    @staticmethod
+    def configure_endpoint(endpoint, ticker=""):
+        if ticker == "":
+            return endpoint.format(utl_base=FmpAPI.url_base, api=FmpAPI.apikey)
+        return endpoint.format(utl_base=FmpAPI.url_base, ticker=ticker, api=FmpAPI.apikey)
+
+    @staticmethod
+    def clean_ticker(ticker):
+        return re.sub("[\^\/]", "", ticker)
+
+    @staticmethod
+    def create_tickers_list(PATH: str, partial_endpoint, file_name):
+        endpoint = FmpAPI.configure_endpoint(partial_endpoint)
+        tickers = FmpAPI.get_jsonparsed_data(endpoint)
+        path_to_file = FmpAPI.get_path_to_file(PATH, file_name)
+
+        tickers_list = []
+        for ticker in tickers:
+            tickers_list.append(ticker['symbol'])
+
+        File.write_json(path_to_file, tickers_list)
+
+    @staticmethod
+    def return_start_from_tickers(how_many_tickers):
         # Si el script falla podemos iniciar el bucle for desde este valor
         if how_many_tickers == 0:
-            _from = 0 
-        else:
-            # _from = read_file(last_ticker)  
-            _from = get_lastTicker_info(FmpAPI.last_ticker)
-            _from = int(_from[1])
-
-        print( f"How many tickers= { how_many_tickers }" )
-        print(f"Desde: {_from}")
-
-        for i in range( _from, len(tickers_list) ):
-           
-            # TODO: Crear una funcion para esto
-            ticker = re.sub("[\^\/]", "", tickers_list[i])
-
-            url = FmpAPI.configure_endpoint(endpoint, ticker)
-            
-            print(url)
-
-            #write file with downloaded data
-            file = f"{folder}/{ticker}.json"
-
-            try:
-                data = FmpAPI.get_jsonparsed_data(url)
-
-                if type(data) is list:
-                    if len(data) > 0:
-                        File.write_json(file, data)
-                    else:
-                        print(f"No data para { ticker }")
-                
-                elif(isinstance(data, dict)):
-                    if not "Not found! Please check the symbol" in data.values():
-                        File.write_json(file, data)                
-                    else:
-                        print(f"Not found! Please check the symbol {ticker}")
-            
-            except Exception as e:
-                print(e, url)
-
-            finally:
-                #Guardar la posicion que tiene el ticker dentro de la tickers_list
-                ticker_position = tickers_list.index(ticker)
-                write_lastTicker_file(FmpAPI.last_ticker, caller, ticker_position)
-                
-                print('ticker', ticker)
-
-                how_many_tickers += 1
-                print('How many: ', how_many_tickers)
+            return 0
+        return int(get_lastTicker_info(FmpAPI.last_ticker)[1])
 
     @staticmethod
-    def creat_dataframe_from_data ( folder: str, engine, table_name: str ):
+    def print_messages(*messages):
+        print(*messages)
+
+    @staticmethod
+    def data_type_is_list(data):
+        return type(data) is list
+
+    @staticmethod
+    def data_type_is_dict(data):
+        return isinstance(data, dict)
+
+    @staticmethod
+    def is_not_empty_list(data):
+        return len(data) > 0
+
+    @staticmethod
+    def symbol_does_not_exist(data):
+        return "Not found! Please check the symbol" in data.values()
+
+    @staticmethod
+    def is_valid_data(data):
+        if (FmpAPI.data_type_is_list(data) and FmpAPI.is_not_empty_list(data)) or \
+                (FmpAPI.data_type_is_dict(data) and FmpAPI.symbol_does_not_exist(data) == False):
+            return True
+        else:
+            return False
+
+
+    @staticmethod
+    def get_download_ticker_possition(tickers_list, ticker):
+        return tickers_list.index(ticker)
+
+    @staticmethod
+    def download_companies_data(domain) -> None:
+        tickers_list = domain["tickers_list"]
+        folder = domain[folder]
+        partial_endpoint = domain["endpoint"]
+        caller = domain["domain"]
+        how_many_tickers = File.count_files_in_folder(folder)
+        _from = FmpAPI.return_start_from_tickers(how_many_tickers)
+
+        FmpAPI.print_messages("How many tickers:", how_many_tickers)
+        FmpAPI.print_messages("Desde:", _from)
+
+        for i in range(_from, len(tickers_list)):
+            ticker = FmpAPI.clean_ticker(tickers_list[i])
+            file = FmpAPI.get_path_to_file(folder, f"{ticker}.json")
+            endpoint = FmpAPI.configure_endpoint(partial_endpoint, ticker)
+            FmpAPI.print_messages(endpoint)
+
+            try:
+                data = FmpAPI.get_jsonparsed_data(endpoint)
+                if FmpAPI.is_valid_data(data):
+                    
+
+                FmpAPI.print_messages("No existe el ticker", ticker)
+
+            except Exception as error:
+                FmpAPI.print_messages(error, endpoint)
+
+            finally:
+                # Guardar la posicion que tiene el ticker dentro de la tickers_list
+                ticker_position = FmpAPI.get_download_ticker_possition(
+                    tickers_list, ticker)
+                write_lastTicker_file(FmpAPI.last_ticker,
+                                      caller, ticker_position)
+                FmpAPI.print_messages('ticker', ticker)
+                how_many_tickers += 1
+                FmpAPI.print_messages('How many: ', how_many_tickers)
+
+    @staticmethod
+    def creat_dataframe_from_data(folder: str, engine, table_name: str):
 
         count = 1
         for file in File.files_in_folder(folder):
@@ -143,8 +144,8 @@ class FmpAPI:
                 df = pd.read_json(f"{folder}/{file}", orient='columns')
 
                 if df.empty == False:
-                    print( file, df )
-                    print(create_table_from_dataframe( df, engine, table_name ))
+                    print(file, df)
+                    print(create_table_from_dataframe(df, engine, table_name))
                 else:
                     print("Dataframe vacío")
 
