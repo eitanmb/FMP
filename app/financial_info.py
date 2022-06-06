@@ -5,7 +5,7 @@ sys.path.append("..")
 from config.setup import DIRS, CONNECTION, TICKERS_PATH
 from config.endpoints import ENDPOINTS
 from db.db_definitions import IS_INDEXES, BS_INDEXES, CF_INDEXES
-from helpers.db_basics import engine_connetion, execute_query
+from helpers.db_basics import engine_connetion, execute_query, creat_dataframe_from_data
 from helpers import FmpAPI
 from helpers.utilities import *
 
@@ -48,8 +48,8 @@ def init( tipo_report:str ) -> None:
 
     def get_financial_report():
         execute_query(f'DROP TABLE IF EXISTS {financial_report.table}', engine)
-        FmpAPI.get_data(financial_report)
-        FmpAPI.creat_dataframe_from_data(financial_report.folder, engine, financial_report.table)
+        FmpAPI.download_companies_data(financial_report)
+        creat_dataframe_from_data(financial_report.folder, engine, financial_report.table)
 
         if financial_report.domain == "IS":
             execute_query( IS_INDEXES, engine )
@@ -58,15 +58,10 @@ def init( tipo_report:str ) -> None:
         if financial_report.domain == "CF":
             execute_query( CF_INDEXES, engine )
 
-    # END def get_financial
-    
     data_name: str = report[tipo_report]['domain']
-    print( set_init_time(data_name))
-
+    print_messages( set_init_time(data_name))
     get_financial_report()
-
-    print( set_init_time( data_name ), set_end_time( data_name ) )
-
+    print_messages( set_init_time( data_name ), set_end_time( data_name ) )
 
 if __name__ == "_main__":
   init()
