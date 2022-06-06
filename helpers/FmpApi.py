@@ -9,6 +9,7 @@ from urllib.request import urlopen
 from helpers import File 
 from helpers.db_basics import create_table_from_dataframe
 from helpers.utilities import *
+from config.endpoints import ENDPOINTS
 
 load_dotenv()
 
@@ -23,20 +24,39 @@ class FmpAPI:
         data = response.read().decode("utf-8")
 
         return json.loads(data)
-
-    @staticmethod
-    def create_tickers_list_with_financial_info(PATH: str) -> None:
-        #Tradeble symbol List with financial statement
-        File.write_json(f"{PATH}/tickers_financial_info.json", FmpAPI.get_jsonparsed_data(FmpAPI.url_base + f"/v3/financial-statement-symbol-lists?apikey={FmpAPI.apikey}"))
     
     @staticmethod
-    def create_tradeble_tickers_list(PATH: str) -> None:
+    def configure_endpoint(endpoint, ticker):
+        if not ticker:
+            return endpoint.format(utl_base=FmpAPI.url_base, api=FmpAPI.apikey)
+        
+        return endpoint.format(utl_base=FmpAPI.url_base, ticker=ticker, api=FmpAPI.apikey)
+    
+    @staticmethod
+    def get_path_to_file(PATH:str, file:str):
+        return f"{PATH}/{file}"
+
+    
+    
+    @staticmethod
+    def create_tickers_list_file(PATH: str) -> None:
         #Tradeble symbol List with financial statement
         tickers_list = []
         for elemento in FmpAPI.get_jsonparsed_data(FmpAPI.url_base + f"/v3/available-traded/list?apikey={FmpAPI.apikey}"):
             tickers_list.append(elemento['symbol'])
 
         File.write_json(f"{PATH}/tradeble_tickers.json",tickers_list)
+    
+
+    @staticmethod
+    def create_tickers_list_with_financial_info(PATH: str) -> None:
+        path_to_file = FmpAPI.get_path_to_file(PATH, 'tickers_financial_info.json')
+        data = 
+        File.write_json(path_to_file, )
+
+        
+    
+   
 
     @staticmethod
     def create_symbol_list(PATH: str) -> None:
@@ -51,8 +71,9 @@ class FmpAPI:
     def get_tickers_list(file):
         return json.load(open(file))
 
+    
     @staticmethod
-    def get_data(domain) -> None:
+    def download_companies_data(domain) -> None:
         tickers_list = domain[tickers_list]
         folder = domain[folder]
         endpoint = domain[endpoint]
@@ -76,7 +97,7 @@ class FmpAPI:
             # TODO: Crear una funcion para esto
             ticker = re.sub("[\^\/]", "", tickers_list[i])
 
-            url = endpoint.format(utl_base=FmpAPI.url_base, ticker=ticker, api=FmpAPI.apikey)
+            url = FmpAPI.configure_endpoint(endpoint, ticker)
             
             print(url)
 

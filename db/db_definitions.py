@@ -1,7 +1,6 @@
 
 TABLE_PROFILE_STRUCTURE = f'CREATE TABLE profile ( \
-        `id` int(11) NOT NULL AUTO_INCREMENT, \
-        `symbol` varchar(50) NOT NULL, \
+        `symbol` varchar(25) NOT NULL, \
         `price` varchar(50) DEFAULT NULL, \
         `beta`  varchar(50) DEFAULT NULL, \
         `volAvg` varchar(50) DEFAULT NULL, \
@@ -37,8 +36,8 @@ TABLE_PROFILE_STRUCTURE = f'CREATE TABLE profile ( \
         `isActivelyTrading` tinyint(1) DEFAULT NULL, \
         `isAdr` tinyint(1) DEFAULT NULL, \
         `isFund` tinyint(1) DEFAULT NULL, \
-        PRIMARY KEY (`id`) \
-      ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;'
+        PRIMARY KEY (`symbol`) \
+      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;'
 
 
 PROFILE_INDEXES = f'ALTER TABLE `profile` \
@@ -53,16 +52,24 @@ PROFILE_INDEXES = f'ALTER TABLE `profile` \
                     ADD INDEX `ICompInd` (`companyName` ASC, `industry` ASC) VISIBLE, \
                     ADD INDEX `ICompIndSec` (`companyName` ASC, `sector` ASC, `industry` ASC) VISIBLE;'
 
+IS_DELETE_NO_SYMBOL = f'DELETE FROM incomeStatement where symbol is NULL;'
 
 IS_INDEXES = f'ALTER TABLE `incomeStatement` \
-              ADD COLUMN `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`), \
               ADD INDEX `IRevenue` (`revenue` ASC) VISIBLE, \
               ADD INDEX `ICostOfRevenue` (`costOfRevenue` ASC) VISIBLE, \
               ADD INDEX `IOperatingExpenses` (`operatingExpenses` ASC) VISIBLE, \
               ADD INDEX `IRevCostExpDate` (`revenue` ASC, `costOfRevenue` ASC, `operatingExpenses` ASC, `calendarYear` ASC) VISIBLE, \
               ADD INDEX `IDate` (`calendarYear` ASC) VISIBLE, \
+              CHANGE COLUMN `symbol` `symbol` VARCHAR(25) NOT NULL, \
               CHANGE COLUMN `link` `linkIncomeStatement` TEXT NULL DEFAULT NULL , \
               CHANGE COLUMN `finalLink` `finalLinkIncomeStatement` TEXT NULL DEFAULT NULL ;'
+
+IS_FK =     f'ALTER TABLE `incomeStatement` \
+                ADD CONSTRAINT `fk_symbol` \
+                FOREIGN KEY (`symbol`) \
+                REFERENCES `profile` (`symbol`) \
+                ON DELETE NO ACTION \
+                ON UPDATE NO ACTION;'          
 
 BS_INDEXES = f'ALTER TABLE `balanceSheet` \
               ADD INDEX `IDate` (`calendarYear` ASC) VISIBLE, \
