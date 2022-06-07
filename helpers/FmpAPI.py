@@ -52,7 +52,7 @@ class FmpAPI:
     
     @staticmethod
     def are_financial_tickers(endpoint):
-        return endpoint.find("financial")
+        return endpoint.find("statement")
 
     @staticmethod
     def create_tickers_list(PATH: str, partial_endpoint:str, file_name:str):
@@ -68,10 +68,7 @@ class FmpAPI:
 
     @staticmethod
     def clean_ticker(ticker):
-        print("ticker", ticker)
-        sys.exit()
-        clean_ticker = re.sub("[\^\/]", "", ticker)
-        return clean_ticker
+        return re.sub("[\^\/]", "", ticker)
 
     @staticmethod
     def return_start_from_tickers(how_many_tickers):
@@ -117,7 +114,7 @@ class FmpAPI:
             try:
                 data = FmpAPI.get_jsonparsed_data(endpoint)
                 if FmpAPI.is_valid_data(data):
-                    File.write_json_file(file, data)
+                    File.write_json(file, data)
                 else:
                     util.print_messages("No existe el ticker:", ticker)
 

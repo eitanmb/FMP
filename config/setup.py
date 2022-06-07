@@ -50,7 +50,6 @@ def init() -> None:
   TICKERS_PATH['tickers_financial_info'] = f'{ DIRS["CURRENT_JSON_FOLDER"] }/tickers_financial_info.json'
   TICKERS_PATH['tradable_tickers'] = f'{ DIRS["CURRENT_JSON_FOLDER"] }/tradeble_tickers.json'
   TICKERS_PATH['symbols'] = f'{ DIRS["CURRENT_JSON_FOLDER"] }/symbols.json'
-
    
   if not os.path.exists(TICKERS_PATH['tickers_financial_info']):
     try:
