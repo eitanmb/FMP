@@ -68,7 +68,10 @@ class FmpAPI:
 
     @staticmethod
     def clean_ticker(ticker):
-        return re.sub("[\^\/]", "", ticker)
+        print("ticker", ticker)
+        sys.exit()
+        clean_ticker = re.sub("[\^\/]", "", ticker)
+        return clean_ticker
 
     @staticmethod
     def return_start_from_tickers(how_many_tickers):
@@ -106,10 +109,6 @@ class FmpAPI:
         util.print_messages("Desde:", _from)
 
         for i in range(_from, len(tickers_list)):
-
-            print("ticker", tickers_list[i])
-            sys.exit()
-
             ticker = FmpAPI.clean_ticker(tickers_list[i])
             file = FmpAPI.get_path_to_file(folder, f"{ticker}.json")
             endpoint = FmpAPI.configure_endpoint(partial_endpoint, ticker)
