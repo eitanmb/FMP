@@ -10,6 +10,7 @@ from helpers.File import File
 from helpers import utilities as util
 from config.endpoints import ENDPOINTS
 
+import sys
 load_dotenv()
 '''
 TODO: los parametros que deben pasarsele al endpoint depende de la versión del fmp endpoint. 
@@ -95,7 +96,7 @@ class FmpAPI:
     @staticmethod
     def download_companies_data(domain) -> None:
         tickers_list = domain["tickers_list"]
-        folder = domain[folder]
+        folder = domain['folder']
         partial_endpoint = domain["endpoint"]
         caller = domain["domain"]
         how_many_tickers = File.count_files_in_folder(folder)
@@ -105,6 +106,10 @@ class FmpAPI:
         util.print_messages("Desde:", _from)
 
         for i in range(_from, len(tickers_list)):
+
+            print("ticker", tickers_list[i])
+            sys.exit()
+
             ticker = FmpAPI.clean_ticker(tickers_list[i])
             file = FmpAPI.get_path_to_file(folder, f"{ticker}.json")
             endpoint = FmpAPI.configure_endpoint(partial_endpoint, ticker)
