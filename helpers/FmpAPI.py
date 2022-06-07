@@ -11,8 +11,11 @@ from helpers import utilities as util
 from config.endpoints import ENDPOINTS
 
 load_dotenv()
+'''
+TODO: los parametros que deben pasarsele al endpoint depende de la versión del fmp endpoint. 
+Evaluar si es más lógico utilizar ese parametro
 
-
+'''
 class FmpAPI:
     apikey = os.environ.get("APIKEY")
     url_base = os.environ.get("FMP_URL_BASE")

@@ -5,7 +5,7 @@ sys.path.append("..")
 from config.setup import DIRS, CONNECTION
 from helpers import FmpAPI
 from helpers.utilities import *
-from helpers.db_basics import engine_connetion, execute_query
+from helpers.db_basics import engine_connetion, execute_query, creat_dataframe_from_data
 from helpers import File
 from app import institutional_holders as holderpaints, float_shares as floatshares
 
@@ -74,13 +74,13 @@ def init() -> None:
     def create_shareholders_table():
         #Eliminar la tabla si existe
         execute_query(f'DROP TABLE IF EXISTS {table_holders}', engine)
-        FmpAPI.creat_dataframe_from_data ( f_holders_mod, engine, table_holders )
+        creat_dataframe_from_data ( f_holders_mod, engine, table_holders )
         execute_query( f'ALTER TABLE {table_holders} ADD COLUMN `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`)', engine )
     
     def create_share_table():
          #Eliminar la tabla si existe
         execute_query(f'DROP TABLE IF EXISTS {table_shares}', engine)
-        FmpAPI.creat_dataframe_from_data ( folder, engine, table_shares )
+        creat_dataframe_from_data ( folder, engine, table_shares )
         execute_query( f'ALTER TABLE {table_shares} ADD COLUMN `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`)', engine )
 
     print( set_init_time( data_name ))
