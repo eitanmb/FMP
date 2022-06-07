@@ -30,9 +30,9 @@ def init() -> None:
             company_profile['folder'], engine, company_profile['table'])
 
     data_name: str = "Company Profile"
-    util.print_message(util.set_init_time(data_name))
+    util.print_messages(util.set_init_time(data_name))
     get_profile()
-    util.print_message(util.set_end_time(data_name))
+    util.print_messages(util.set_end_time(data_name))
 
 if __name__ == "_main__":
     init()

@@ -18,9 +18,9 @@ def init() -> None:
     }
     data_name: str = "Institutional Holders"
 
-    util.print_message( util.set_init_time( data_name ) )
+    util.print_messages( util.set_init_time( data_name ) )
     FmpAPI.download_companies_data(inst_holders)
-    util.print_message( util.set_end_time( data_name ) )
+    util.print_messages( util.set_end_time( data_name ) )
 
 if __name__ == "__main__":
     init()

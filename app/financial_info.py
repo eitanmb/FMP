@@ -62,7 +62,7 @@ def init(tipo_report: str) -> None:
     data_name: str = report[tipo_report]['domain']
     print_messages(set_init_time(data_name))
     get_financial_report()
-    print_messages(set_init_time(data_name), set_end_time(data_name))
+    print_messages(set_end_time(data_name))
 
 
 if __name__ == "_main__":
