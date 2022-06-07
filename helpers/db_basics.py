@@ -3,8 +3,8 @@
 import sys
 import mysql.connector
 from sqlalchemy import create_engine
-from File import *
 import pandas as pd
+from .File import *
 
 def engine_connetion(CONNECTION: object):
     engine = create_engine(

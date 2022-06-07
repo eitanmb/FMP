@@ -6,7 +6,7 @@ from config.setup import DIRS, CONNECTION, TICKERS_PATH
 from config.endpoints import ENDPOINTS
 from db.db_definitions import IS_INDEXES, BS_INDEXES, CF_INDEXES
 from helpers.db_basics import engine_connetion, execute_query, creat_dataframe_from_data
-from helpers import FmpAPI
+from helpers.FmpAPI import FmpAPI
 from helpers.utilities import *
 
 

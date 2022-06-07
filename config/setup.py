@@ -1,10 +1,10 @@
 # from ast import List
 import os
 import sys
-from helpers import FmpAPI
-from helpers.db_basics import *
 sys.path.append("..")
 
+from helpers.FmpAPI import FmpAPI
+from helpers.db_basics import *
 from config.directory_structure import *
 from config.endpoints import ENDPOINTS
 
@@ -61,14 +61,14 @@ def init() -> None:
 
   if not os.path.exists(TICKERS_PATH['tradable_tickers']):
     try:
-      FmpAPI.create_tradeble_tickers_list(DIRS['CURRENT_JSON_FOLDER'], ENDPOINTS['tradeble_list'], 'tradable_tickers.json')
+      FmpAPI.create_tickers_list(DIRS['CURRENT_JSON_FOLDER'], ENDPOINTS['tradeble_list'], 'tradable_tickers.json')
       print("tradable_tickers created")
     except FileExistsError:
       print("tradable_tickers already exist")
 
   if not os.path.exists(TICKERS_PATH['symbols']):
     try:
-      FmpAPI.create_symbol_list(DIRS['CURRENT_JSON_FOLDER'],  ENDPOINTS['stock_list'], 'symbols.json')
+      FmpAPI.create_tickers_list(DIRS['CURRENT_JSON_FOLDER'],  ENDPOINTS['stock_list'], 'symbols.json')
       print("symbols created")
     
     except FileExistsError as e:

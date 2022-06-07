@@ -6,8 +6,7 @@ import re
 from urllib.request import urlopen
 
 # Custom modules
-from helpers import File
-from helpers.db_basics import create_table_from_dataframe
+from helpers.File import File
 from helpers import utilities as util
 from config.endpoints import ENDPOINTS
 
@@ -36,8 +35,8 @@ class FmpAPI:
     @staticmethod
     def configure_endpoint(endpoint, ticker=""):
         if ticker == "":
-            return endpoint.format(utl_base=FmpAPI.url_base, api=FmpAPI.apikey)
-        return endpoint.format(utl_base=FmpAPI.url_base, ticker=ticker, api=FmpAPI.apikey)
+            return endpoint.format(url_base=FmpAPI.url_base, apikey=FmpAPI.apikey)
+        return endpoint.format(url_base=FmpAPI.url_base, ticker=ticker, apikey=FmpAPI.apikey)
     
     @staticmethod
     def append_ticker(tickers):
