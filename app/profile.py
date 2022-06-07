@@ -1,5 +1,5 @@
 from helpers import utilities as util
-from helpers import FmpAPI
+from helpers.FmpAPI import FmpAPI
 from helpers import db_basics as db
 from db.db_definitions import TABLE_PROFILE_STRUCTURE, PROFILE_INDEXES
 from config.setup import DIRS, CONNECTION, TICKERS_PATH
