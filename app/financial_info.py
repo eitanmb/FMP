@@ -5,7 +5,7 @@ from config.endpoints import ENDPOINTS
 from config.setup import DIRS, CONNECTION, TICKERS_PATH
 from db.db_definitions import IS_INDEXES, BS_INDEXES, CF_INDEXES, \
     IS_FK, BS_FK, CF_FK, IS_DELETE_NO_SYMBOL, BS_DELETE_NO_SYMBOL, CF_DELETE_NO_SYMBOL, \
-    IS_TABLE_STRUCTURE, BS_TABLE_STRUCTURE, CF_TABLE_STRUCTURE
+    IS_CREATE_TABLE, BS_CREATE_TABLE, CF_CREATE_TABLE, IS_DROP_TABLE, BS_DROP_TABLE, CF_DROP_TABLE
 from helpers.utilities import *
 from helpers.FmpAPI import FmpAPI
 from helpers import db_basics as db
@@ -21,7 +21,8 @@ def init(tipo_report: str) -> None:
             "endpoint": ENDPOINTS["IS"],
             "table": "incomeStatement",
             "db_operations": {
-                "create_table": IS_TABLE_STRUCTURE,
+                "drop_table": IS_DROP_TABLE,
+                "create_table": IS_CREATE_TABLE,
                 "indexes": IS_INDEXES,
                 "delete_null": IS_DELETE_NO_SYMBOL,
                 "fk": IS_FK
@@ -32,7 +33,8 @@ def init(tipo_report: str) -> None:
             "endpoint": ENDPOINTS["BS"],
             "table": "balanceSheet",
             "db_operations": {
-                "create_table": BS_TABLE_STRUCTURE,
+                "drop_table": BS_DROP_TABLE,
+                "create_table": BS_CREATE_TABLE,
                 "indexes": BS_INDEXES,
                 "delete_null": BS_DELETE_NO_SYMBOL,
                 "fk": BS_FK
@@ -43,7 +45,8 @@ def init(tipo_report: str) -> None:
             "endpoint": ENDPOINTS["CF"],
             "table": "cashFlow",
             "db_operations": {
-                "create_table": CF_TABLE_STRUCTURE,
+                "drop_table": CF_DROP_TABLE,
+                "create_table": CF_CREATE_TABLE,
                 "indexes": CF_INDEXES,
                 "delete_null": CF_DELETE_NO_SYMBOL,
                 "fk": CF_FK
@@ -54,7 +57,7 @@ def init(tipo_report: str) -> None:
     tickers_list = FmpAPI.get_tickers_list(
         TICKERS_PATH['tickers_financial_info'])
 
-    financial_report: object = {
+    report: object = {
         'domain': tipo_report,
         'tickers_list': tickers_list,
         'endpoint': report[tipo_report]['endpoint'],
@@ -65,25 +68,22 @@ def init(tipo_report: str) -> None:
     engine = db.engine_connetion(CONNECTION)
 
     def drop_financial_report_table()-> None:
-        db.execute_query(
-            f"DROP TABLE IF EXISTS {financial_report['table']}", engine)
+        db.execute_query(report['db_operations']['drop_table'], engine)
 
     def create_financial_report_table()-> None:
         db.execute_query(
-            financial_report['db_operations']['create_table'], engine)
+            report['db_operations']['create_table'], engine)
 
     def alter_financial_report_table()-> None:
-        db.execute_query(financial_report['db_operations']['indexes'], engine)
-        db.execute_query(
-            financial_report['db_operations']['delete_null'], engine)
-        db.execute_query(financial_report['db_operations']['fk'], engine)
+        db.execute_query(report['db_operations']['indexes'], engine)
+        db.execute_query(report['db_operations']['delete_null'], engine)
+        db.execute_query(report['db_operations']['fk'], engine)
 
     def get_financial_report()-> None:
-        FmpAPI.download_companies_data(financial_report)
+        FmpAPI.download_companies_data(report)
         drop_financial_report_table()
         create_financial_report_table()
-        db.creat_dataframe_from_data(
-            financial_report['folder'], engine, financial_report['table'])
+        db.creat_dataframe_from_data(report['folder'], engine, report['table'])
         alter_financial_report_table()
 
     data_name: str = report[tipo_report]['domain']

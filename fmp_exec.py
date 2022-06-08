@@ -7,7 +7,6 @@ from app import profile, company_outlook, \
 from typing import NoReturn, Callable, List, Dict
 import sys
 
-# Configura lo necesario para la descarga desde FMP
 setup.init()
 
 
@@ -71,7 +70,6 @@ if execution_func == "forex":
 
 if execution_func == "finished":
     print('FINISHED')
-
 
 
 # PRUEBA

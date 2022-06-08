@@ -1,10 +1,11 @@
-from helpers import FmpAPI
-from helpers import utilities as util
-from config.setup import DIRS, TICKERS_PATH
-from config.endpoints import ENDPOINTS
 import sys
-from tkinter import E
 sys.path.append("..")
+from tkinter import E
+
+from config.endpoints import ENDPOINTS
+from config.setup import DIRS, TICKERS_PATH
+from helpers.FmpAPI import FmpAPI
+from helpers import utilities as util
 
 
 def init() -> None:
@@ -23,6 +24,7 @@ def init() -> None:
     util.print_messages(util.set_init_time(data_name))
     FmpAPI.download_companies_data(outlook)
     util.print_messages(util.set_end_time(data_name))
+    util.print_messages("Tiempo de ejecución", util.set_end_time(data_name) - util.set_init_time(data_name))
 
 if __name__ == "_main__":
     init()

@@ -1,22 +1,22 @@
 from dotenv import load_dotenv
+from urllib.request import urlopen
 import json
 import os
-import pandas as pd
 import re
-from urllib.request import urlopen
-
-# Custom modules
-from helpers.File import File
-from helpers import utilities as util
-from config.endpoints import ENDPOINTS
-
 import sys
+
+from config.endpoints import ENDPOINTS
+from helpers import utilities as util
+from helpers.File import File
+
 load_dotenv()
 '''
 TODO: los parametros que deben pasarsele al endpoint depende de la versión del fmp endpoint. 
 Evaluar si es más lógico utilizar ese parametro
 
 '''
+
+
 class FmpAPI:
     apikey = os.environ.get("APIKEY")
     url_base = os.environ.get("FMP_URL_BASE")
@@ -41,7 +41,7 @@ class FmpAPI:
         if ticker == "":
             return endpoint.format(url_base=FmpAPI.url_base, apikey=FmpAPI.apikey)
         return endpoint.format(url_base=FmpAPI.url_base, ticker=ticker, apikey=FmpAPI.apikey)
-    
+
     @staticmethod
     def append_ticker(tickers):
         tickers_list = []
@@ -49,18 +49,17 @@ class FmpAPI:
             tickers_list.append(ticker['symbol'])
         return tickers_list
 
-    
     @staticmethod
     def are_financial_tickers(endpoint):
         return endpoint.find("statement")
 
     @staticmethod
-    def create_tickers_list(PATH: str, partial_endpoint:str, file_name:str):
+    def create_tickers_list(PATH: str, partial_endpoint: str, file_name: str):
         endpoint = FmpAPI.configure_endpoint(partial_endpoint)
         tickers = FmpAPI.get_jsonparsed_data(endpoint)
         path_to_file = FmpAPI.get_path_to_file(PATH, file_name)
 
-        if  FmpAPI.are_financial_tickers(endpoint) == -1:
+        if FmpAPI.are_financial_tickers(endpoint) == -1:
             tickers_list = FmpAPI.append_ticker(tickers)
             File.write_json(path_to_file, tickers_list)
         else:
@@ -126,7 +125,7 @@ class FmpAPI:
                 ticker_position = FmpAPI.get_download_ticker_possition(
                     tickers_list, ticker)
                 util.write_lastTicker_file(FmpAPI.last_ticker,
-                                      caller, ticker_position)
+                                           caller, ticker_position)
                 util.print_messages('ticker', ticker)
                 how_many_tickers += 1
                 util.print_messages('How many: ', how_many_tickers)

@@ -1,47 +1,46 @@
-
-TABLE_PROFILE_STRUCTURE = f'CREATE TABLE profile ( \
-                            `symbol` varchar(25) NOT NULL, \
-                            `price` varchar(50) DEFAULT NULL, \
-                            `beta`  varchar(50) DEFAULT NULL, \
-                            `volAvg` varchar(50) DEFAULT NULL, \
-                            `mktCap` varchar(50) DEFAULT NULL, \
-                            `lastDiv` varchar(50) DEFAULT NULL, \
-                            `range` varchar(250) DEFAULT NULL, \
-                            `changes` varchar(250) DEFAULT NULL, \
-                            `companyName` varchar(250) DEFAULT NULL, \
-                            `currency` text, \
-                            `cik` varchar(100) DEFAULT NULL, \
-                            `isin` text, \
-                            `cusip` text DEFAULT NULL, \
-                            `exchange` text, \
-                            `exchangeShortName` text, \
-                            `industry` varchar(250) DEFAULT NULL, \
-                            `website` varchar(250) DEFAULT NULL, \
-                            `description` text, \
-                            `ceo` text, \
-                            `sector` varchar(250) DEFAULT NULL, \
-                            `country` varchar(250) DEFAULT NULL, \
-                            `fullTimeEmployees` varchar(20) DEFAULT NULL, \
-                            `phone` varchar(100) DEFAULT NULL, \
-                            `address` text, \
-                            `city` varchar(250) DEFAULT NULL, \
-                            `state` varchar(250) DEFAULT NULL, \
-                            `zip` varchar(100) DEFAULT NULL, \
-                            `dcfDiff` varchar(50) DEFAULT NULL, \
-                            `dcf` varchar(50) DEFAULT NULL, \
-                            `image` text, \
-                            `ipoDate` text, \
-                            `defaultImage` tinyint(1) DEFAULT NULL, \
-                            `isEtf` tinyint(1) DEFAULT NULL, \
-                            `isActivelyTrading` tinyint(1) DEFAULT NULL, \
-                            `isAdr` tinyint(1) DEFAULT NULL, \
-                            `isFund` tinyint(1) DEFAULT NULL, \
-                            PRIMARY KEY (`symbol`) \
-                          ) ENGINE=InnoDB DEFAULT CHARSET=latin1;'
+PROFILE_DROP_TABLE   = f"DROP TABLE IF EXISTS profile"
+PROFILE_CREATE_TABLE = f'CREATE TABLE profile ( \
+                        `symbol` varchar(25) NOT NULL, \
+                        `price` varchar(50) DEFAULT NULL, \
+                        `beta`  varchar(50) DEFAULT NULL, \
+                        `volAvg` varchar(50) DEFAULT NULL, \
+                        `mktCap` varchar(50) DEFAULT NULL, \
+                        `lastDiv` varchar(50) DEFAULT NULL, \
+                        `range` varchar(250) DEFAULT NULL, \
+                        `changes` varchar(250) DEFAULT NULL, \
+                        `companyName` varchar(250) DEFAULT NULL, \
+                        `currency` text, \
+                        `cik` varchar(100) DEFAULT NULL, \
+                        `isin` text, \
+                        `cusip` text DEFAULT NULL, \
+                        `exchange` text, \
+                        `exchangeShortName` text, \
+                        `industry` varchar(250) DEFAULT NULL, \
+                        `website` varchar(250) DEFAULT NULL, \
+                        `description` text, \
+                        `ceo` text, \
+                        `sector` varchar(250) DEFAULT NULL, \
+                        `country` varchar(250) DEFAULT NULL, \
+                        `fullTimeEmployees` varchar(20) DEFAULT NULL, \
+                        `phone` varchar(100) DEFAULT NULL, \
+                        `address` text, \
+                        `city` varchar(250) DEFAULT NULL, \
+                        `state` varchar(250) DEFAULT NULL, \
+                        `zip` varchar(100) DEFAULT NULL, \
+                        `dcfDiff` varchar(50) DEFAULT NULL, \
+                        `dcf` varchar(50) DEFAULT NULL, \
+                        `image` text, \
+                        `ipoDate` text, \
+                        `defaultImage` tinyint(1) DEFAULT NULL, \
+                        `isEtf` tinyint(1) DEFAULT NULL, \
+                        `isActivelyTrading` tinyint(1) DEFAULT NULL, \
+                        `isAdr` tinyint(1) DEFAULT NULL, \
+                        `isFund` tinyint(1) DEFAULT NULL, \
+                        PRIMARY KEY (`symbol`) \
+                      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;'
 
 
 PROFILE_INDEXES = f'ALTER TABLE `profile` \
-                    ADD COLUMN `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`), \
                     ADD FULLTEXT INDEX `Search` (`description`) VISIBLE, \
                     ADD INDEX `ISector` (`sector` ASC) VISIBLE, \
                     ADD INDEX `ICountry` (`country` ASC) VISIBLE, \
@@ -53,7 +52,8 @@ PROFILE_INDEXES = f'ALTER TABLE `profile` \
                     ADD INDEX `ICompInd` (`companyName` ASC, `industry` ASC) VISIBLE, \
                     ADD INDEX `ICompIndSec` (`companyName` ASC, `sector` ASC, `industry` ASC) VISIBLE;'
 
-IS_TABLE_STRUCTURE = f'CREATE TABLE `incomeStatement` (\
+IS_DROP_TABLE   = f"DROP TABLE IF EXISTS incomeStatement"
+IS_CREATE_TABLE = f'CREATE TABLE `incomeStatement` (\
                       `id` int NOT NULL AUTO_INCREMENT,\
                       `date` datetime DEFAULT NULL,\
                       `symbol` varchar(25) NOT NULL,\
@@ -111,7 +111,8 @@ IS_FK =  f'ALTER TABLE `incomeStatement` \
           ON DELETE NO ACTION \
           ON UPDATE NO ACTION;'
 
-BS_TABLE_STRUCTURE = f"CREATE TABLE `balanceSheet` ( \
+BS_DROP_TABLE   = f"DROP TABLE IF EXISTS balanceSheet"
+BS_CREATE_TABLE = f"CREATE TABLE `balanceSheet` ( \
                       `id` int NOT NULL AUTO_INCREMENT, \
                       `date` datetime DEFAULT NULL, \
                       `symbol` varchar(25) DEFAULT NULL, \
@@ -184,8 +185,8 @@ BS_FK = f'ALTER TABLE `balanceSheet` \
           ON DELETE NO ACTION \
           ON UPDATE NO ACTION;'   
 
-
-CF_TABLE_STRUCTURE = f'CREATE TABLE `cashFlow` (\
+CF_DROP_TABLE   = f"DROP TABLE IF EXISTS cashFlow"
+CF_CREATE_TABLE = f'CREATE TABLE `cashFlow` (\
                       `id` int NOT NULL AUTO_INCREMENT,\
                       `date` datetime DEFAULT NULL,\
                       `symbol` varchar(25) DEFAULT NULL,,\
