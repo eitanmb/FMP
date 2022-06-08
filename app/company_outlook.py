@@ -24,6 +24,5 @@ def init() -> None:
     FmpAPI.download_companies_data(outlook)
     util.print_messages(util.set_end_time(data_name))
 
-
 if __name__ == "_main__":
     init()

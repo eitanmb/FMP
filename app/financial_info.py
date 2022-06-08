@@ -1,7 +1,9 @@
 from helpers.utilities import *
 from helpers.FmpAPI import FmpAPI
 from helpers import db_basics as db
-from db.db_definitions import IS_INDEXES, BS_INDEXES, CF_INDEXES
+from db.db_definitions import IS_INDEXES, BS_INDEXES, CF_INDEXES, \
+    IS_FK, BS_FK, CF_FK, IS_DELETE_NO_SYMBOL, BS_DELETE_NO_SYMBOL, CF_DELETE_NO_SYMBOL, \
+    IS_TABLE_STRUCTURE, BS_TABLE_STRUCTURE, CF_TABLE_STRUCTURE
 from config.endpoints import ENDPOINTS
 from config.setup import DIRS, CONNECTION, TICKERS_PATH
 import sys
@@ -10,26 +12,43 @@ sys.path.append("..")
 
 
 def init(tipo_report: str) -> None:
-
     BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
     folder: str = f"{BASE_FOLDER}/financials"
 
     report: object = {
 
         "IS": {
+            "domain": "Income Statement",
             "endpoint": ENDPOINTS["IS"],
             "table": "incomeStatement",
-            "domain": "Income Statement"
+            "db_operations": {
+                "create_table": IS_TABLE_STRUCTURE,
+                "indexes": IS_INDEXES,
+                "delete_null": IS_DELETE_NO_SYMBOL,
+                "fk": IS_FK
+            }
         },
         "BS": {
+            "domain": "Balance Sheet",
             "endpoint": ENDPOINTS["BS"],
             "table": "balanceSheet",
-            "domain": "Balance Sheet"
+            "db_operations": {
+                "create_table": BS_TABLE_STRUCTURE,
+                "indexes": BS_INDEXES,
+                "delete_null": BS_DELETE_NO_SYMBOL,
+                "fk": BS_FK
+            }
         },
         "CF": {
+            "domain": "Cash Flow",
             "endpoint": ENDPOINTS["CF"],
             "table": "cashFlow",
-            "domain": "Cash Flow"
+            "db_operations": {
+                "create_table": CF_TABLE_STRUCTURE,
+                "indexes": CF_INDEXES,
+                "delete_null": CF_DELETE_NO_SYMBOL,
+                "fk": CF_FK
+            }
         }
     }
 
@@ -37,33 +56,41 @@ def init(tipo_report: str) -> None:
         TICKERS_PATH['tickers_financial_info'])
 
     financial_report: object = {
+        'domain': tipo_report,
         'tickers_list': tickers_list,
         'endpoint': report[tipo_report]['endpoint'],
         'table': report[tipo_report]['table'],
         'folder': f"{folder}/{tipo_report}/",
-        'domain': tipo_report
+        'db_operations': report[tipo_report]['db_operations']
     }
     engine = db.engine_connetion(CONNECTION)
 
-    def get_financial_report():
+    def drop_financial_report_table():
         db.execute_query(
             f"DROP TABLE IF EXISTS {financial_report['table']}", engine)
+
+    def create_financial_report_table():
+        db.execute_query(
+            financial_report['db_operations']['create_table'], engine)
+
+    def alter_financial_report_table():
+        db.execute_query(financial_report['db_operations']['indexes'], engine)
+        db.execute_query(
+            financial_report['db_operations']['delete_null'], engine)
+        db.execute_query(financial_report['db_operations']['fk'], engine)
+
+    def get_financial_report():
         FmpAPI.download_companies_data(financial_report)
+        drop_financial_report_table()
+        create_financial_report_table()
         db.creat_dataframe_from_data(
             financial_report['folder'], engine, financial_report['table'])
-
-        if financial_report.domain == "IS":
-            db.execute_query(IS_INDEXES, engine)
-        if financial_report.domain == "BS":
-            db.execute_query(BS_INDEXES, engine)
-        if financial_report.domain == "CF":
-            db.execute_query(CF_INDEXES, engine)
+        alter_financial_report_table()
 
     data_name: str = report[tipo_report]['domain']
     print_messages(set_init_time(data_name))
     get_financial_report()
     print_messages(set_end_time(data_name))
-
 
 if __name__ == "_main__":
     init()

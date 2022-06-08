@@ -12,22 +12,23 @@ def init() -> None:
     BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
     tickers_list = FmpAPI.get_tickers_list(TICKERS_PATH['symbols'])
     company_profile: object = {
+        'domain': 'profile',
         'tickers_list': tickers_list,
         'endpoint': ENDPOINTS['profile'],
         'table': 'profile',
-        'folder': f'{BASE_FOLDER}/profiles',
-        'domain': 'profile'
+        'folder': f'{BASE_FOLDER}/profiles'
     }
     engine = db.engine_connetion(CONNECTION)
 
-    def get_profile() -> None:
-        db.execute_query(
-            f"DROP TABLE IF EXISTS { company_profile['table'] }", engine)
+    def alter_profile_table():
+        db.execute_query(f"DROP TABLE IF EXISTS {company_profile['table']}", engine)
         db.execute_query(TABLE_PROFILE_STRUCTURE, engine)
         db.execute_query(PROFILE_INDEXES, engine)
+
+    def get_profile() -> None:
+        alter_profile_table()
         FmpAPI.download_companies_data(company_profile)
-        db.creat_dataframe_from_data(
-            company_profile['folder'], engine, company_profile['table'])
+        db.creat_dataframe_from_data(company_profile['folder'], engine, company_profile['table'])
 
     data_name: str = "Company Profile"
     util.print_messages(util.set_init_time(data_name))
