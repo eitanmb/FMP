@@ -1,15 +1,14 @@
-from helpers.utilities import *
-from helpers.FmpAPI import FmpAPI
-from helpers import db_basics as db
+import sys
+sys.path.append("..")
+
+from config.endpoints import ENDPOINTS
+from config.setup import DIRS, CONNECTION, TICKERS_PATH
 from db.db_definitions import IS_INDEXES, BS_INDEXES, CF_INDEXES, \
     IS_FK, BS_FK, CF_FK, IS_DELETE_NO_SYMBOL, BS_DELETE_NO_SYMBOL, CF_DELETE_NO_SYMBOL, \
     IS_TABLE_STRUCTURE, BS_TABLE_STRUCTURE, CF_TABLE_STRUCTURE
-from config.endpoints import ENDPOINTS
-from config.setup import DIRS, CONNECTION, TICKERS_PATH
-import sys
-
-sys.path.append("..")
-
+from helpers.utilities import *
+from helpers.FmpAPI import FmpAPI
+from helpers import db_basics as db
 
 def init(tipo_report: str) -> None:
     BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
@@ -65,21 +64,21 @@ def init(tipo_report: str) -> None:
     }
     engine = db.engine_connetion(CONNECTION)
 
-    def drop_financial_report_table():
+    def drop_financial_report_table()-> None:
         db.execute_query(
             f"DROP TABLE IF EXISTS {financial_report['table']}", engine)
 
-    def create_financial_report_table():
+    def create_financial_report_table()-> None:
         db.execute_query(
             financial_report['db_operations']['create_table'], engine)
 
-    def alter_financial_report_table():
+    def alter_financial_report_table()-> None:
         db.execute_query(financial_report['db_operations']['indexes'], engine)
         db.execute_query(
             financial_report['db_operations']['delete_null'], engine)
         db.execute_query(financial_report['db_operations']['fk'], engine)
 
-    def get_financial_report():
+    def get_financial_report()-> None:
         FmpAPI.download_companies_data(financial_report)
         drop_financial_report_table()
         create_financial_report_table()
