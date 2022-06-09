@@ -15,7 +15,6 @@ def init(tipo_report: str) -> None:
     folder: str = f"{BASE_FOLDER}/financials"
 
     report: object = {
-
         "IS": {
             "domain": "Income Statement",
             "endpoint": ENDPOINTS["IS"],
@@ -57,7 +56,7 @@ def init(tipo_report: str) -> None:
     tickers_list = FmpAPI.get_tickers_list(
         TICKERS_PATH['tickers_financial_info'])
 
-    report: object = {
+    financial_report: object = {
         'domain': tipo_report,
         'tickers_list': tickers_list,
         'endpoint': report[tipo_report]['endpoint'],
@@ -68,25 +67,25 @@ def init(tipo_report: str) -> None:
     engine = db.engine_connetion(CONNECTION)
 
     def drop_financial_report_table()-> None:
-        db.execute_query(report['db_operations']['drop_table'], engine)
+        db.execute_query(financial_report['db_operations']['drop_table'], engine)
 
     def create_financial_report_table()-> None:
         db.execute_query(
-            report['db_operations']['create_table'], engine)
+            financial_report['db_operations']['create_table'], engine)
 
     def alter_financial_report_table()-> None:
-        db.execute_query(report['db_operations']['indexes'], engine)
-        db.execute_query(report['db_operations']['delete_null'], engine)
-        db.execute_query(report['db_operations']['fk'], engine)
+        db.execute_query(financial_report['db_operations']['indexes'], engine)
+        db.execute_query(financial_report['db_operations']['delete_null'], engine)
+        db.execute_query(financial_report['db_operations']['fk'], engine)
 
     def get_financial_report()-> None:
-        FmpAPI.download_companies_data(report)
+        FmpAPI.download_companies_data(financial_report)
         drop_financial_report_table()
         create_financial_report_table()
-        db.creat_dataframe_from_data(report['folder'], engine, report['table'])
+        db.creat_dataframe_from_data(financial_report['folder'], engine, financial_report['table'])
         alter_financial_report_table()
 
-    data_name: str = report['domain']
+    data_name: str = financial_report['domain']
     print_messages(set_init_time(data_name))
     get_financial_report()
     print_messages(set_end_time(data_name))
