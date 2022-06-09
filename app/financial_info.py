@@ -86,7 +86,7 @@ def init(tipo_report: str) -> None:
         db.creat_dataframe_from_data(report['folder'], engine, report['table'])
         alter_financial_report_table()
 
-    data_name: str = report[tipo_report]['domain']
+    data_name: str = report['domain']
     print_messages(set_init_time(data_name))
     get_financial_report()
     print_messages(set_end_time(data_name))
