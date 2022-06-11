@@ -9,7 +9,7 @@ from helpers import utilities as util
 def init() -> None:
 
     BASE_FOLDER = DIRS['CURRENT_JSON_FOLDER']
-    tickers_list = FmpAPI.get_tickers_list(TICKERS_PATH['tickers_financial_info'])
+    tickers_list = FmpAPI.get_tickers_list(TICKERS_PATH['symbols'])
     inst_holders:object = {
         'tickers_list': tickers_list,
         'endpoint': ENDPOINTS['holders'],

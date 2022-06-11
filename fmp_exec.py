@@ -9,7 +9,6 @@ import sys
 
 setup.init()
 
-
 execution_func:str = '';
 
 def execution_routine( func_name:str, func, argument, next_func_name:str ) -> NoReturn:
@@ -27,8 +26,6 @@ def execution_routine( func_name:str, func, argument, next_func_name:str ) -> No
     print(f"END {func_name}")
 
 
-# Registra la funcion que se esta ejecutando
-# Si el script se detiene, se retoma desde la funcion en ejecución
 if get_lastTicker_info( 'lastTicker.txt' )[0] == 'finished':
     print('FINISHED')
     sys.exit()

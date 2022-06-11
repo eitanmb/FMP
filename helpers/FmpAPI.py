@@ -5,7 +5,6 @@ import os
 import re
 import sys
 
-from config.endpoints import ENDPOINTS
 from helpers import utilities as util
 from helpers.File import File
 

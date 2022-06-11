@@ -80,7 +80,7 @@ def init(tipo_report: str) -> None:
         execute_table_operation(drop_table, "Drop table:")
         execute_table_operation(create_table, "Create table:")
         execute_table_operation(add_indexes, "Create indexes:")
-        # FmpAPI.download_companies_data(financial_report)
+        FmpAPI.download_companies_data(financial_report)
         db.creat_dataframe_from_data(folder, engine, table)
         execute_table_operation(alter_table, "Alter table:")
 

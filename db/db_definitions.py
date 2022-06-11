@@ -187,7 +187,7 @@ CF_DROP_TABLE   = f"DROP TABLE IF EXISTS cashFlow"
 CF_CREATE_TABLE = f'CREATE TABLE `cashFlow` (\
                       `id` int NOT NULL AUTO_INCREMENT,\
                       `date` datetime NOT NULL,\
-                      `symbol` varchar(25) NOT NULL,,\
+                      `symbol` varchar(25) NOT NULL,\
                       `reportedCurrency` text,\
                       `cik` bigint DEFAULT NULL,\
                       `fillingDate` text,\
