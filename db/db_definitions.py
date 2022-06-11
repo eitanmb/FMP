@@ -9,35 +9,35 @@ PROFILE_CREATE_TABLE = f'CREATE TABLE profile ( \
                         `range` varchar(250) DEFAULT NULL, \
                         `changes` varchar(250) DEFAULT NULL, \
                         `companyName` varchar(250) DEFAULT NULL, \
-                        `currency` text, \
-                        `cik` varchar(100) DEFAULT NULL, \
-                        `isin` text, \
-                        `cusip` text DEFAULT NULL, \
-                        `exchange` text, \
-                        `exchangeShortName` text, \
+                        `currency` varchar(15), \
+                        `cik` varchar(200) DEFAULT NULL, \
+                        `isin` varchar(200), \
+                        `cusip` varchar(100) DEFAULT NULL, \
+                        `exchange` varchar(200), \
+                        `exchangeShortName` varchar(100), \
                         `industry` varchar(250) DEFAULT NULL, \
                         `website` varchar(250) DEFAULT NULL, \
                         `description` text, \
-                        `ceo` text, \
+                        `ceo` varchar(200), \
                         `sector` varchar(250) DEFAULT NULL, \
                         `country` varchar(250) DEFAULT NULL, \
                         `fullTimeEmployees` varchar(20) DEFAULT NULL, \
                         `phone` varchar(100) DEFAULT NULL, \
-                        `address` text, \
+                        `address` tinytext, \
                         `city` varchar(250) DEFAULT NULL, \
                         `state` varchar(250) DEFAULT NULL, \
                         `zip` varchar(100) DEFAULT NULL, \
                         `dcfDiff` varchar(50) DEFAULT NULL, \
                         `dcf` varchar(50) DEFAULT NULL, \
                         `image` text, \
-                        `ipoDate` text, \
+                        `ipoDate` varchar(200), \
                         `defaultImage` tinyint(1) DEFAULT NULL, \
                         `isEtf` tinyint(1) DEFAULT NULL, \
                         `isActivelyTrading` tinyint(1) DEFAULT NULL, \
                         `isAdr` tinyint(1) DEFAULT NULL, \
                         `isFund` tinyint(1) DEFAULT NULL, \
                         PRIMARY KEY (`symbol`) \
-                      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;'
+                      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4'
 
 
 PROFILE_INDEXES = f'ALTER TABLE `profile` \
@@ -91,21 +91,19 @@ IS_CREATE_TABLE = f'CREATE TABLE `incomeStatement` (\
                       `epsdiluted` double DEFAULT NULL,\
                       `weightedAverageShsOut` bigint DEFAULT NULL,\
                       `weightedAverageShsOutDil` bigint DEFAULT NULL,\
-                      `linkIncomestatement` text,\
-                      `finalLinkIncomestatement` text,\
-                      PRIMARY KEY (`id`),\
-                      KEY `fk_profile_id_idx` (`id`),\
-                      KEY `fk_incomeStatement_1_idx` (`symbol`,`id`)\
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;'
+                      `link` text,\
+                      `finalLink` text,\
+                      PRIMARY KEY (`id`) \
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4'
 
-IS_INDEXES = f'ALTER TABLE `incomeStatement` \
+IS_CHANGE_COLUMNS = f'ALTER TABLE `incomeStatement` \
               CHANGE COLUMN `link` `linkIncomeStatement` TEXT NULL DEFAULT NULL , \
               CHANGE COLUMN `finalLink` `finalLinkIncomeStatement` TEXT NULL DEFAULT NULL ;'
 
 IS_DELETE_NO_SYMBOL = f'DELETE FROM incomeStatement where symbol is NULL;'
 
 IS_FK =  f'ALTER TABLE `incomeStatement` \
-          ADD CONSTRAINT `fk_symbol` \
+          ADD CONSTRAINT `fk_symbol_is` \
           FOREIGN KEY (`symbol`) \
           REFERENCES `profile` (`symbol`) \
           ON DELETE NO ACTION \
@@ -115,7 +113,7 @@ BS_DROP_TABLE   = f"DROP TABLE IF EXISTS balanceSheet"
 BS_CREATE_TABLE = f"CREATE TABLE `balanceSheet` ( \
                       `id` int NOT NULL AUTO_INCREMENT, \
                       `date` datetime DEFAULT NULL, \
-                      `symbol` varchar(25) DEFAULT NULL, \
+                      `symbol` varchar(25) NOT NULL, \
                       `reportedCurrency` text, \
                       `cik` bigint DEFAULT NULL, \
                       `fillingDate` text, \
@@ -166,20 +164,20 @@ BS_CREATE_TABLE = f"CREATE TABLE `balanceSheet` ( \
                       `totalInvestments` bigint DEFAULT NULL, \
                       `totalDebt` bigint DEFAULT NULL, \
                       `netDebt` bigint DEFAULT NULL, \
-                      `linkBalancesheet` text, \
-                      `finalLinkBalancesheet` text, \
+                      `link` text, \
+                      `finalLink` text, \
                       PRIMARY KEY (`id`) \
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;"
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4"
 
 
-BS_INDEXES = f'ALTER TABLE `balanceSheet` \
+BS_CHANGE_COLUMNS = f'ALTER TABLE `balanceSheet` \
               CHANGE COLUMN `link` `linkBalanceSheet` TEXT NULL DEFAULT NULL , \
               CHANGE COLUMN `finalLink` `finalLinkBalanceSheet` TEXT NULL DEFAULT NULL ;'
 
 BS_DELETE_NO_SYMBOL = f'DELETE FROM balanceSheet where symbol is NULL;'
 
 BS_FK = f'ALTER TABLE `balanceSheet` \
-          ADD CONSTRAINT `fk_symbol` \
+          ADD CONSTRAINT `fk_symbol_bs` \
           FOREIGN KEY (`symbol`) \
           REFERENCES `profile` (`symbol`) \
           ON DELETE NO ACTION \
@@ -188,8 +186,8 @@ BS_FK = f'ALTER TABLE `balanceSheet` \
 CF_DROP_TABLE   = f"DROP TABLE IF EXISTS cashFlow"
 CF_CREATE_TABLE = f'CREATE TABLE `cashFlow` (\
                       `id` int NOT NULL AUTO_INCREMENT,\
-                      `date` datetime DEFAULT NULL,\
-                      `symbol` varchar(25) DEFAULT NULL,,\
+                      `date` datetime NOT NULL,\
+                      `symbol` varchar(25) NOT NULL,,\
                       `reportedCurrency` text,\
                       `cik` bigint DEFAULT NULL,\
                       `fillingDate` text,\
@@ -226,19 +224,19 @@ CF_CREATE_TABLE = f'CREATE TABLE `cashFlow` (\
                       `operatingCashFlow` bigint DEFAULT NULL,\
                       `capitalExpenditure` bigint DEFAULT NULL,\
                       `freeCashFlow` bigint DEFAULT NULL,\
-                      `linkCashflow` text,\
-                      `finalLinkCashflow` text,\
+                      `link` text,\
+                      `finalLink` text,\
                       PRIMARY KEY (`id`)\
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;'
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4'
 
-CF_INDEXES = f'ALTER TABLE cashFlow \
+CF_CHANGE_COLUMNS = f'ALTER TABLE cashFlow \
               CHANGE COLUMN `link` `linkCashFlow` TEXT NULL DEFAULT NULL, \
               CHANGE COLUMN `finalLink` `finalLinkCashFlow` TEXT NULL DEFAULT NULL;'
 
 CF_DELETE_NO_SYMBOL = f'DELETE FROM cashFlow where symbol is NULL;'    
 
 CF_FK =     f'ALTER TABLE `cashFlow` \
-                ADD CONSTRAINT `fk_symbol` \
+                ADD CONSTRAINT `fk_symbol_cf` \
                 FOREIGN KEY (`symbol`) \
                 REFERENCES `profile` (`symbol`) \
                 ON DELETE NO ACTION \

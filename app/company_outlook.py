@@ -17,7 +17,9 @@ def init() -> None:
         'domain': 'outlook',
         'tickers_list': tickers_list,
         'endpoint': ENDPOINTS['outlook'],
-        'folder': f"{BASE_FOLDER}/outlook"
+        'folder': f"{BASE_FOLDER}/outlook",
+        'table': None,
+        'db_operations':None
     }
 
     data_name: str = "Company Outlook"

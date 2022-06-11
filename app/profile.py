@@ -42,7 +42,7 @@ def init() -> None:
     util.print_messages(util.set_init_time(data_name))
     get_profile()
     util.print_messages(util.set_end_time(data_name))
-    util.print_messages("Tiempo de ejecución", util.set_end_time(data_name) - util.set_init_time(data_name))
+    util.print_messages(util.set_end_time(data_name))
 
 if __name__ == "_main__":
     init()

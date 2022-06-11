@@ -12,10 +12,10 @@ def init() -> None:
     BASE_FOLDER = DIRS['CURRENT_JSON_FOLDER']
     tickers_list = FmpAPI.get_tickers_list(TICKERS_PATH['tickers_financial_info'])
     floatshare:object = {
+        'domain': 'floatshares',
         'tickers_list': tickers_list,
         'endpoint': ENDPOINTS['floatshares'],
-        'folder': f'{BASE_FOLDER}/shares',
-        'domain': 'floatshares'
+        'folder': f'{BASE_FOLDER}/shares'
     }
     data_name: str = "Float Shares"
 

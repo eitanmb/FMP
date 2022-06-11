@@ -48,7 +48,7 @@ def init() -> None:
   
   #GET TICKERS LISTS
   TICKERS_PATH['tickers_financial_info'] = f'{ DIRS["CURRENT_JSON_FOLDER"] }/tickers_financial_info.json'
-  TICKERS_PATH['tradable_tickers'] = f'{ DIRS["CURRENT_JSON_FOLDER"] }/tradeble_tickers.json'
+  TICKERS_PATH['tradeble_tickers'] = f'{ DIRS["CURRENT_JSON_FOLDER"] }/tradeble_tickers.json'
   TICKERS_PATH['symbols'] = f'{ DIRS["CURRENT_JSON_FOLDER"] }/symbols.json'
    
   if not os.path.exists(TICKERS_PATH['tickers_financial_info']):
@@ -58,12 +58,12 @@ def init() -> None:
     except FileExistsError:
       print("tickers_financial_info already exist")
 
-  if not os.path.exists(TICKERS_PATH['tradable_tickers']):
+  if not os.path.exists(TICKERS_PATH['tradeble_tickers']):
     try:
-      FmpAPI.create_tickers_list(DIRS['CURRENT_JSON_FOLDER'], ENDPOINTS['tradeble_list'], 'tradable_tickers.json')
-      print("tradable_tickers created")
+      FmpAPI.create_tickers_list(DIRS['CURRENT_JSON_FOLDER'], ENDPOINTS['tradeble_list'], 'tradeble_tickers.json')
+      print("tradeble_tickers created")
     except FileExistsError:
-      print("tradable_tickers already exist")
+      print("tradeble_tickers already exist")
 
   if not os.path.exists(TICKERS_PATH['symbols']):
     try:
@@ -73,7 +73,6 @@ def init() -> None:
     except FileExistsError as e:
       print("symbols already exist")
     
-  
   
   if __name__ == "__main__":
     init()
