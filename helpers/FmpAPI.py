@@ -3,19 +3,19 @@ from urllib.request import urlopen
 import json
 import os
 import re
+import ssl
 import sys
 
 from helpers import utilities as util
 from helpers.File import File
 
 load_dotenv()
+context = ssl._create_unverified_context()
 '''
 TODO: los parametros que deben pasarsele al endpoint depende de la versión del fmp endpoint. 
 Evaluar si es más lógico utilizar ese parametro
 
 '''
-
-
 class FmpAPI:
     apikey = os.environ.get("APIKEY")
     url_base = os.environ.get("FMP_URL_BASE")
@@ -23,7 +23,7 @@ class FmpAPI:
 
     @staticmethod
     def get_jsonparsed_data(url: str):
-        response = urlopen(url)
+        response = urlopen(url, context=context)
         data = response.read().decode("utf-8")
         return json.loads(data)
 
