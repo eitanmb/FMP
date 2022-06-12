@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
-from helpers.db_basics import engine_connetion, create_table_from_dataframe, execute_query
-from helpers import FmpAPI
+from db.db_basics import engine_connetion, create_table_from_dataframe, execute_query
+from core import FmpAPI
 from helpers.utilities import *
 from helpers.File import *
 

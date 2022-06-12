@@ -2,8 +2,8 @@ import os
 from dotenv import load_dotenv
 import pandas as pd
 from datetime import datetime
-from helpers.db_basics import *
-from helpers import FmpAPI
+from db.db_basics import *
+from core import FmpAPI
 from helpers.utilities import *
 from config.setup import CONNECTION
 

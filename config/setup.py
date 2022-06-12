@@ -1,10 +1,11 @@
 # from ast import List
 import os
 import sys
+
+from sql.db_basics import create_db
 sys.path.append("..")
 
-from helpers.FmpAPI import FmpAPI
-from helpers.db_basics import *
+from core.FmpAPI import FmpAPI
 from config.directory_structure import *
 from config.endpoints import ENDPOINTS
 

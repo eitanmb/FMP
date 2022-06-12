@@ -3,9 +3,9 @@ import os
 sys.path.append("..")
 
 from config.setup import DIRS, CONNECTION
-from helpers import FmpAPI
+from core import FmpAPI
 from helpers.utilities import *
-from helpers.db_basics import engine_connetion, execute_query, creat_dataframe_from_data
+from db.db_basics import engine_connetion, execute_query, creat_dataframe_from_data
 from helpers import File
 from app import institutional_holders as holderpaints, float_shares as floatshares
 

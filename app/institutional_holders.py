@@ -3,7 +3,7 @@ sys.path.append("..")
 
 from config.endpoints import ENDPOINTS
 from config.setup import DIRS, TICKERS_PATH
-from helpers.FmpAPI import FmpAPI
+from core.FmpAPI import FmpAPI
 from helpers import utilities as util
 
 def init() -> None:
