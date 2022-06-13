@@ -52,6 +52,15 @@ PROFILE_INDEXES = f'ALTER TABLE `profile` \
                     ADD INDEX `ICompInd` (`companyName` ASC, `industry` ASC) VISIBLE, \
                     ADD INDEX `ICompIndSec` (`companyName` ASC, `sector` ASC, `industry` ASC) VISIBLE;'
 
+PROFILE_OPERATIONS = {
+    "drop_table": PROFILE_DROP_TABLE,
+    "create_table": PROFILE_CREATE_TABLE,
+    "add_indexes": PROFILE_INDEXES,
+    "alter_table": None,
+    "delete_null": None
+
+}
+
 IS_DROP_TABLE = f"DROP TABLE IF EXISTS incomeStatement"
 IS_CREATE_TABLE = f'CREATE TABLE `incomeStatement` (\
                       `id` int NOT NULL AUTO_INCREMENT,\

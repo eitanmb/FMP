@@ -4,7 +4,7 @@ sys.path.append("..")
 
 from sql.db_basics import create_db, engine_connetion
 from config.endpoints import ENDPOINTS
-from config.directory_structure import *
+from config.dir_structure import *
 from core.FmpAPI import FmpAPI
 import os
 
