@@ -1,22 +1,18 @@
-# Funciones para la conección y operacion con BBDD
-# MySql
 import sys
+sys.path.append("..")
+import pandas as pd
 import mysql.connector
 from sqlalchemy import create_engine
-import pandas as pd
-from ..helpers.File import *
+from helpers.File import *
+
 
 def engine_connetion(CONNECTION: object):
-    engine = create_engine(
-        f"mysql+pymysql://{CONNECTION['user']}:{CONNECTION['password']}@{CONNECTION['host']}/{CONNECTION['database']}")
-    return engine
+    return create_engine(f"mysql+pymysql://{CONNECTION['user']}:{CONNECTION['password']}@{CONNECTION['host']}/{CONNECTION['database']}")
 
 
 def create_table_from_dataframe(df, engine, table_name):
-
     try:
         df.to_sql(table_name, engine, index=False, if_exists='append')
-
         return f"Tabla {table_name} y datos añadidos"
     except Exception as e:
         return e

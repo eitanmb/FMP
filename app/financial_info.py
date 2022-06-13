@@ -1,10 +1,10 @@
 import sys
 sys.path.append("..")
 
-from db import db_basics as db
+from sql import db_basics as db
 from core.FmpAPI import FmpAPI
 from helpers.utilities import *
-from db.db_definitions import IS_CHANGE_COLUMNS, BS_CHANGE_COLUMNS, CF_CHANGE_COLUMNS, \
+from sql.db_definitions import IS_CHANGE_COLUMNS, BS_CHANGE_COLUMNS, CF_CHANGE_COLUMNS, \
     IS_FK, BS_FK, CF_FK, IS_DELETE_NO_SYMBOL, BS_DELETE_NO_SYMBOL, CF_DELETE_NO_SYMBOL, \
     IS_CREATE_TABLE, BS_CREATE_TABLE, CF_CREATE_TABLE, IS_DROP_TABLE, BS_DROP_TABLE, CF_DROP_TABLE
 from config.setup import DIRS, CONNECTION, TICKERS_PATH

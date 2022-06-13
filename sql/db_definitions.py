@@ -1,4 +1,4 @@
-PROFILE_DROP_TABLE   = f"DROP TABLE IF EXISTS profile"
+PROFILE_DROP_TABLE = f"DROP TABLE IF EXISTS profile"
 PROFILE_CREATE_TABLE = f'CREATE TABLE profile ( \
                         `symbol` varchar(25) NOT NULL, \
                         `price` varchar(50) DEFAULT NULL, \
@@ -52,7 +52,7 @@ PROFILE_INDEXES = f'ALTER TABLE `profile` \
                     ADD INDEX `ICompInd` (`companyName` ASC, `industry` ASC) VISIBLE, \
                     ADD INDEX `ICompIndSec` (`companyName` ASC, `sector` ASC, `industry` ASC) VISIBLE;'
 
-IS_DROP_TABLE   = f"DROP TABLE IF EXISTS incomeStatement"
+IS_DROP_TABLE = f"DROP TABLE IF EXISTS incomeStatement"
 IS_CREATE_TABLE = f'CREATE TABLE `incomeStatement` (\
                       `id` int NOT NULL AUTO_INCREMENT,\
                       `date` datetime DEFAULT NULL,\
@@ -102,14 +102,23 @@ IS_CHANGE_COLUMNS = f'ALTER TABLE `incomeStatement` \
 
 IS_DELETE_NO_SYMBOL = f'DELETE FROM incomeStatement where symbol is NULL;'
 
-IS_FK =  f'ALTER TABLE `incomeStatement` \
+IS_FK = f'ALTER TABLE `incomeStatement` \
           ADD CONSTRAINT `fk_symbol_is` \
           FOREIGN KEY (`symbol`) \
           REFERENCES `profile` (`symbol`) \
           ON DELETE NO ACTION \
           ON UPDATE NO ACTION;'
 
-BS_DROP_TABLE   = f"DROP TABLE IF EXISTS balanceSheet"
+IS_OPERATIONS = {
+    "drop_table": IS_DROP_TABLE,
+    "create_table": IS_CREATE_TABLE,
+    "alter_table": IS_CHANGE_COLUMNS,
+    "delete_null": IS_DELETE_NO_SYMBOL,
+    "add_indexes": IS_FK
+
+}
+
+BS_DROP_TABLE = f"DROP TABLE IF EXISTS balanceSheet"
 BS_CREATE_TABLE = f"CREATE TABLE `balanceSheet` ( \
                       `id` int NOT NULL AUTO_INCREMENT, \
                       `date` datetime DEFAULT NULL, \
@@ -181,9 +190,17 @@ BS_FK = f'ALTER TABLE `balanceSheet` \
           FOREIGN KEY (`symbol`) \
           REFERENCES `profile` (`symbol`) \
           ON DELETE NO ACTION \
-          ON UPDATE NO ACTION;'   
+          ON UPDATE NO ACTION;'
 
-CF_DROP_TABLE   = f"DROP TABLE IF EXISTS cashFlow"
+BS_OPERATIONS = {
+    "drop_table": BS_DROP_TABLE,
+    "create_table": BS_CREATE_TABLE,
+    "alter_table": BS_CHANGE_COLUMNS,
+    "delete_null": BS_DELETE_NO_SYMBOL,
+    "add_indexes": BS_FK
+}
+
+CF_DROP_TABLE = f"DROP TABLE IF EXISTS cashFlow"
 CF_CREATE_TABLE = f'CREATE TABLE `cashFlow` (\
                       `id` int NOT NULL AUTO_INCREMENT,\
                       `date` datetime NOT NULL,\
@@ -233,15 +250,19 @@ CF_CHANGE_COLUMNS = f'ALTER TABLE cashFlow \
               CHANGE COLUMN `link` `linkCashFlow` TEXT NULL DEFAULT NULL, \
               CHANGE COLUMN `finalLink` `finalLinkCashFlow` TEXT NULL DEFAULT NULL;'
 
-CF_DELETE_NO_SYMBOL = f'DELETE FROM cashFlow where symbol is NULL;'    
+CF_DELETE_NO_SYMBOL = f'DELETE FROM cashFlow where symbol is NULL;'
 
-CF_FK =     f'ALTER TABLE `cashFlow` \
+CF_FK = f'ALTER TABLE `cashFlow` \
                 ADD CONSTRAINT `fk_symbol_cf` \
                 FOREIGN KEY (`symbol`) \
                 REFERENCES `profile` (`symbol`) \
                 ON DELETE NO ACTION \
                 ON UPDATE NO ACTION;'
 
-
-
-
+CF_OPERATIONS = {
+    "drop_table": CF_DROP_TABLE,
+    "create_table": CF_CREATE_TABLE,
+    "alter_table": CF_CHANGE_COLUMNS,
+    "delete_null": CF_DELETE_NO_SYMBOL,
+    "add_indexes": CF_FK
+}
