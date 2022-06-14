@@ -6,6 +6,7 @@ from core.DataPersistence import SqlDataPersistence
 from core.DataDownload import DataDownload
 from config.setup import engine
 
+
 profile_download = DataDownload(**profile_kwargs)
 profile_download.create_folder()
 profile_download.fetch_data()
