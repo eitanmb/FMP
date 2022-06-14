@@ -78,8 +78,8 @@ class FmpAPI:
         return len(data) > 0
 
     def is_valid_data(data):
-        if (util.is_list(data) and util.is_not_empty(data)) or \
-                (util.is_dict(data) and FmpAPI.does_not_exist(data) == False):
+        if (FmpAPI.is_list(data) and FmpAPI.is_not_empty(data)) or \
+                (FmpAPI.is_dict(data) and FmpAPI.does_not_exist(data) == False):
             return True
         else:
             return False

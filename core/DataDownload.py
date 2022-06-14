@@ -4,7 +4,6 @@ sys.path.append("..")
 
 from .FmpAPI import FmpAPI
 from config.setup import TICKERS_PATH
-from config.dir_structure import make_directory
 
 
 class DataDownload(FmpAPI):
