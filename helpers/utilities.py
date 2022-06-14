@@ -1,10 +1,29 @@
+import os
 from datetime import datetime
 from helpers.File import File
-
 
 def set_datetime_now() -> str:
     return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+
+def get_date() -> str:
+    return '2023-01'
+    # return datetime.now().strftime('%Y-%m')
+
+def get_subdirectories_by_date(date: str) -> list:
+    return date.split('-')
+
+
+def join_path(*routes):
+    return os.path.join(*routes)
+
+
+def make_directory(path: str):
+    try:
+        os.makedirs(path)
+        print("Directory ", path,  " Created ")
+    except FileExistsError:
+        print("Directory ", path,  " already exists")
 
 def set_init_end_time(ini_fin: str, data: str) -> str:
     return f"{ ini_fin } { data }: { set_datetime_now() }"
@@ -39,11 +58,4 @@ def get_lastTicker_info(last_ticker_file) -> tuple:
 def print_messages(*messages):
     print(*messages)
 
-def is_list(data):
-    return type(data) is list
 
-def is_dict(data):
-    return isinstance(data, dict)
-
-def is_not_empty(data):
-    return len(data) > 0

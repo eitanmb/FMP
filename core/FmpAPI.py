@@ -15,44 +15,36 @@ Evaluar si es más lógico utilizar ese parametro
 
 '''
 
-
 class FmpAPI:
     apikey = os.environ.get("APIKEY")
     url_base = os.environ.get("FMP_URL_BASE")
     last_ticker = 'lastTicker.txt'
 
-    @staticmethod
     def get_jsonparsed_data(url: str):
         response = urlopen(url)
         data = response.read().decode("utf-8")
         return json.loads(data)
 
-    @staticmethod
     def get_tickers_list(file):
         return json.load(open(file))
 
-    @staticmethod
     def get_path_to_file(PATH: str, file: str):
         return f"{PATH}/{file}"
 
-    @staticmethod
     def configure_endpoint(endpoint, ticker=""):
         if ticker == "":
             return endpoint.format(url_base=FmpAPI.url_base, apikey=FmpAPI.apikey)
         return endpoint.format(url_base=FmpAPI.url_base, ticker=ticker, apikey=FmpAPI.apikey)
 
-    @staticmethod
     def append_ticker(tickers):
         tickers_list = []
         for ticker in tickers:
             tickers_list.append(ticker['symbol'])
         return tickers_list
 
-    @staticmethod
     def are_financial_tickers(endpoint):
         return endpoint.find("statement")
 
-    @staticmethod
     def create_tickers_list(PATH: str, partial_endpoint: str, file_name: str):
         endpoint = FmpAPI.configure_endpoint(partial_endpoint)
         tickers = FmpAPI.get_jsonparsed_data(endpoint)
@@ -64,22 +56,27 @@ class FmpAPI:
         else:
             File.write_json(path_to_file, tickers)
 
-    @staticmethod
     def clean_ticker(ticker):
         return re.sub("[\^\/]", "", ticker)
 
-    @staticmethod
     def return_start_from_tickers(how_many_tickers):
         # Si el script falla podemos iniciar el bucle for desde este valor
         if how_many_tickers == 0:
             return 0
         return int(util.get_lastTicker_info(FmpAPI.last_ticker)[1])
 
-    @staticmethod
     def does_not_exist(data):
         return "Not found! Please check the symbol" in data.values()
+    
+    def is_list(data):
+        return type(data) is list
 
-    @staticmethod
+    def is_dict(data):
+        return isinstance(data, dict)
+
+    def is_not_empty(data):
+        return len(data) > 0
+
     def is_valid_data(data):
         if (util.is_list(data) and util.is_not_empty(data)) or \
                 (util.is_dict(data) and FmpAPI.does_not_exist(data) == False):
@@ -87,11 +84,9 @@ class FmpAPI:
         else:
             return False
 
-    @staticmethod
     def get_download_ticker_possition(tickers_list, ticker):
         return tickers_list.index(ticker)
 
-    @staticmethod
     def download_companies_data(domain) -> None:
         tickers_list = domain["tickers_list"]
         folder = domain['folder']
