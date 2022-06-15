@@ -2,7 +2,7 @@ import os
 import sys
 sys.path.append("..")
 
-from .FmpAPI import FmpAPI
+from .FmpAPI import FmpAPI, FmpImplementation
 from config.setup import TICKERS_PATH
 
 
@@ -15,7 +15,7 @@ class DataDownload(FmpAPI):
         self.store_ticket_list()
 
     def store_ticket_list(self):
-        self.tickers_list = FmpAPI.get_tickers_list(self.tickers_path)
+        self.tickers_list = FmpImplementation.get_tickers_list(self.tickers_path)
 
     def create_folder(self):
         try:

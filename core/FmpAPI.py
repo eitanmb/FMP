@@ -15,11 +15,7 @@ Evaluar si es más lógico utilizar ese parametro
 
 '''
 
-class FmpAPI:
-    apikey = os.environ.get("APIKEY")
-    url_base = os.environ.get("FMP_URL_BASE")
-    last_ticker = 'lastTicker.txt'
-
+class FmpImplementation:
     def get_jsonparsed_data(url: str):
         response = urlopen(url)
         data = response.read().decode("utf-8")
@@ -36,38 +32,9 @@ class FmpAPI:
             return endpoint.format(url_base=FmpAPI.url_base, apikey=FmpAPI.apikey)
         return endpoint.format(url_base=FmpAPI.url_base, ticker=ticker, apikey=FmpAPI.apikey)
 
-    def append_ticker(tickers):
-        tickers_list = []
-        for ticker in tickers:
-            tickers_list.append(ticker['symbol'])
-        return tickers_list
-
-    def are_financial_tickers(endpoint):
-        return endpoint.find("statement")
-
-    def create_tickers_list(PATH: str, partial_endpoint: str, file_name: str):
-        endpoint = FmpAPI.configure_endpoint(partial_endpoint)
-        tickers = FmpAPI.get_jsonparsed_data(endpoint)
-        path_to_file = FmpAPI.get_path_to_file(PATH, file_name)
-
-        if FmpAPI.are_financial_tickers(endpoint) == -1:
-            tickers_list = FmpAPI.append_ticker(tickers)
-            File.write_json(path_to_file, tickers_list)
-        else:
-            File.write_json(path_to_file, tickers)
-
-    def clean_ticker(ticker):
-        return re.sub("[\^\/]", "", ticker)
-
-    def return_start_from_tickers(how_many_tickers):
-        # Si el script falla podemos iniciar el bucle for desde este valor
-        if how_many_tickers == 0:
-            return 0
-        return int(util.get_lastTicker_info(FmpAPI.last_ticker)[1])
-
     def does_not_exist(data):
         return "Not found! Please check the symbol" in data.values()
-    
+
     def is_list(data):
         return type(data) is list
 
@@ -78,11 +45,48 @@ class FmpAPI:
         return len(data) > 0
 
     def is_valid_data(data):
-        if (FmpAPI.is_list(data) and FmpAPI.is_not_empty(data)) or \
-                (FmpAPI.is_dict(data) and FmpAPI.does_not_exist(data) == False):
+        if (FmpImplementation.is_list(data) and FmpImplementation.is_not_empty(data)) or \
+                (FmpImplementation.is_dict(data) and FmpImplementation.does_not_exist(data) == False):
             return True
         else:
             return False
+
+
+class FmpTickers:
+    def append_ticker(tickers):
+        tickers_list = []
+        for ticker in tickers:
+            tickers_list.append(ticker['symbol'])
+        return tickers_list
+
+    def are_financial_tickers(endpoint):
+        return endpoint.find("statement")
+
+    def create_tickers_list(PATH: str, partial_endpoint: str, file_name: str):
+        endpoint = FmpImplementation.configure_endpoint(partial_endpoint)
+        tickers = FmpImplementation.get_jsonparsed_data(endpoint)
+        path_to_file = FmpImplementation.get_path_to_file(PATH, file_name)
+
+        if FmpTickers.are_financial_tickers(endpoint) == -1:
+            tickers_list = FmpTickers.append_ticker(tickers)
+            File.write_json(path_to_file, tickers_list)
+        else:
+            File.write_json(path_to_file, tickers)
+
+
+class FmpAPI:
+    apikey = os.environ.get("APIKEY")
+    url_base = os.environ.get("FMP_URL_BASE")
+    last_ticker = 'lastTicker.txt'
+
+    def clean_ticker(ticker):
+        return re.sub("[\^\/]", "", ticker)
+
+    def return_start_from_tickers(how_many_tickers):
+        # Si el script falla podemos iniciar el bucle for desde este valor
+        if how_many_tickers == 0:
+            return 0
+        return int(util.get_lastTicker_info(FmpAPI.last_ticker)[1])
 
     def get_download_ticker_possition(tickers_list, ticker):
         return tickers_list.index(ticker)
@@ -100,13 +104,13 @@ class FmpAPI:
 
         for i in range(_from, len(tickers_list)):
             ticker = FmpAPI.clean_ticker(tickers_list[i])
-            file = FmpAPI.get_path_to_file(folder, f"{ticker}.json")
-            endpoint = FmpAPI.configure_endpoint(partial_endpoint, ticker)
+            file = FmpImplementation.get_path_to_file(folder, f"{ticker}.json")
+            endpoint = FmpImplementation.configure_endpoint(partial_endpoint, ticker)
             util.print_messages(endpoint)
 
             try:
-                data = FmpAPI.get_jsonparsed_data(endpoint)
-                if FmpAPI.is_valid_data(data):
+                data = FmpImplementation.get_jsonparsed_data(endpoint)
+                if FmpImplementation.is_valid_data(data):
                     File.write_json(file, data)
                 else:
                     util.print_messages("No existe el ticker:", ticker)
@@ -115,7 +119,6 @@ class FmpAPI:
                 util.print_messages(error, endpoint)
 
             finally:
-                # Guardar la posicion que tiene el ticker dentro de la tickers_list
                 ticker_position = FmpAPI.get_download_ticker_possition(
                     tickers_list, ticker)
                 util.write_lastTicker_file(FmpAPI.last_ticker,

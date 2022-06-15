@@ -4,7 +4,7 @@ sys.path.append("..")
 
 from config.endpoints import ENDPOINTS
 from config.dir_structure import *
-from core.FmpAPI import FmpAPI
+from core.FmpAPI import FmpAPI, FmpTickers
 from helpers.utilities import get_date, get_subdirectories_by_date
 from sql.db_basics import create_db, engine_connetion
 
@@ -48,14 +48,14 @@ TICKERS_PATH: object = {
 
 if not os.path.exists(TICKERS_PATH['tickers_financial_info']):
     try:
-        FmpAPI.create_tickers_list( DIRS['CURRENT_JSON_FOLDER'], ENDPOINTS['financial_list'], 'tickers_financial_info.json')
+        FmpTickers.create_tickers_list( DIRS['CURRENT_JSON_FOLDER'], ENDPOINTS['financial_list'], 'tickers_financial_info.json')
         print("tickers_financial_info created")
     except FileExistsError:
         print("tickers_financial_info already exist")
 
 if not os.path.exists(TICKERS_PATH['tradeble_tickers']):
     try:
-        FmpAPI.create_tickers_list(
+        FmpTickers.create_tickers_list(
             DIRS['CURRENT_JSON_FOLDER'], ENDPOINTS['tradeble_list'], 'tradeble_tickers.json')
         print("tradeble_tickers created")
     except FileExistsError:
@@ -63,7 +63,7 @@ if not os.path.exists(TICKERS_PATH['tradeble_tickers']):
 
 if not os.path.exists(TICKERS_PATH['symbols']):
     try:
-        FmpAPI.create_tickers_list(
+        FmpTickers.create_tickers_list(
             DIRS['CURRENT_JSON_FOLDER'],  ENDPOINTS['stock_list'], 'symbols.json')
         print("symbols created")
 

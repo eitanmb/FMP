@@ -1,9 +1,12 @@
 import os
+import sys
+sys.path.append("..")
+
 from dotenv import load_dotenv
 import pandas as pd
 from datetime import datetime
-from db.db_basics import *
-from core import FmpAPI
+from sql.db_basics import *
+from core.FmpAPI import FmpAPI
 from helpers.utilities import *
 from config.setup import CONNECTION
 
@@ -18,9 +21,10 @@ def init():
     table_name = "forex"
     engine = engine_connetion(CONNECTION)
 
-    #Get all FOREX PAIR available
+    # Get all FOREX PAIR available
     # url_fx_all = url_base + f"symbol/available-forex-currency-pairs?apikey={apikey}"
-    url_fx_all = url_base + f"symbol/available-forex-currency-pairs?apikey={apikey}"
+    url_fx_all = url_base + \
+        f"symbol/available-forex-currency-pairs?apikey={apikey}"
 
     fx_pairs = FmpAPI.get_jsonparsed_data(url_fx_all)
     pairs = []
@@ -33,7 +37,7 @@ def init():
     print('Pares disponibles: ', pairs)
     print('Pares disponibles: ', len(pairs))
 
-    #Get USD PAIR FOREX HISTORIC VALUES
+    # Get USD PAIR FOREX HISTORIC VALUES
     fx_values = []
     fx_values_temp = []
 
@@ -43,36 +47,32 @@ def init():
         fx_values.append(fx_values_temp)
         fx_values_temp = []
 
-
-    #CREAR LISTA DE VALORES QUE SERVIRA DE DATA PARA DATAFRAME
+    # CREAR LISTA DE VALORES QUE SERVIRA DE DATA PARA DATAFRAME
     values_list = []
     values_list_temp = []
     for fx_value in fx_values:
         try:
-            for i in range( 0, len(fx_value[0]['historical'])):
-                    values_list_temp.append(fx_value[0]['symbol'])
-                    values_list_temp.append(fx_value[0]['historical'][i]['date'])
-                    values_list_temp.append(fx_value[0]['historical'][i]['close'])
+            for i in range(0, len(fx_value[0]['historical'])):
+                values_list_temp.append(fx_value[0]['symbol'])
+                values_list_temp.append(fx_value[0]['historical'][i]['date'])
+                values_list_temp.append(fx_value[0]['historical'][i]['close'])
 
-                    # print(values_list_temp)
-                    values_list.append(values_list_temp)
-                    values_list_temp = []
+                # print(values_list_temp)
+                values_list.append(values_list_temp)
+                values_list_temp = []
 
         except Exception as e:
             print(e)
 
-
-    #CREAR dataframe
-    df = pd.DataFrame(data = values_list, columns = ['pair','date','close'])
+    # CREAR dataframe
+    df = pd.DataFrame(data=values_list, columns=['pair', 'date', 'close'])
 
     # Escribir en la BD
     execute_query(f'DROP TABLE IF EXISTS {table_name}', engine)
-    print(create_table_from_dataframe( df, engine, table_name ))
-
+    print(create_table_from_dataframe(df, engine, table_name))
 
     print(f"Final: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
 
 if __name__ == "__main__":
     init()
-
