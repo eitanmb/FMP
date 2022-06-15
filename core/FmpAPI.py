@@ -83,7 +83,6 @@ class FmpAPI:
         return re.sub("[\^\/]", "", ticker)
 
     def return_start_from_tickers(how_many_tickers):
-        # Si el script falla podemos iniciar el bucle for desde este valor
         if how_many_tickers == 0:
             return 0
         return int(util.get_lastTicker_info(FmpAPI.last_ticker)[1])
