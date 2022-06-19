@@ -1,17 +1,17 @@
 import sys
 sys.path.append("..")
 
-from sql.db_definitions import IS_OPERATIONS, BS_OPERATIONS, CF_OPERATIONS, PROFILE_OPERATIONS
+from sql.definitions import IS_OPERATIONS, BS_OPERATIONS, CF_OPERATIONS, PROFILE_OPERATIONS
 from .endpoints import ENDPOINTS
 from .setup import DIRS
 from  .types import types
 BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
 
 profile_kwargs = {
-    'domain':'IS',
+    'domain':'profile',
     'tickers_list': types['stock_tickers'],
     'endpoint': ENDPOINTS['profile'], 
-    'folder': f'{BASE_FOLDER}/profile',
+    'folder': f'{BASE_FOLDER}/profiles',
     'table': 'profile',
     'db_operations': PROFILE_OPERATIONS
 }

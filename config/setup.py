@@ -6,7 +6,7 @@ from config.endpoints import ENDPOINTS
 from config.dir_structure import *
 from core.FmpAPI import FmpAPI, FmpTickers
 from helpers.utilities import get_date, get_subdirectories_by_date
-from sql.db_basics import create_db, engine_connetion
+from sql.basics import create_db, engine_connetion
 
 
 BASE_DIR: str = os.path.dirname(os.path.abspath('fmp'))

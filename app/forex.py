@@ -5,7 +5,7 @@ sys.path.append("..")
 from dotenv import load_dotenv
 import pandas as pd
 from datetime import datetime
-from sql.db_basics import *
+from sql.basics import *
 from core.FmpAPI import FmpAPI
 from helpers.utilities import *
 from config.setup import CONNECTION

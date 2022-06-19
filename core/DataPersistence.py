@@ -1,9 +1,8 @@
 import sys
 sys.path.append("..")
 
+from sql.basics import execute_query, creat_dataframe_from_data
 from helpers.utilities import print_messages
-from sql.db_basics import execute_query, creat_dataframe_from_data
-from .DataDownload import DataDownload
 
 
 class SqlDataPersistence():
@@ -16,7 +15,7 @@ class SqlDataPersistence():
         self.alter_table_query = kwargs['db_operations']['alter_table']
         self.folder = kwargs['folder']
         self.table = kwargs['table']
-    
+
     def drop_table(self):
         result = execute_query(self.drop_table_query, self.engine)
         print_messages("Drop table:", result)
@@ -35,3 +34,10 @@ class SqlDataPersistence():
 
     def insert_data_from_dataframe(self):
         creat_dataframe_from_data(self.folder, self.engine, self.table)
+
+
+def drop_create_procedures(stp, engine):
+    print_messages(f"Drop {stp['name']} Procedure",
+                   execute_query(stp['drop'], engine))
+    print_messages(f"Create {stp['name']} Procedure",
+                   execute_query(stp['create'], engine))
