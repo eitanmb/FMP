@@ -2,6 +2,7 @@ import os
 import sys
 
 from helpers.utilities import *
+from helpers.File import File
 from core.DataPersistence import SqlDataPersistence, drop_create_procedures
 from core.DataDownload import DataDownload
 from config.setup import DBNAME
@@ -16,6 +17,7 @@ engine = engine_connetion(CONNECTION)
 
 downloading_data = ''
 
+
 def get_data_download(kargs):
     download = DataDownload(**kargs)
     download.create_folder()
@@ -24,12 +26,6 @@ def get_data_download(kargs):
 
 def get_data_persistence(kargs):
     sql = SqlDataPersistence(engine, **kargs)
-
-
-def file_is_empty(file):
-    if os.path.getsize(file) != 0:
-        return False
-    return True
 
 
 def current_download_data():
@@ -54,7 +50,7 @@ def init():
         print_messages('FINISHED')
         halt()
 
-    if file_is_empty('lastTicker.txt'):
+    if File.file_is_empty('lastTicker.txt'):
         downloading_data = 'profile'
     else:
         downloading_data = current_download_data()
