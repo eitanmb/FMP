@@ -4,9 +4,15 @@ import sys
 from helpers.utilities import *
 from core.DataPersistence import SqlDataPersistence, drop_create_procedures
 from core.DataDownload import DataDownload
-from config.setup import engine
+from config.setup import DBNAME
 from config.exec_order import exec_order
 from sql.procedures import *
+from sql.basics import *
+from sql.definitions import CONNECTION
+
+CONNECTION['database'] = DBNAME
+create_db(CONNECTION)
+engine = engine_connetion(CONNECTION)
 
 downloading_data = ''
 

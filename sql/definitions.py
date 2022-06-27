@@ -1,3 +1,10 @@
+CONNECTION: object = {
+  'user': 'eitan',
+  'host': 'localhost',
+  'password': '123456'
+}
+
+
 PROFILE_DROP_TABLE = f"DROP TABLE IF EXISTS profile"
 PROFILE_CREATE_TABLE = f'CREATE TABLE profile ( \
                         `symbol` varchar(25) NOT NULL, \
