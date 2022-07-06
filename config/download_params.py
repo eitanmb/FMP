@@ -4,7 +4,6 @@ sys.path.append("..")
 from sql.definitions import IS_OPERATIONS, BS_OPERATIONS, CF_OPERATIONS, PROFILE_OPERATIONS
 from .endpoints import ENDPOINTS
 from .setup import DIRS, TICKERS_FILES
-from  .types import types
 BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
 
 profile_kwargs = {
