@@ -1,18 +1,17 @@
+from helpers.utilities import get_date, get_subdirectories_by_date
+from core.FmpAPI import FmpAPI, FmpTickers
+from config.dir_structure import *
+from config.endpoints import ENDPOINTS
 import os
 import sys
 sys.path.append("..")
-
-from config.endpoints import ENDPOINTS
-from config.dir_structure import *
-from core.FmpAPI import FmpAPI, FmpTickers
-from helpers.utilities import get_date, get_subdirectories_by_date
 
 
 BASE_DIR: str = os.path.dirname(os.path.abspath('fmp'))
 
 DIRS: object = {
     'ROOT_JSON_DIR': "",
-  'CURRENT_JSON_FOLDER': ""
+    'CURRENT_JSON_FOLDER': ""
 }
 
 DIRS['ROOT_JSON_DIR'] = f'{ BASE_DIR }/json'
@@ -30,15 +29,17 @@ if DIRS['CURRENT_JSON_FOLDER'] == "":
 
 
 TICKERS_PATH: object = {
-  'tickers_financial_info': f'{ DIRS["CURRENT_JSON_FOLDER"] }/tickers_financial_info.json',
-  'tradeble_tickers': f'{ DIRS["CURRENT_JSON_FOLDER"] }/tradeble_tickers.json',
-  'symbols': f'{ DIRS["CURRENT_JSON_FOLDER"] }/symbols.json'
+    'tickers_financial_info': f'{ DIRS["CURRENT_JSON_FOLDER"] }/tickers_financial_info.json',
+    'tradeble_tickers': f'{ DIRS["CURRENT_JSON_FOLDER"] }/tradeble_tickers.json',
+    'symbols': f'{ DIRS["CURRENT_JSON_FOLDER"] }/symbols.json',
+    'forex_pairs': f'{ DIRS["CURRENT_JSON_FOLDER"] }/forex_pairs.json'
 
 }
 
 if not os.path.exists(TICKERS_PATH['tickers_financial_info']):
     try:
-        FmpTickers.create_tickers_list( DIRS['CURRENT_JSON_FOLDER'], ENDPOINTS['financial_list'], 'tickers_financial_info.json')
+        FmpTickers.create_tickers_list(
+            DIRS['CURRENT_JSON_FOLDER'], ENDPOINTS['financial_list'], 'tickers_financial_info.json')
         print("tickers_financial_info created")
     except FileExistsError:
         print("tickers_financial_info already exist")
@@ -60,3 +61,11 @@ if not os.path.exists(TICKERS_PATH['symbols']):
     except FileExistsError as e:
         print("symbols already exist")
 
+if not os.path.exists(TICKERS_PATH['forex_pairs']):
+    try:
+        FmpTickers.create_tickers_list(
+            DIRS['CURRENT_JSON_FOLDER'],  ENDPOINTS['forex_pairs'], 'forex_pairs.json')
+        print("forex_pairs file created")
+
+    except FileExistsError as e:
+        print("forex_pairs file already exist")
