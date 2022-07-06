@@ -14,7 +14,6 @@ from sql.definitions import CONNECTION
 CONNECTION['database'] = DBNAME
 create_db(CONNECTION)
 engine = engine_connetion(CONNECTION)
-
 downloading_data = ''
 
 

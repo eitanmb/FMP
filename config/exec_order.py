@@ -26,8 +26,14 @@ cashFlow = {
 
 outlook = {
     'current': 'outlook',
-    'next': 'finished',
+    'next': 'forex',
     'kwargs': outlook_kwargs
+}
+
+forex = {
+    'current': 'forex',
+    'next': 'finished',
+    'kwargs': forex_kwargs
 }
 
 exec_order = [
@@ -35,5 +41,6 @@ exec_order = [
     incomeStatement,
     balanceSheet,
     cashFlow,
-    outlook
+    outlook,
+    forex
 ]

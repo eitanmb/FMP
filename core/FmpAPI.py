@@ -62,10 +62,9 @@ class FmpTickers:
     def are_financial_tickers(endpoint):
         return endpoint.find("statement")
 
-    def create_tickers_list(PATH: str, partial_endpoint: str, file_name: str):
+    def create_tickers_list(path_to_file: str, partial_endpoint: str):
         endpoint = FmpImplementation.configure_endpoint(partial_endpoint)
         tickers = FmpAPI.get_jsonparsed_data(endpoint)
-        path_to_file = FmpImplementation.get_path_to_file(PATH, file_name)
 
         if FmpTickers.are_financial_tickers(endpoint) == -1:
             tickers_list = FmpTickers.append_ticker(tickers)

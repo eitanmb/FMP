@@ -18,7 +18,7 @@ class DataDownload(FmpAPI):
 
     def create_folder(self):
         try:
-            print(os.makedirs(self.folder))
+            os.makedirs(self.folder)
         except FileExistsError as error:
             print(error)
 

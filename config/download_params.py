@@ -45,3 +45,11 @@ outlook_kwargs = {
     'folder': f'{BASE_FOLDER}/outlook',
     'sql': None
 }
+
+forex_kwargs = {
+    'domain':'forex',
+    'tickers_list': TICKERS_FILES['forex']['path_to_file'],
+    'endpoint': ENDPOINTS['forex'], 
+    'folder': f'{BASE_FOLDER}/forex',
+    'sql': None
+}
