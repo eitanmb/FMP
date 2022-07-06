@@ -42,3 +42,12 @@ cash_flow_kwargs = {
     'table': 'cashFlow',
     'db_operations': CF_OPERATIONS
 }
+
+outlook_kwargs = {
+    'domain':'outlook',
+    'tickers_list': types['fin_tickers'],
+    'endpoint': ENDPOINTS['outlook'], 
+    'folder': f'{BASE_FOLDER}/outlook',
+    'table': None,
+    'db_operations': None
+}

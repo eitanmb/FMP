@@ -36,7 +36,7 @@ class SqlDataPersistence():
         creat_dataframe_from_data(self.folder, self.engine, self.table)
 
 
-def drop_create_procedures(stp, engine):
+def drop_create_procedure(stp, engine):
     print_messages(f"Drop {stp['name']} Procedure",
                    execute_query(stp['drop'], engine))
     print_messages(f"Create {stp['name']} Procedure",

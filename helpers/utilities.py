@@ -7,8 +7,8 @@ def set_datetime_now() -> str:
 
 
 def get_date() -> str:
-    return '2023-01'
-    # return datetime.now().strftime('%Y-%m')
+    # return '2023-01'
+    return datetime.now().strftime('%Y-%m')
 
 def get_subdirectories_by_date(date: str) -> list:
     return date.split('-')

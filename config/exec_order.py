@@ -20,13 +20,20 @@ balanceSheet = {
 
 cashFlow = {
     'current': 'CF',
-    'next': 'finished',
+    'next': 'outlook',
     'kwargs': cash_flow_kwargs
+}
+
+outlook = {
+    'current': 'outlook',
+    'next': 'finished',
+    'kwargs': outlook_kwargs
 }
 
 exec_order = [
     profile,
     incomeStatement,
     balanceSheet,
-    cashFlow
+    cashFlow,
+    outlook
 ]

@@ -3,7 +3,7 @@ import sys
 
 from helpers.utilities import *
 from helpers.File import File
-from core.DataPersistence import SqlDataPersistence, drop_create_procedures
+from core.DataPersistence import SqlDataPersistence, drop_create_procedure
 from core.DataDownload import DataDownload
 from config.setup import DBNAME
 from config.exec_order import exec_order
@@ -45,6 +45,12 @@ def download_routine(data):
     print_messages("END:", data['current'])
 
 
+def drop_create_procedures():
+    drop_create_procedure(stp_getLastChangeOfYear, engine)
+    drop_create_procedure(stp_to_exRate, engine)
+    drop_create_procedure(stp_to_usd, engine)
+
+
 def init():
     if current_download_data() == 'finished':
         print_messages('FINISHED')
@@ -56,10 +62,13 @@ def init():
         downloading_data = current_download_data()
 
     for data in exec_order:
-        print(data['current'], downloading_data)
+        print_messages(data['current'], downloading_data)
         if data['current'] == downloading_data:
             download_routine(data)
 
-    drop_create_procedures(stp_getLastChangeOfYear, engine)
-    drop_create_procedures(stp_to_exRate, engine)
-    drop_create_procedures(stp_to_usd, engine)
+    drop_create_procedures()
+
+    for data in exec_order:
+        print_messages("Sql executions on", data['current'])
+        if data['kwargs']['table'] is not None:
+            get_data_persistence(data['kwargs'])
