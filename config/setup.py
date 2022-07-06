@@ -46,22 +46,22 @@ def create_tickers_file(file_info):
 
 TICKERS_FILES: object = {
     "financial": {
-        "path_to_file": f"DIRS['CURRENT_JSON_FOLDER']/tickers_financial_info.json",
+        "path_to_file": f"{DIRS['CURRENT_JSON_FOLDER']}/tickers_financial_info.json",
         "endpoint": ENDPOINTS['financial_list'],
         "file_name": 'tickers_financial_info.json'
     },
     "tradeble": {
-        "path_to_file": f"DIRS['CURRENT_JSON_FOLDER']/tradeble_tickers.json",
+        "path_to_file": f"{DIRS['CURRENT_JSON_FOLDER']}/tradeble_tickers.json",
         "endpoint": ENDPOINTS['tradeble_list'],
         "file_name": 'tradeble_tickers.json'
     },
     "stock": {
-        "path_to_file": f"DIRS['CURRENT_JSON_FOLDER']/symbols.json",
+        "path_to_file": f"{DIRS['CURRENT_JSON_FOLDER']}/symbols.json",
         "endpoint": ENDPOINTS['stock_list'],
         "file_name": 'symbols.json'
     },
     "forex": {
-        "path_to_file": f"DIRS['CURRENT_JSON_FOLDER']/forex_pairs.json",
+        "path_to_file": f"{DIRS['CURRENT_JSON_FOLDER']}/forex_pairs.json",
         "endpoint":  ENDPOINTS['forex_pairs'],
         "file_name": 'forex_pairs.json'
     }
