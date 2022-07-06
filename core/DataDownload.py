@@ -3,7 +3,6 @@ import sys
 sys.path.append("..")
 
 from .FmpAPI import FmpAPI, FmpImplementation
-from config.setup import TICKERS_PATH
 
 
 class DataDownload(FmpAPI):
@@ -11,7 +10,7 @@ class DataDownload(FmpAPI):
         self.domain = kwargs['domain']
         self.endpoint = kwargs['endpoint']
         self.folder = kwargs['folder']
-        self.tickers_path = TICKERS_PATH[kwargs['tickers_list']]
+        self.tickers_path = kwargs['tickers_list']
         self.store_ticket_list()
 
     def store_ticket_list(self):

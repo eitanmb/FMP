@@ -30,15 +30,8 @@ if DIRS['CURRENT_JSON_FOLDER'] == "":
         DIRS['ROOT_JSON_DIR'], subdirectories_list)
 
 
-TICKERS_PATH: object = {
-    'tickers_financial_info': f'{ DIRS["CURRENT_JSON_FOLDER"] }/tickers_financial_info.json',
-    'tradeble_tickers': f'{ DIRS["CURRENT_JSON_FOLDER"] }/tradeble_tickers.json',
-    'symbols': f'{ DIRS["CURRENT_JSON_FOLDER"] }/symbols.json',
-    'forex_pairs': f'{ DIRS["CURRENT_JSON_FOLDER"] }/forex_pairs.json'
-
-}
-
-def isFile(file):
+def isFile(ticker):
+    file = ticker['path_to_file']
     return os.path.exists(file)
 
 
@@ -51,37 +44,37 @@ def create_tickers_file(file_info):
         print_messages(error)
 
 
-tickers_file: object = {
+TICKERS_FILES: object = {
     "financial": {
-        "dir": DIRS['CURRENT_JSON_FOLDER'],
+        "path_to_file": f"DIRS['CURRENT_JSON_FOLDER']/tickers_financial_info.json",
         "endpoint": ENDPOINTS['financial_list'],
         "file_name": 'tickers_financial_info.json'
     },
     "tradeble": {
-        "dir": DIRS['CURRENT_JSON_FOLDER'],
+        "path_to_file": f"DIRS['CURRENT_JSON_FOLDER']/tradeble_tickers.json",
         "endpoint": ENDPOINTS['tradeble_list'],
         "file_name": 'tradeble_tickers.json'
     },
     "stock": {
-        "dir": DIRS['CURRENT_JSON_FOLDER'],
+        "path_to_file": f"DIRS['CURRENT_JSON_FOLDER']/symbols.json",
         "endpoint": ENDPOINTS['stock_list'],
         "file_name": 'symbols.json'
     },
     "forex": {
-        "dir": DIRS['CURRENT_JSON_FOLDER'],
+        "path_to_file": f"DIRS['CURRENT_JSON_FOLDER']/forex_pairs.json",
         "endpoint":  ENDPOINTS['forex_pairs'],
         "file_name": 'forex_pairs.json'
     }
 }
 
-if not isFile(TICKERS_PATH['tickers_financial_info']):
-    create_tickers_file(tickers_file['financial'])
+if not isFile(TICKERS_FILES['financial']):
+    create_tickers_file(TICKERS_FILES['financial'])
 
-if not isFile(TICKERS_PATH['tradeble_tickers']):
-    create_tickers_file(tickers_file['tradeble'])
+if not isFile(TICKERS_FILES['tradeble']):
+    create_tickers_file(TICKERS_FILES['tradeble'])
 
-if not isFile(TICKERS_PATH['symbols']):
-    create_tickers_file(tickers_file['stock'])
+if not isFile(TICKERS_FILES['stock']):
+    create_tickers_file(TICKERS_FILES['stock'])
 
-if not isFile(TICKERS_PATH['forex_pairs']):
-    create_tickers_file(tickers_file['forex'])
+if not isFile(TICKERS_FILES['forex']):
+    create_tickers_file(TICKERS_FILES['forex'])
