@@ -1,10 +1,12 @@
-from helpers.utilities import get_date, get_subdirectories_by_date
-from core.FmpAPI import FmpAPI, FmpTickers
-from config.dir_structure import *
-from config.endpoints import ENDPOINTS
 import os
 import sys
 sys.path.append("..")
+
+from distutils.log import error
+from helpers.utilities import get_date, get_subdirectories_by_date, print_messages
+from core.FmpAPI import FmpAPI, FmpTickers
+from config.dir_structure import *
+from config.endpoints import ENDPOINTS
 
 
 BASE_DIR: str = os.path.dirname(os.path.abspath('fmp'))
@@ -36,36 +38,50 @@ TICKERS_PATH: object = {
 
 }
 
-if not os.path.exists(TICKERS_PATH['tickers_financial_info']):
+def isFile(file):
+    return os.path.exists(file)
+
+
+def create_tickers_file(file_info):
     try:
         FmpTickers.create_tickers_list(
-            DIRS['CURRENT_JSON_FOLDER'], ENDPOINTS['financial_list'], 'tickers_financial_info.json')
-        print("tickers_financial_info created")
-    except FileExistsError:
-        print("tickers_financial_info already exist")
+            file_info['dir'], file_info['endpoint'], file_info['file_name'])
+        print_messages(file_info['file_name'], "created")
+    except Exception as error:
+        print_messages(error)
 
-if not os.path.exists(TICKERS_PATH['tradeble_tickers']):
-    try:
-        FmpTickers.create_tickers_list(
-            DIRS['CURRENT_JSON_FOLDER'], ENDPOINTS['tradeble_list'], 'tradeble_tickers.json')
-        print("tradeble_tickers created")
-    except FileExistsError:
-        print("tradeble_tickers already exist")
 
-if not os.path.exists(TICKERS_PATH['symbols']):
-    try:
-        FmpTickers.create_tickers_list(
-            DIRS['CURRENT_JSON_FOLDER'],  ENDPOINTS['stock_list'], 'symbols.json')
-        print("symbols created")
+tickers_file: object = {
+    "financial": {
+        "dir": DIRS['CURRENT_JSON_FOLDER'],
+        "endpoint": ENDPOINTS['financial_list'],
+        "file_name": 'tickers_financial_info.json'
+    },
+    "tradeble": {
+        "dir": DIRS['CURRENT_JSON_FOLDER'],
+        "endpoint": ENDPOINTS['tradeble_list'],
+        "file_name": 'tradeble_tickers.json'
+    },
+    "stock": {
+        "dir": DIRS['CURRENT_JSON_FOLDER'],
+        "endpoint": ENDPOINTS['stock_list'],
+        "file_name": 'symbols.json'
+    },
+    "forex": {
+        "dir": DIRS['CURRENT_JSON_FOLDER'],
+        "endpoint":  ENDPOINTS['forex_pairs'],
+        "file_name": 'forex_pairs.json'
+    }
+}
 
-    except FileExistsError as e:
-        print("symbols already exist")
+if not isFile(TICKERS_PATH['tickers_financial_info']):
+    create_tickers_file(tickers_file['financial'])
 
-if not os.path.exists(TICKERS_PATH['forex_pairs']):
-    try:
-        FmpTickers.create_tickers_list(
-            DIRS['CURRENT_JSON_FOLDER'],  ENDPOINTS['forex_pairs'], 'forex_pairs.json')
-        print("forex_pairs file created")
+if not isFile(TICKERS_PATH['tradeble_tickers']):
+    create_tickers_file(tickers_file['tradeble'])
 
-    except FileExistsError as e:
-        print("forex_pairs file already exist")
+if not isFile(TICKERS_PATH['symbols']):
+    create_tickers_file(tickers_file['stock'])
+
+if not isFile(TICKERS_PATH['forex_pairs']):
+    create_tickers_file(tickers_file['forex'])
