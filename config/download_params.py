@@ -12,8 +12,7 @@ profile_kwargs = {
     'tickers_list': types['stock_tickers'],
     'endpoint': ENDPOINTS['profile'], 
     'folder': f'{BASE_FOLDER}/profiles',
-    'table': 'profile',
-    'db_operations': PROFILE_OPERATIONS
+    'sql': PROFILE_OPERATIONS
 }
 
 income_statements_kwargs = {
@@ -21,8 +20,7 @@ income_statements_kwargs = {
     'tickers_list': types['fin_tickers'],
     'endpoint': ENDPOINTS['IS'], 
     'folder': f'{BASE_FOLDER}/financials/IS',
-    'table': 'incomeStatement',
-    'db_operations': IS_OPERATIONS
+    'sql': IS_OPERATIONS
 }
 
 balance_sheet_kwargs = {
@@ -30,8 +28,7 @@ balance_sheet_kwargs = {
     'tickers_list': types['fin_tickers'],
     'endpoint': ENDPOINTS['BS'], 
     'folder': f'{BASE_FOLDER}/financials/BS',
-    'table': 'balanceSheet',
-    'db_operations': BS_OPERATIONS
+    'sql': BS_OPERATIONS
 }
 
 cash_flow_kwargs = {
@@ -39,8 +36,7 @@ cash_flow_kwargs = {
     'tickers_list': types['fin_tickers'],
     'endpoint': ENDPOINTS['CF'], 
     'folder': f'{BASE_FOLDER}/financials/CF',
-    'table': 'cashFlow',
-    'db_operations': CF_OPERATIONS
+    'sql': CF_OPERATIONS
 }
 
 outlook_kwargs = {
@@ -48,6 +44,5 @@ outlook_kwargs = {
     'tickers_list': types['fin_tickers'],
     'endpoint': ENDPOINTS['outlook'], 
     'folder': f'{BASE_FOLDER}/outlook',
-    'table': None,
-    'db_operations': None
+    'sql': None
 }

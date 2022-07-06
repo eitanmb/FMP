@@ -70,5 +70,5 @@ def init():
 
     for data in exec_order:
         print_messages("Sql executions on", data['current'])
-        if data['kwargs']['table'] is not None:
+        if data['kwargs']['sql'] is not None:
             get_data_persistence(data['kwargs'])

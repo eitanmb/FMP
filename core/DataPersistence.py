@@ -9,12 +9,12 @@ class SqlDataPersistence():
 
     def __init__(self, engine, **kwargs):
         self.engine = engine
-        self.drop_table_query = kwargs['db_operations']['drop_table']
-        self.create_table_query = kwargs['db_operations']['create_table']
-        self.add_indexes_query = kwargs['db_operations']['add_indexes']
-        self.alter_table_query = kwargs['db_operations']['alter_table']
+        self.table = kwargs['sql']['table']
+        self.drop_table_query = kwargs['sql']['drop_table']
+        self.create_table_query = kwargs['sql']['create_table']
+        self.add_indexes_query = kwargs['sql']['add_indexes']
+        self.alter_table_query = kwargs['sql']['alter_table']
         self.folder = kwargs['folder']
-        self.table = kwargs['table']
 
     def drop_table(self):
         result = execute_query(self.drop_table_query, self.engine)

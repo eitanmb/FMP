@@ -60,6 +60,7 @@ PROFILE_INDEXES = f'ALTER TABLE `profile` \
                     ADD INDEX `ICompIndSec` (`companyName` ASC, `sector` ASC, `industry` ASC) VISIBLE;'
 
 PROFILE_OPERATIONS = {
+    "table": "profile",
     "drop_table": PROFILE_DROP_TABLE,
     "create_table": PROFILE_CREATE_TABLE,
     "add_indexes": PROFILE_INDEXES,
@@ -126,6 +127,7 @@ IS_FK = f'ALTER TABLE `incomeStatement` \
           ON UPDATE NO ACTION;'
 
 IS_OPERATIONS = {
+    "table": "incomeStatement",
     "drop_table": IS_DROP_TABLE,
     "create_table": IS_CREATE_TABLE,
     "alter_table": IS_CHANGE_COLUMNS,
@@ -209,6 +211,7 @@ BS_FK = f'ALTER TABLE `balanceSheet` \
           ON UPDATE NO ACTION;'
 
 BS_OPERATIONS = {
+    "table": "balanceSheet",
     "drop_table": BS_DROP_TABLE,
     "create_table": BS_CREATE_TABLE,
     "alter_table": BS_CHANGE_COLUMNS,
@@ -276,6 +279,7 @@ CF_FK = f'ALTER TABLE `cashFlow` \
                 ON UPDATE NO ACTION;'
 
 CF_OPERATIONS = {
+    "table": "cashFlow",
     "drop_table": CF_DROP_TABLE,
     "create_table": CF_CREATE_TABLE,
     "alter_table": CF_CHANGE_COLUMNS,
