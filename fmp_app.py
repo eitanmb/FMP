@@ -1,4 +1,3 @@
-import os
 import sys
 
 from helpers.utilities import *
@@ -14,7 +13,6 @@ from sql.definitions import CONNECTION
 CONNECTION['database'] = DBNAME
 create_db(CONNECTION)
 engine = engine_connetion(CONNECTION)
-downloading_data = ''
 
 
 def get_data_download(kargs):
@@ -36,11 +34,9 @@ def halt():
 
 
 def download_routine(data):
-    global downloading_data
     print_messages("START:", data['current'])
     get_data_download(data['kwargs'])
     write_lastTicker_file('lastTicker.txt', data['next'], '0')
-    downloading_data = current_download_data()
     print_messages("END:", data['current'])
 
 
@@ -51,23 +47,26 @@ def drop_create_procedures():
 
 
 def init():
+    current_download = ''
+
     if current_download_data() == 'finished':
         print_messages('FINISHED')
         halt()
 
     if File.file_is_empty('lastTicker.txt'):
-        downloading_data = 'profile'
+        current_download = 'profile'
     else:
-        downloading_data = current_download_data()
+        current_download = current_download_data()
 
     for data in exec_order:
-        print_messages(data['current'], downloading_data)
-        if data['current'] == downloading_data:
+        print_messages(data['current'], ": expected to download ->", current_download)
+        if data['current'] == current_download:
             download_routine(data)
+            current_download = current_download_data()
 
     drop_create_procedures()
 
     for data in exec_order:
-        print_messages("Sql executions on", data['current'])
+        print_messages("Sql executions on:", data['current'])
         if data['kwargs']['sql'] is not None:
             get_data_persistence(data['kwargs'])

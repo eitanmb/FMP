@@ -2,9 +2,8 @@ import os
 import sys
 sys.path.append("..")
 
-from distutils.log import error
 from helpers.utilities import get_date, get_subdirectories_by_date, print_messages
-from core.FmpAPI import FmpAPI, FmpTickers
+from core.FmpAPI import FmpTickers
 from config.dir_structure import *
 from config.endpoints import ENDPOINTS
 
