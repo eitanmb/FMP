@@ -1,12 +1,21 @@
 import sys
 
 from config.exec_order import incomeStatement, balanceSheet, cashFlow, outlook, profile
-from noSql.mongo_operations import create_collection
+from core.DataPersistenceNoSQL import NoSqlDataPersistence
 
 
-# create_collection(profile['kwargs'])
-# create_collection(incomeStatement['kwargs'])
-# create_collection(balanceSheet['kwargs'])
-create_collection(cashFlow['kwargs'])
-# create_collection(outlook['kwargs'])
+def create_data_persistence_noSQL(kargs):
+    noSql = NoSqlDataPersistence(**kargs)
+    noSql.create_data_persistence_noSQL()
+    noSql.insert_collection_data_from_json_files()
+
+create_data_persistence_noSQL(profile['kwargs'])
+create_data_persistence_noSQL(incomeStatement['kwargs'])
+create_data_persistence_noSQL(balanceSheet['kwargs'])
+create_data_persistence_noSQL(cashFlow['kwargs'])
+create_data_persistence_noSQL(outlook['kwargs'])
+
+
+
+
 

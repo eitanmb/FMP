@@ -2,14 +2,14 @@ import sys
 
 from helpers.utilities import *
 from helpers.File import File
-from core.DataPersistence import SqlDataPersistence, drop_create_procedure
+from core.DataPersistenceSQL import SqlDataPersistence, drop_create_procedure
+from core.DataPersistenceNoSQL import NoSqlDataPersistence
 from core.DataDownload import DataDownload
 from config.setup import DBNAME
-from config.exec_order import exec_order, outlook
+from config.exec_order import exec_order
 from sql.procedures import *
 from sql.basics import *
 from sql.definitions import CONNECTION
-from noSql.mongo_operations import create_collection
 
 
 CONNECTION['database'] = DBNAME
@@ -23,13 +23,19 @@ def get_data_download(kargs):
     download.fetch_data()
 
 
-def get_data_persistence(kargs):
+def create_data_persistence_sql(kargs):
     sql = SqlDataPersistence(engine, **kargs)
     sql.drop_table()
     sql.create_table()
     sql.add_indexes()
     sql.insert_data_from_dataframe()
     sql.alter_table()
+
+
+def create_data_persistence_noSQL(kargs):
+    noSql = NoSqlDataPersistence(**kargs)
+    noSql.create_collection()
+    noSql.insert_collection_data_from_json_files()
 
 
 def current_download_data():
@@ -76,13 +82,13 @@ def init():
     for data in exec_order:
         print_messages("Sql executions on:", data['current'])
         if data['kwargs']['sql'] is not None:
-            get_data_persistence(data['kwargs'])
+            create_data_persistence_sql(data['kwargs'])
 
     
     for data in exec_order:
         print_messages("NoSql executions on:", data['current'])
         if data['kwargs']['noSql'] is not None:
-             create_collection(data['kwargs'])
+             create_data_persistence_noSQL(data['kwargs'])
 
    
 

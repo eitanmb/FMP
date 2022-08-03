@@ -10,8 +10,8 @@ from helpers.utilities import get_year, get_month
 BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
 _date: str = f"{get_month()}{get_year()}"
 
-# BASE_FOLDER: str = '/home/eitan/Programacion/FMP_2/json/2022/07'
-# _date: str = "072022"
+# BASE_FOLDER: str = '/home/eitan/Programacion/FMP_2/json/2022/06'
+# _date: str = "062022"
 
 profile_kwargs = {
     'domain':'profile',
