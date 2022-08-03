@@ -7,7 +7,7 @@ Por hacer MongoDB version:
     *) Profile, IncomeStatement, BalanceSheet, CashFlow, Outlook
     *) Cada una de estas collections tendrá una propiedad con la fecha de la actualización en el formato mm-yyyy. Y esa pripedad abergará un array de documentos relacionados con la coleccion
 
-Estructura  bbdd PTRA:
+Estructura  bbdd PTRA: NO FUNCIONO, EL DOCUMENTO CREADO EXCEDE LOS 16M
 yyyy_collection: _id: "mm-yyyy", dataSet:[]
 
 Ejemplo: 2022_incomeStatement: [

@@ -9,7 +9,7 @@ from config.exec_order import exec_order, outlook
 from sql.procedures import *
 from sql.basics import *
 from sql.definitions import CONNECTION
-from noSql.create_mongo_collections import create_collection
+from noSql.mongo_operations import create_collection
 
 
 CONNECTION['database'] = DBNAME

@@ -1,44 +1,55 @@
 import sys
+import os
 sys.path.append("..")
 
-from pymongo import *
-import os
-import json
+from dotenv import load_dotenv
 from helpers.utilities import *
-from .get_mongo_db import get_database
+import json
+from pymongo import MongoClient
 
-# _date = get_date()
+load_dotenv()
+MONGO_DB = os.environ.get("MONGO_DB_CONN")
 
-def insert_collection_data_from_json_files(folder, collection):
-    count = 1
+
+def get_database():
+    client = MongoClient(MONGO_DB)
+    return client['ptraDB']
+    
+
+def insert_collection_data_from_json_files(folder, collection, domain):
+    counter = 1
 
     for filename in os.listdir(folder):
         f = os.path.join(folder, filename)
-        
+
         if os.path.isfile(f):
             company_data = open(f)
 
         try:
             doc = json.load(company_data)
             if len(doc) > 0:
-                print(count)
-                print(collection.insert_one(doc[0]))
+                print(counter)
+                if domain == "outlook":
+                    print(collection.insert_one(doc))
+                else:
+                    print(collection.insert_one(doc[0]))
 
         except Exception as e:
             print(e)
 
-        count = count + 1
-
-    # create_text_indexes( collection )
+        counter = counter + 1
 
 
 def create_collection(kwargs):
     db = get_database()
     collection_name = kwargs['noSql']['collection_name']
     collection = db[collection_name]
+    collection.drop()
+    domain = kwargs['domain']
     folder = kwargs['folder']
+    print(f'current folder: {folder}')
 
-    insert_collection_data_from_json_files(folder, collection)
+    insert_collection_data_from_json_files(folder, collection, domain)
 
 
 # def create_text_indexes( collection_name ):
@@ -47,4 +58,3 @@ def create_collection(kwargs):
 #         calendarYear:"text",
 #         symbol:"text"
 #     })
-
