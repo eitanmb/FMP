@@ -17,20 +17,24 @@ class SqlDataPersistence():
         self.folder = kwargs['folder']
 
     def drop_table(self):
-        result = execute_query(self.drop_table_query, self.engine)
-        print_messages("Drop table:", result)
+        if self.drop_table_query is not None:
+            result = execute_query(self.drop_table_query, self.engine)
+            print_messages("Drop table:", result)
 
     def create_table(self):
-        result = execute_query(self.create_table_query, self.engine)
-        print_messages("Create table:", result)
+        if self.create_table_query is not None:
+            result = execute_query(self.create_table_query, self.engine)
+            print_messages("Create table:", result)
 
     def add_indexes(self):
-        result = execute_query(self.add_indexes_query, self.engine)
-        print_messages("Add indexes:", result)
+        if self.add_indexes_query is not None:
+            result = execute_query(self.add_indexes_query, self.engine)
+            print_messages("Add indexes:", result)
 
     def alter_table(self):
-        result = execute_query(self.alter_table_query, self.engine)
-        print_messages("Alter table:", result)
+        if self.alter_table_query is not None:
+            result = execute_query(self.alter_table_query, self.engine)
+            print_messages("Alter table:", result)
 
     def insert_data_from_dataframe(self):
         creat_dataframe_from_data(self.folder, self.engine, self.table)

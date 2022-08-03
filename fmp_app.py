@@ -5,10 +5,12 @@ from helpers.File import File
 from core.DataPersistence import SqlDataPersistence, drop_create_procedure
 from core.DataDownload import DataDownload
 from config.setup import DBNAME
-from config.exec_order import exec_order
+from config.exec_order import exec_order, outlook
 from sql.procedures import *
 from sql.basics import *
 from sql.definitions import CONNECTION
+from noSql.create_mongo_collections import create_collection
+
 
 CONNECTION['database'] = DBNAME
 create_db(CONNECTION)
@@ -23,6 +25,11 @@ def get_data_download(kargs):
 
 def get_data_persistence(kargs):
     sql = SqlDataPersistence(engine, **kargs)
+    sql.drop_table()
+    sql.create_table()
+    sql.add_indexes()
+    sql.insert_data_from_dataframe()
+    sql.alter_table()
 
 
 def current_download_data():
@@ -70,3 +77,12 @@ def init():
         print_messages("Sql executions on:", data['current'])
         if data['kwargs']['sql'] is not None:
             get_data_persistence(data['kwargs'])
+
+    
+    for data in exec_order:
+        print_messages("NoSql executions on:", data['current'])
+        if data['kwargs']['noSql'] is not None:
+             create_collection(data['kwargs'])
+
+   
+

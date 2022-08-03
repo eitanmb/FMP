@@ -1,51 +1,50 @@
 import sys
 sys.path.append("..")
+
 from pymongo import *
 import os
 import json
-from config.setup import DIRS
 from helpers.utilities import *
+from .get_mongo_db import get_database
 
-from get_mongo_db import get_database
+# _date = get_date()
 
-
-# Get the database
-BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
-folder: str      = f"/home/eitan/Programacion/FMP_2/json/2022/04/outlook"
-dbname = get_database()
-collection_name = dbname['outlook_2022_04']
-
-print('folder: ', folder)
-
-
-def create_collection_from_json( folder, collection ):
+def insert_collection_data_from_json_files(folder, collection):
+    count = 1
 
     for filename in os.listdir(folder):
         f = os.path.join(folder, filename)
         
-        # checking if it is a file
         if os.path.isfile(f):
-            company_file = open(f)
-
+            company_data = open(f)
 
         try:
-            doc = json.load(company_file)
+            doc = json.load(company_data)
             if len(doc) > 0:
-                print(collection.insert_one(doc))
+                print(count)
+                print(collection.insert_one(doc[0]))
 
         except Exception as e:
             print(e)
 
-def create_text_indexes( collection_name ):
+        count = count + 1
 
-    collection_text_indexes = collection_name.financialsAnnual.income.create_index({
-        date:"text",
-        calendarYear:"text",
-        symbol:"text"
-    })
+    # create_text_indexes( collection )
 
 
+def create_collection(kwargs):
+    db = get_database()
+    collection_name = kwargs['noSql']['collection_name']
+    collection = db[collection_name]
+    folder = kwargs['folder']
 
-create_collection_from_json( folder, collection_name)
+    insert_collection_data_from_json_files(folder, collection)
 
-# create_text_indexes( collection_name )
+
+# def create_text_indexes( collection_name ):
+#     collection_text_indexes = collection_name.financialsAnnual.income.create_index({
+#         date:"text",
+#         calendarYear:"text",
+#         symbol:"text"
+#     })
+

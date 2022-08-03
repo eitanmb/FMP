@@ -286,3 +286,17 @@ CF_OPERATIONS = {
     "delete_null": CF_DELETE_NO_SYMBOL,
     "add_indexes": CF_FK
 }
+
+
+
+# FX_DROP_TABLE = f"DROP TABLE IF EXISTS fx"
+
+# FX_OPERATIONS = {
+#     "table": "fx",
+#     "drop_table": FX_DROP_TABLE,
+#     "create_table": None,
+#     "alter_table": None,
+#     "delete_null": None,
+#     "add_indexes": None
+
+# }
