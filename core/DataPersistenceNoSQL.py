@@ -58,10 +58,9 @@ class NoSqlDataPersistence():
 
     
     def create_indexes(self):
-
-        if self.indexes is None:
+        if self.indexes[0] is None:
             return
-       
+
         for index in self.indexes:
             for query in index.values():
                 try:

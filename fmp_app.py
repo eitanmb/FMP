@@ -34,8 +34,9 @@ def create_data_persistence_sql(kargs):
 
 def create_data_persistence_noSQL(kargs):
     noSql = NoSqlDataPersistence(**kargs)
-    noSql.create_collection()
-    noSql.insert_collection_data_from_json_files()
+    # noSql.create_collection()
+    # noSql.insert_collection_data_from_json_files()
+    noSql.create_indexes()
 
 
 
@@ -63,27 +64,27 @@ def drop_create_procedures():
 def init():
     current_download = ''
 
-    if current_download_data() == 'finished':
-        print_messages('FINISHED')
-        halt()
+    # if current_download_data() == 'finished':
+    #     print_messages('FINISHED')
+    #     halt()
 
-    if File.file_is_empty('lastTicker.txt'):
-        current_download = 'profile'
-    else:
-        current_download = current_download_data()
+    # if File.file_is_empty('lastTicker.txt'):
+    #     current_download = 'profile'
+    # else:
+    #     current_download = current_download_data()
 
-    for data in exec_order:
-        print_messages(data['current'], ": expected to download ->", current_download)
-        if data['current'] == current_download:
-            download_routine(data)
-            current_download = current_download_data()
+    # for data in exec_order:
+    #     print_messages(data['current'], ": expected to download ->", current_download)
+    #     if data['current'] == current_download:
+    #         download_routine(data)
+    #         current_download = current_download_data()
 
-    drop_create_procedures()
+    # drop_create_procedures()
 
-    for data in exec_order:
-        print_messages("Sql executions on:", data['current'])
-        if data['kwargs']['sql'] is not None:
-            create_data_persistence_sql(data['kwargs'])
+    # for data in exec_order:
+    #     print_messages("Sql executions on:", data['current'])
+    #     if data['kwargs']['sql'] is not None:
+    #         create_data_persistence_sql(data['kwargs'])
 
     
     for data in exec_order:
