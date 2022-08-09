@@ -11,11 +11,9 @@ def get_date() -> str:
     return datetime.now().strftime('%Y-%m')
 
 def get_year() -> str:
-    # return '2023-01'
     return datetime.now().strftime('%Y')
 
 def get_month() -> str:
-    # return '2023-01'
     return datetime.now().strftime('%m')
 
 def get_subdirectories_by_date(date: str) -> list:

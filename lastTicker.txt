@@ -1,1 +1,1 @@
-CF,1063
+finished,0

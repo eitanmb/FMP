@@ -20,7 +20,13 @@ profile_kwargs = {
     'folder': f'{BASE_FOLDER}/profiles',
     'sql': PROFILE_OPERATIONS,
     'noSql': {
-        'collection_name':f'{_date}_profile'
+        'collection_name':f'{_date}_profile',
+        'indexes':
+        {   
+            'symbol_index':'self.collection.create_index([("symbol",1)], name="symbol_index", unique=True)',
+            'info_index': 'self.collection.create_index([("companyName","text"),("description","text")], name="info_index", default_language="english")',
+                
+        }
     }
 }
 
@@ -31,7 +37,8 @@ income_statements_kwargs = {
     'folder': f'{BASE_FOLDER}/financials/IS',
     'sql': IS_OPERATIONS,
     'noSql': {
-        'collection_name':f'{_date}_incomeStatements'
+        'collection_name':f'{_date}_incomeStatements',
+        'indexes': None
     }
 }
 
@@ -42,7 +49,8 @@ balance_sheet_kwargs = {
     'folder': f'{BASE_FOLDER}/financials/BS',
     'sql': BS_OPERATIONS,
     'noSql': {
-        'collection_name':f'{_date}_balanceSheet'
+        'collection_name':f'{_date}_balanceSheet',
+        'indexes': None
     }
 }
 
@@ -53,7 +61,8 @@ cash_flow_kwargs = {
     'folder': f'{BASE_FOLDER}/financials/CF',
     'sql': CF_OPERATIONS,
     'noSql': {
-        'collection_name':f'{_date}_cashFlow'
+        'collection_name':f'{_date}_cashFlow',
+        'indexes': None
     }
 }
 
@@ -64,7 +73,8 @@ outlook_kwargs = {
     'folder': f'{BASE_FOLDER}/outlook',
     'sql': None,
     'noSql': {
-        'collection_name':f'{_date}_outlook'
+        'collection_name':f'{_date}_outlook',
+        'indexes': None
     }
 }
 

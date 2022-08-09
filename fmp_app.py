@@ -38,6 +38,7 @@ def create_data_persistence_noSQL(kargs):
     noSql.insert_collection_data_from_json_files()
 
 
+
 def current_download_data():
     return get_lastTicker_info('lastTicker.txt')[0]
 
