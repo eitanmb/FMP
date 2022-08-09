@@ -23,8 +23,8 @@ profile_kwargs = {
         'collection_name':f'{_date}_profile',
         'indexes':
         {   
-            'symbol_index':'self.collection.create_index([("symbol",1)], name="symbol_index", unique=True)',
-            'info_index': 'self.collection.create_index([("companyName","text"),("description","text")], name="info_index", default_language="english")',
+            'symbol_index':'[("symbol",1)], name="symbol_index", unique=True',
+            'info_index': '[("companyName","text"),("description","text")], name="info_index", default_language="english"'
                 
         }
     }
