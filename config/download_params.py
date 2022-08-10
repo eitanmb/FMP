@@ -2,13 +2,13 @@ import sys
 sys.path.append("..")
 
 from sql.definitions import IS_OPERATIONS, BS_OPERATIONS, CF_OPERATIONS, PROFILE_OPERATIONS
+from noSql.definitions import PROFILE_NOSQl, IS_NOSQl, BS_NOSQl, CF_NOSQl, OUTLOOK_NOSQL
 from .endpoints import ENDPOINTS
 from .setup import DIRS, TICKERS_FILES
-from helpers.utilities import get_year, get_month
+
 
 
 BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
-_date: str = f"{get_month()}{get_year()}"
 
 # BASE_FOLDER: str = '/home/eitan/Programacion/FMP_2/json/2022/06'
 # _date: str = "062022"
@@ -19,15 +19,7 @@ profile_kwargs = {
     'endpoint': ENDPOINTS['profile'], 
     'folder': f'{BASE_FOLDER}/profiles',
     'sql': PROFILE_OPERATIONS,
-    'noSql': {
-        'collection_name':f'{_date}_profile',
-        'indexes':
-        {   
-            'symbol_index':'[("symbol",1)], name="symbol_index", unique=True',
-            'info_index': '[("companyName","text"),("description","text")], name="info_index", default_language="english"'
-                
-        }
-    }
+    'noSql': PROFILE_NOSQl
 }
 
 income_statements_kwargs = {
@@ -36,10 +28,7 @@ income_statements_kwargs = {
     'endpoint': ENDPOINTS['IS'], 
     'folder': f'{BASE_FOLDER}/financials/IS',
     'sql': IS_OPERATIONS,
-    'noSql': {
-        'collection_name':f'{_date}_incomeStatements',
-        'indexes': None
-    }
+    'noSql': IS_NOSQl
 }
 
 balance_sheet_kwargs = {
@@ -48,10 +37,7 @@ balance_sheet_kwargs = {
     'endpoint': ENDPOINTS['BS'], 
     'folder': f'{BASE_FOLDER}/financials/BS',
     'sql': BS_OPERATIONS,
-    'noSql': {
-        'collection_name':f'{_date}_balanceSheet',
-        'indexes': None
-    }
+    'noSql': BS_NOSQl
 }
 
 cash_flow_kwargs = {
@@ -60,10 +46,7 @@ cash_flow_kwargs = {
     'endpoint': ENDPOINTS['CF'], 
     'folder': f'{BASE_FOLDER}/financials/CF',
     'sql': CF_OPERATIONS,
-    'noSql': {
-        'collection_name':f'{_date}_cashFlow',
-        'indexes': None
-    }
+    'noSql': CF_NOSQl
 }
 
 outlook_kwargs = {
@@ -72,10 +55,7 @@ outlook_kwargs = {
     'endpoint': ENDPOINTS['outlook'], 
     'folder': f'{BASE_FOLDER}/outlook',
     'sql': None,
-    'noSql': {
-        'collection_name':f'{_date}_outlook',
-        'indexes': None
-    }
+    'noSql': OUTLOOK_NOSQL
 }
 
 forex_kwargs = {
