@@ -11,7 +11,6 @@ from .setup import DIRS, TICKERS_FILES
 BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
 
 # BASE_FOLDER: str = '/home/eitan/Programacion/FMP_2/json/2022/06'
-# _date: str = "062022"
 
 profile_kwargs = {
     'domain':'profile',

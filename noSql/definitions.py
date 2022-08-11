@@ -5,6 +5,8 @@ from helpers.utilities import get_year, get_month
 
 
 _date: str = f"{get_month()}{get_year()}"
+# _date: str = "062022"
+
 
 PROFILE_NOSQl =  {
     'collection_name':f'{_date}_profile',
