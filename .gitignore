@@ -2,3 +2,4 @@ bitacora/
 /json
 *.json
 .env
+lastTicker.txt

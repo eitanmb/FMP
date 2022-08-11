@@ -14,12 +14,12 @@ status = False
 
 
 # obtain de process PID
-output = os.popen('ps l | grep fmp_exec.py')
+output = os.popen('ps l | grep app.py')
 processes = output.readlines()
 process_list = []
 
 for process in processes:
-    if process.find('python fmp_exec.py') != -1:
+    if process.find('python app.py') != -1:
         process_list = process.split(' ')
 
 
@@ -49,7 +49,7 @@ if status != True:
     sp.wait()
 
     # cmd1 = 'tmux new -d -s Scraping\; send-keys "pipenv run python inv_explorer_bot.py | tee -a log/exp.log" Enter'
-    cmd1 = 'tmux new -d -s FMP\; send-keys "pipenv run python fmp_exec.py" Enter'
+    cmd1 = 'tmux new -d -s FMP\; send-keys "pipenv run python app.py" Enter'
     print(cmd1)
     # Use shell to execute the command and store it in sp variable
     sp1 = subprocess.Popen(cmd1, shell=True)

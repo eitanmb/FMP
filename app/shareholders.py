@@ -1,11 +1,12 @@
 import sys
+import os
 sys.path.append("..")
 
 from config.setup import DIRS, CONNECTION
-from helpers.get_data_functions import *
+from core import FmpAPI
 from helpers.utilities import *
-from helpers.db_basics import engine_connetion, execute_query
-from helpers.file_basics import *
+from db.db_basics import engine_connetion, execute_query, creat_dataframe_from_data
+from helpers import File
 from app import institutional_holders as holderpaints, float_shares as floatshares
 
 
@@ -43,13 +44,13 @@ def init() -> None:
             data['symbol'] = symbol
 
         #obtener listado de archivos a modificar
-        files = files_in_folder( f_holders_ori )
+        files = File.files_in_folder( f_holders_ori )
 
         #Extraer la data de cada archivo JSON
         for file in files:
             #Convertir json data a python data
             try:
-                data = read_json_file(path_to_file(file))
+                data = File.read(path_to_file(file))
             
             except Exception as e:
                 print(e)
@@ -65,7 +66,7 @@ def init() -> None:
             new_file = f"{f_holders_mod}/{symbol}.json"
 
             if not os.path.exists(new_file):
-                write_json_file( new_file, data )
+                File.write_json( new_file, data )
             else:
                 print(f'El archivo {symbol} ya fue modificado')
 

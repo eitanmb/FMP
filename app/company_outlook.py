@@ -1,29 +1,31 @@
 import sys
 sys.path.append("..")
+from tkinter import E
 
+from config.endpoints import ENDPOINTS
 from config.setup import DIRS, TICKERS_PATH
-from helpers.get_data_functions import *
-from helpers.utilities import *
+from core.FmpAPI import FmpAPI
+from helpers import utilities as util
 
 
 def init() -> None:
 
-  BASE_FOLDER = DIRS['CURRENT_JSON_FOLDER']
-  folder: str = f"{BASE_FOLDER}/outlook"
-  data_name: str = "Company Outlook"
+    BASE_FOLDER = DIRS['CURRENT_JSON_FOLDER']
+    tickers_file = TICKERS_PATH['tickers_financial_info']
+    tickers_list: list = FmpAPI.get_tickers_list(tickers_file)
+    outlook: object = {
+        'domain': 'outlook',
+        'tickers_list': tickers_list,
+        'endpoint': ENDPOINTS['outlook'],
+        'folder': f"{BASE_FOLDER}/outlook",
+        'table': None,
+        'db_operations':None
+    }
 
-  print( set_init_time( data_name ) )
-
-  tickers_list: list = get_tickers_list(TICKERS_PATH['tickers_financial_info'])
-
-  outlook_url: str =  f"{url_base}/v4/company-outlook?symbol="
-
-  get_fmp_data( tickers_list, outlook_url, folder, 'outlook' )
-
-  print( set_init_time( data_name ), set_end_time( data_name ) )
-
-
-
+    data_name: str = "Company Outlook"
+    util.print_messages(util.set_init_time(data_name))
+    FmpAPI.download_companies_data(outlook)
+    util.print_messages(util.set_end_time(data_name))
 
 if __name__ == "_main__":
-  init()
+    init()

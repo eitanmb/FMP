@@ -1,42 +1,48 @@
 import sys
 sys.path.append("..")
 
+from config.endpoints import ENDPOINTS
 from config.setup import DIRS, CONNECTION, TICKERS_PATH
-from db.db_definitions import TABLE_PROFILE_STRUCTURE, PROFILE_INDEXES
-from helpers.db_basics import engine_connetion, execute_query
-from helpers.get_data_functions import *
-from helpers.utilities import *
+from db.db_definitions import PROFILE_DROP_TABLE, PROFILE_CREATE_TABLE, PROFILE_INDEXES
+from db import db_basics as db
+from helpers import utilities as util
+from core.FmpAPI import FmpAPI
 
 def init() -> None:
-  BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
-  folder: str      = f"{BASE_FOLDER}/profiles"
-  table_name: str  = "profile"
-  data_name: str = "Company Profile"
+    BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
+    tickers_list = FmpAPI.get_tickers_list(TICKERS_PATH['symbols'])
+    profile: object = {
+        'domain': 'profile',
+        'tickers_list': tickers_list,
+        'endpoint': ENDPOINTS['profile'],
+        'folder': f'{BASE_FOLDER}/profiles',
+        'table': 'profile',
+        'db_operations': {
+            "drop_table": PROFILE_DROP_TABLE,
+            "create_table": PROFILE_CREATE_TABLE,
+            "indexes": PROFILE_INDEXES,
+        }
+    }
+    engine = db.engine_connetion(CONNECTION)
 
-  #Connexion con BBDD
-  engine = engine_connetion(CONNECTION)
+    def create_profile_table():
+        db.execute_query(profile['db_operations']['drop_table'], engine)
+        db.execute_query(profile['db_operations']['create_table'], engine)
 
-  def get_profile( tickers_list:list, profile_url:str, folder:str ) -> None:
-      #Eliminar la tabla si existe
-      
-      execute_query(f'DROP TABLE IF EXISTS {table_name}', engine)
-      execute_query( TABLE_PROFILE_STRUCTURE, engine )
-      execute_query( PROFILE_INDEXES, engine )
-      get_fmp_data(tickers_list, profile_url, folder, 'profile')
-      creat_dataframe_from_data ( folder, engine, table_name )
+    def alter_profile_table():
+        db.execute_query(profile['db_operations']['indexes'], engine)
 
+    def get_profile() -> None:
+        create_profile_table()
+        alter_profile_table()
+        FmpAPI.download_companies_data(profile)
+        db.creat_dataframe_from_data(profile['folder'], engine, profile['table'])
 
-
-  print( set_init_time( data_name ) )
-
-  tickers_list = get_tickers_list(TICKERS_PATH['symbols'])
-
-  profile_url =  f"{url_base}/v3/profile/"
-
-  get_profile( tickers_list, profile_url, folder )
-
-  print( set_init_time( data_name ), set_end_time( data_name ) )
-
+    data_name: str = "Company Profile"
+    util.print_messages(util.set_init_time(data_name))
+    get_profile()
+    util.print_messages(util.set_end_time(data_name))
+    util.print_messages(util.set_end_time(data_name))
 
 if __name__ == "_main__":
-  init()
+    init()

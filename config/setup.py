@@ -1,81 +1,72 @@
-# from ast import List
 import os
 import sys
-from helpers.get_data_functions import *
-from helpers.db_basics import *
 sys.path.append("..")
 
-from config.directory_structure import *
+from helpers.utilities import get_date, get_subdirectories_by_date, print_messages
+from core.FmpAPI import FmpTickers
+from config.dir_structure import *
+from config.endpoints import ENDPOINTS
 
 
-BASE_DIR: str = os.path.dirname(os.path.abspath( 'fmp') )
+BASE_DIR: str = os.path.dirname(os.path.abspath('fmp'))
 
 DIRS: object = {
-  'ROOT_JSON_DIR': "",
-  'CURRENT_JSON_FOLDER': ""
+    'ROOT_JSON_DIR': "",
+    'CURRENT_JSON_FOLDER': ""
 }
-CONNECTION: object = {}
-TICKERS_PATH: object = {}
 
 DIRS['ROOT_JSON_DIR'] = f'{ BASE_DIR }/json'
 
 subdirectories_list: list = []
 date: str = get_date()
-subdirectories_list = get_subdirectories_by_date( date )
+subdirectories_list = get_subdirectories_by_date(date)
+DBNAME = f'FMP_{ subdirectories_list[0] }_{ subdirectories_list[1] }'
 
-# FOLDER STRUCTURE
-def init() -> None:
-  global DIRS
-  global CONNECTION
-  global TICKERS_PATH
+create_json_directory_structure(DIRS["ROOT_JSON_DIR"], subdirectories_list)
 
-  create_json_directory_structure( DIRS["ROOT_JSON_DIR"], subdirectories_list )
-  
-  
-  if DIRS['CURRENT_JSON_FOLDER'] == "":
-      DIRS['CURRENT_JSON_FOLDER'] = set_current_json_folder( DIRS['ROOT_JSON_DIR'], subdirectories_list )
-    
-  # DB CONNECTION DATA
-  CONNECTION['user'] = 'eitan'
-  CONNECTION['host'] = 'localhost'
-  CONNECTION['password'] = '123456'
-  CONNECTION['database'] = f'FMP_{ subdirectories_list[0] }_{ subdirectories_list[1] }'
+if DIRS['CURRENT_JSON_FOLDER'] == "":
+    DIRS['CURRENT_JSON_FOLDER'] = set_current_json_folder(
+        DIRS['ROOT_JSON_DIR'], subdirectories_list)
 
-  #CREATE DB IF NOT EXIST
-  create_db(CONNECTION);
 
-  
-  #GET TICKERS LISTS
-  TICKERS_PATH['tickers_financial_info'] = f'{ DIRS["CURRENT_JSON_FOLDER"] }/tickers_financial_info.json'
-  TICKERS_PATH['tradable_tickers'] = f'{ DIRS["CURRENT_JSON_FOLDER"] }/tradeble_tickers.json'
-  TICKERS_PATH['symbols'] = f'{ DIRS["CURRENT_JSON_FOLDER"] }/symbols.json'
+TICKERS_FILES: object = {
+    "financial": {
+        "file_name": 'tickers_financial_info.json',
+        "path_to_file": f"{DIRS['CURRENT_JSON_FOLDER']}/tickers_financial_info.json",
+        "endpoint": ENDPOINTS['financial_list']
+    },
+    "tradeble": {
+        "file_name": 'tradeble_tickers.json',
+        "path_to_file": f"{DIRS['CURRENT_JSON_FOLDER']}/tradeble_tickers.json",
+        "endpoint": ENDPOINTS['tradeble_list']
+    },
+    "stock": {
+        "file_name": 'symbols.json',
+        "path_to_file": f"{DIRS['CURRENT_JSON_FOLDER']}/symbols.json",
+        "endpoint": ENDPOINTS['stock_list']
+    },
+    "forex": {
+        "file_name": 'forex_pairs.json',
+        "path_to_file": f"{DIRS['CURRENT_JSON_FOLDER']}/forex_pairs.json",
+        "endpoint":  ENDPOINTS['forex_pairs']
+    }
+}
 
-   
-  if not os.path.exists(TICKERS_PATH['tickers_financial_info']):
-    try:
-      create_tickers_list_with_financial_info( DIRS['CURRENT_JSON_FOLDER'] )
-      print("tickers_financial_info created")
-    except FileExistsError:
-      print("tickers_financial_info already exist")
+def isFile(ticker):
+    file = ticker['path_to_file']
+    return os.path.exists(file)
 
-  if not os.path.exists(TICKERS_PATH['tradable_tickers']):
-    try:
-      create_tradeble_tickers_list(DIRS['CURRENT_JSON_FOLDER'])
-      print("tradable_tickers created")
-    except FileExistsError:
-      print("tradable_tickers already exist")
 
-  if not os.path.exists(TICKERS_PATH['symbols']):
-    try:
-      create_symbol_list(DIRS['CURRENT_JSON_FOLDER'])
-      print("symbols created")
-    
-    except FileExistsError as e:
-      print("symbols already exist")
-    
-  
-  
-  if __name__ == "__main__":
-    init()
+def create_tickers_file_if_not_exist(file_info):
+    if not isFile(file_info):
+        try:
+            FmpTickers.create_tickers_list(file_info['path_to_file'], file_info['endpoint'])
+            print_messages(file_info['file_name'], "created")
+        except Exception as error:
+            print_messages(error)
 
-    
+
+create_tickers_file_if_not_exist(TICKERS_FILES['financial'])
+create_tickers_file_if_not_exist(TICKERS_FILES['tradeble'])
+create_tickers_file_if_not_exist(TICKERS_FILES['stock'])
+create_tickers_file_if_not_exist(TICKERS_FILES['forex'])
