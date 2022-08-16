@@ -5,17 +5,11 @@ from helpers.File import File
 from core.DataPersistenceSQL import SqlDataPersistence, drop_create_procedure
 from core.DataPersistenceNoSQL import NoSqlDataPersistence
 from core.DataDownload import DataDownload
-from config.setup import DBNAME
 from config.exec_order import exec_order
 from sql.procedures import *
 from sql.basics import *
-from sql.definitions import CONNECTION
 
-
-CONNECTION['database'] = DBNAME
-create_db(CONNECTION)
-engine = engine_connetion(CONNECTION)
-
+mysql_engine = engine_connetion()
 
 def get_data_download(kargs):
     download = DataDownload(**kargs)
@@ -24,7 +18,7 @@ def get_data_download(kargs):
 
 
 def create_data_persistence_sql(kargs):
-    sql = SqlDataPersistence(engine, **kargs)
+    sql = SqlDataPersistence(mysql_engine, **kargs)
     sql.drop_table()
     sql.create_table()
     sql.add_indexes()
@@ -37,7 +31,6 @@ def create_data_persistence_noSQL(kargs):
     noSql.create_collection()
     noSql.insert_collection_data_from_json_files()
     noSql.create_indexes()
-
 
 
 def current_download_data():
@@ -56,9 +49,9 @@ def download_routine(data):
 
 
 def drop_create_procedures():
-    drop_create_procedure(stp_getLastChangeOfYear, engine)
-    drop_create_procedure(stp_to_exRate, engine)
-    drop_create_procedure(stp_to_usd, engine)
+    drop_create_procedure(stp_getLastChangeOfYear, mysql_engine)
+    drop_create_procedure(stp_to_exRate, mysql_engine)
+    drop_create_procedure(stp_to_usd, mysql_engine)
 
 
 def init():
