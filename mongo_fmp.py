@@ -1,13 +1,13 @@
 import sys
 
-from config.exec_order import incomeStatement, balanceSheet, cashFlow, outlook, profile
+from config.fmp.fmp_exec_order import incomeStatement, balanceSheet, cashFlow, outlook, profile
 from core.DataPersistenceNoSQL import NoSqlDataPersistence
 
 
 def create_data_persistence_noSQL(kargs):
     noSql = NoSqlDataPersistence(**kargs)
-    # noSql.create_data_persistence_noSQL()
-    # noSql.insert_collection_data_from_json_files()
+    noSql.create_data_persistence_noSQL()
+    noSql.insert_collection_data_from_json_files()
     noSql.create_indexes()
 
 create_data_persistence_noSQL(profile['kwargs'])

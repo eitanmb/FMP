@@ -1,4 +1,4 @@
-from .download_params import *
+from .fmp_download_params import *
 
 profile = {
     'current': 'profile',

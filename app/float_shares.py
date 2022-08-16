@@ -1,9 +1,9 @@
 import sys
 sys.path.append("..")
 
-from config.endpoints import ENDPOINTS
+from config.fmp.fmp_endpoints import ENDPOINTS
 from config.setup import DIRS, TICKERS_PATH
-from core.FmpAPI import FmpAPI
+from core.fmp.FmpAPI import FmpAPI
 from helpers import utilities as util
 
 

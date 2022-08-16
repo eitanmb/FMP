@@ -1,12 +1,12 @@
 import sys
 sys.path.append("..")
 
-from config.endpoints import ENDPOINTS
+from config.fmp.fmp_endpoints import ENDPOINTS
 from config.setup import DIRS, CONNECTION, TICKERS_PATH
 from db.db_definitions import PROFILE_DROP_TABLE, PROFILE_CREATE_TABLE, PROFILE_INDEXES
 from db import db_basics as db
 from helpers import utilities as util
-from core.FmpAPI import FmpAPI
+from core.fmp.FmpAPI import FmpAPI
 
 def init() -> None:
     BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']

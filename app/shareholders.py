@@ -3,7 +3,7 @@ import os
 sys.path.append("..")
 
 from config.setup import DIRS, CONNECTION
-from core import FmpAPI
+from core.fmp import FmpAPI
 from helpers.utilities import *
 from db.db_basics import engine_connetion, execute_query, creat_dataframe_from_data
 from helpers import File

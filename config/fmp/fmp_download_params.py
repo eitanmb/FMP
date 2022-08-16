@@ -3,8 +3,9 @@ sys.path.append("..")
 
 from sql.definitions import IS_OPERATIONS, BS_OPERATIONS, CF_OPERATIONS, PROFILE_OPERATIONS
 from noSql.definitions import PROFILE_NOSQl, IS_NOSQl, BS_NOSQl, CF_NOSQl, OUTLOOK_NOSQL
-from .endpoints import ENDPOINTS
-from .setup import DIRS, TICKERS_FILES
+from .fmp_endpoints import ENDPOINTS
+from ..setup import DIRS
+from .fmp_tickers import TICKERS_FILES
 
 
 

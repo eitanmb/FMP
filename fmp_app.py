@@ -1,11 +1,13 @@
 import sys
 
-from helpers.utilities import *
-from helpers.File import File
 from core.DataPersistenceSQL import SqlDataPersistence, drop_create_procedure
 from core.DataPersistenceNoSQL import NoSqlDataPersistence
-from core.DataDownload import DataDownload
-from config.exec_order import exec_order
+from core.fmp.FmpDataDownload import DataDownload
+from config.fmp.fmp_exec_order import exec_order
+from config.fmp.fmp_tickers import *
+from config.setup import DIRS
+from helpers.utilities import *
+from helpers.File import File
 from sql.procedures import *
 from sql.basics import *
 
@@ -53,8 +55,12 @@ def drop_create_procedures():
     drop_create_procedure(stp_to_exRate, mysql_engine)
     drop_create_procedure(stp_to_usd, mysql_engine)
 
+def manage_tickers_creation():
+    set_fmp_tickers_info(DIRS)
+    get_tickers()
 
 def init():
+    manage_tickers_creation()
     current_download = ''
 
     if current_download_data() == 'finished':
