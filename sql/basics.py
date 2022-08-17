@@ -24,7 +24,7 @@ def create_db():
 
 
 def engine_connetion():
-    create_db(CONNECTION)
+    create_db()
     return create_engine(f"mysql+pymysql://{CONNECTION['user']}:{CONNECTION['password']}@{CONNECTION['host']}/{CONNECTION['database']}")
 
 

@@ -3,64 +3,65 @@ import sys
 from core.DataPersistenceSQL import SqlDataPersistence, drop_create_procedure
 from core.DataPersistenceNoSQL import NoSqlDataPersistence
 from core.fmp.FmpDataDownload import DataDownload
-from config.fmp.fmp_exec_order import exec_order
-from config.fmp.fmp_tickers import *
-from config.setup import DIRS
+from config.fmp import fmp_tickers
+from config.fmp import fmp_exec_order
 from helpers.utilities import *
 from helpers.File import File
 from sql.procedures import *
 from sql.basics import *
 
-mysql_engine = engine_connetion()
 
-def get_data_download(kargs):
-    download = DataDownload(**kargs)
-    download.create_folder()
-    download.fetch_data()
+def init(DIRS):
 
-
-def create_data_persistence_sql(kargs):
-    sql = SqlDataPersistence(mysql_engine, **kargs)
-    sql.drop_table()
-    sql.create_table()
-    sql.add_indexes()
-    sql.insert_data_from_dataframe()
-    sql.alter_table()
+    def get_data_download(kargs):
+        download = DataDownload(**kargs)
+        download.create_folder()
+        download.fetch_data()
 
 
-def create_data_persistence_noSQL(kargs):
-    noSql = NoSqlDataPersistence(**kargs)
-    noSql.create_collection()
-    noSql.insert_collection_data_from_json_files()
-    noSql.create_indexes()
+    def create_data_persistence_sql(kargs):
+        sql = SqlDataPersistence(mysql_engine, **kargs)
+        sql.drop_table()
+        sql.create_table()
+        sql.add_indexes()
+        sql.insert_data_from_dataframe()
+        sql.alter_table()
 
 
-def current_download_data():
-    return get_lastTicker_info('lastTicker.txt')[0]
+    def create_data_persistence_noSQL(kargs):
+        noSql = NoSqlDataPersistence(**kargs)
+        noSql.create_collection()
+        noSql.insert_collection_data_from_json_files()
+        noSql.create_indexes()
 
 
-def halt():
-    sys.exit()
+    def current_download_data():
+        return get_lastTicker_info('lastTicker.txt')[0]
 
 
-def download_routine(data):
-    print_messages("START:", data['current'])
-    get_data_download(data['kwargs'])
-    write_lastTicker_file('lastTicker.txt', data['next'], '0')
-    print_messages("END:", data['current'])
+    def halt():
+        sys.exit()
 
 
-def drop_create_procedures():
-    drop_create_procedure(stp_getLastChangeOfYear, mysql_engine)
-    drop_create_procedure(stp_to_exRate, mysql_engine)
-    drop_create_procedure(stp_to_usd, mysql_engine)
+    def download_routine(data):
+        print_messages("START:", data['current'])
+        get_data_download(data['kwargs'])
+        write_lastTicker_file('lastTicker.txt', data['next'], '0')
+        print_messages("END:", data['current'])
 
-def manage_tickers_creation():
-    set_fmp_tickers_info(DIRS)
-    get_tickers()
 
-def init():
-    manage_tickers_creation()
+    def drop_create_procedures():
+        drop_create_procedure(stp_getLastChangeOfYear, mysql_engine)
+        drop_create_procedure(stp_to_exRate, mysql_engine)
+        drop_create_procedure(stp_to_usd, mysql_engine)
+
+    
+
+    mysql_engine = engine_connetion()
+    fmp_tickers.init(DIRS)
+    TICKERS_FILES = fmp_tickers.get_fmp_tickers_info(DIRS)
+    exec_order = fmp_exec_order.init(DIRS, TICKERS_FILES)
+    
     current_download = ''
 
     if current_download_data() == 'finished':
@@ -92,4 +93,5 @@ def init():
              create_data_persistence_noSQL(data['kwargs'])
 
    
-
+if __name__ == '__main__':
+    init()

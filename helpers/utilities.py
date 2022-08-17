@@ -6,14 +6,16 @@ def set_datetime_now() -> str:
     return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 def get_date() -> str:
-    # return '2023-01'
-    return datetime.now().strftime('%Y-%m')
+    return '2023-01'
+    # return datetime.now().strftime('%Y-%m')
 
 def get_year() -> str:
-    return datetime.now().strftime('%Y')
+    return "2023"
+    # return datetime.now().strftime('%Y')
 
 def get_month() -> str:
-    return datetime.now().strftime('%m')
+    return "01"
+    # return datetime.now().strftime('%m')
 
 def get_subdirectories_by_date(date: str) -> list:
     return date.split('-')

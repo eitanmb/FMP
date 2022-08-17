@@ -1,5 +1,5 @@
-import fmp_app
 from config import setup
+import fmp_app
 
-setup.init()
-fmp_app.init()
+DIRS = setup.init()
+fmp_app.init(DIRS)
