@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-finished,0
-=======
-finished,0
->>>>>>> class
+profile,43

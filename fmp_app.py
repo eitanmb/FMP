@@ -91,7 +91,3 @@ def init(DIRS):
         print_messages("NoSql executions on:", data['current'])
         if data['kwargs']['noSql'] is not None:
              create_data_persistence_noSQL(data['kwargs'])
-
-   
-if __name__ == '__main__':
-    init()
