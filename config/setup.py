@@ -18,7 +18,7 @@ def set_current_json_folder(ROOT_JSON_DIR: str, subdirectories_list: list):
 
 
 def init():
-    BASE_DIR: str = os.path.dirname(os.path.abspath('app.py'))
+    BASE_DIR: str = os.path.dirname(os.path.abspath('exec.py'))
     
     DIRS: object = {
         'ROOT_JSON_DIR': "",

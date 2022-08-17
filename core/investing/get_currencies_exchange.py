@@ -1,6 +1,6 @@
-###Información histótica del valor de las monedas, obtenida de MARKETS INSIDERS###
-
 import sys
+sys.path.append("..")
+
 from lxml import etree
 import time
 from bs4 import BeautifulSoup
@@ -17,13 +17,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
-from available_pairs import available_pairs
+from config.investing.available_pairs import available_pairs
+from  helpers.File import File
 
 currecies_url = "/currencies/"
 
 #formato web investing: mm/dd/yyyy
-_from = "01/01/2021"
-_till = "02/01/2021"
+_from = "01/01/2008"
+_till = "07/31/2022"
 
 
 def verify_404(driver,url):
@@ -37,8 +38,8 @@ def verify_404(driver,url):
 def driver_init_headless(extende_url):
     base_url = "https://www.investing.com"
     firefox_options = Options()
-    firefox_options.add_argument("-incognito")
-    firefox_options.add_argument("--headless")
+    # firefox_options.add_argument("-incognito")
+    # firefox_options.add_argument("--headless")
     driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=firefox_options)
 
     url = base_url + extende_url
@@ -223,23 +224,15 @@ def build_currecy_value_dataframe(pair, doc):
     return currencydata
 
 
-def read_json(file):
-    jd = open(file)
-    data = json.load(jd)
-    return data
+def init(DIRS):
+    BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
+    PATH:str = f"{BASE_FOLDER}/forex/"
 
-def write_json(file, data):
-    with open(file, 'w') as fp:
-        json.dump(data, fp)
-
-path = '/home/eitan/'
-
-def init():
     for currency in available_pairs:
         base_currency = currency[0]
         quote_currency = currency[1]
         pair = base_currency + quote_currency
-        file = f"{path}{pair}.json"
+        file = f"{PATH}{pair}.json"
         print(pair)
     
         extende_url = currecies_url + base_currency.lower() + '-' + quote_currency.lower() + "-historical-data"
@@ -254,15 +247,9 @@ def init():
 
             result = currencydata.to_json(orient="records")
             parsed = json.loads(result)
-            write_json(file, parsed)
+            File.write_json(file, parsed)
             
             print(json.dumps(parsed, indent=4))
             # sys.exit()
         else:
             print("ERROR - NO HAY DATOS SOBRE {} EN Investing\n\n".format(currency[0]))
-
-
-
-
-if __name__ == "__main__":
-    init()

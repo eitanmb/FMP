@@ -1,4 +1,6 @@
+import os
 import sys
+sys.path.append("..")
 
 from core.DataPersistenceSQL import SqlDataPersistence, drop_create_procedure
 from core.DataPersistenceNoSQL import NoSqlDataPersistence

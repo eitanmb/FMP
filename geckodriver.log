@@ -1,0 +1,63 @@
+1660745886853	geckodriver	INFO	Listening on 127.0.0.1:47127
+1660745886879	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-incognito" "--headless" "--remote-debugging-port" "41571" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileb1ya3x"
+*** You are running in headless mode.
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660745965102	geckodriver	INFO	Listening on 127.0.0.1:54083
+1660745965677	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-incognito" "--headless" "--remote-debugging-port" "36911" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileprhK7F"
+*** You are running in headless mode.
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660745966072	Marionette	INFO	Marionette enabled
+1660745966081	Marionette	INFO	Listening on port 46639
+WebDriver BiDi listening on ws://localhost:36911
+Read port: 46639
+1660745966258	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileprhK7F/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:36911/devtools/browser/95797812-4711-43f0-8b96-cf235ff500a1
+libEGL warning: DRI2: failed to create dri screen
+JavaScript warning: https://pagead2.googlesyndication.com/bg/dJtiYfEJEI0hyw5wQ_g_8NlKRsHdja2JZeZ5T9NF0jg.js line 2 > eval line 4126 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/dJtiYfEJEI0hyw5wQ_g_8NlKRsHdja2JZeZ5T9NF0jg.js line 2 > eval line 410 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+libEGL warning: DRI2: failed to create dri screen
+JavaScript warning: https://pagead2.googlesyndication.com/bg/dJtiYfEJEI0hyw5wQ_g_8NlKRsHdja2JZeZ5T9NF0jg.js line 2 > eval line 5176 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660746252114	geckodriver	INFO	Listening on 127.0.0.1:48155
+1660746252663	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "59529" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofile4Td8Ny"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660746253297	Marionette	INFO	Marionette enabled
+1660746253302	Marionette	INFO	Listening on port 32839
+WebDriver BiDi listening on ws://localhost:59529
+Read port: 32839
+1660746253514	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile4Td8Ny/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:59529/devtools/browser/dcc4767f-467d-47f6-bf18-fbd4b89e98b7
+JavaScript warning: https://pagead2.googlesyndication.com/bg/dJtiYfEJEI0hyw5wQ_g_8NlKRsHdja2JZeZ5T9NF0jg.js line 2 > eval line 6756 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660746455211	Marionette	INFO	Stopped listening on port 32839
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1660746456101	geckodriver	INFO	Listening on 127.0.0.1:35691
+1660746456146	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "60217" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilem2kHrz"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660746456790	Marionette	INFO	Marionette enabled
+1660746456794	Marionette	INFO	Listening on port 36863
+WebDriver BiDi listening on ws://localhost:60217
+Read port: 36863
+1660746456994	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilem2kHrz/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:60217/devtools/browser/e8b257ab-4129-4fe9-8501-d3715ef845a7
+JavaScript warning: https://pagead2.googlesyndication.com/bg/dJtiYfEJEI0hyw5wQ_g_8NlKRsHdja2JZeZ5T9NF0jg.js line 2 > eval line 2436 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: , line 0: uncaught exception: 7
+JavaScript warning: https://pagead2.googlesyndication.com/bg/dJtiYfEJEI0hyw5wQ_g_8NlKRsHdja2JZeZ5T9NF0jg.js line 2 > eval line 2424 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660746653786	Marionette	INFO	Stopped listening on port 36863
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: https://i-invdn-com.investing.com/x/prod/fa2daef/_next/static/chunks/pages/_app-ef23a8f164c4d0279ef2.js, line 1: SyntaxError: JSON.parse: unterminated string at line 1 column 686 of the JSON data
+JavaScript error: https://i-invdn-com.investing.com/x/prod/fa2daef/_next/static/chunks/pages/_app-ef23a8f164c4d0279ef2.js, line 1: SyntaxError: JSON.parse: unterminated string at line 1 column 619 of the JSON data
