@@ -3,3 +3,4 @@ bitacora/
 *.json
 .env
 lastTicker.txt
+core/investin/get_currencies_exchange copy.py
