@@ -2820,3 +2820,490 @@ JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C
 1660841166007	geckodriver	INFO	Listening on 127.0.0.1:56377
 1660841166062	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "60385" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileJ9XS6l"
 [GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660852186094	geckodriver	INFO	Listening on 127.0.0.1:40071
+1660852186664	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "57769" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileIBBciS"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660852187283	Marionette	INFO	Marionette enabled
+1660852187287	Marionette	INFO	Listening on port 45061
+WebDriver BiDi listening on ws://localhost:57769
+Read port: 45061
+1660852187603	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileIBBciS/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:57769/devtools/browser/edd61243-92f0-4583-a130-933c53f33507
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1869 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6983 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1894 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660852292946	Marionette	INFO	Stopped listening on port 45061
+1660852737380	geckodriver	INFO	Listening on 127.0.0.1:34949
+1660852737958	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "52219" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofiletLBF53"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660852738601	Marionette	INFO	Marionette enabled
+1660852738605	Marionette	INFO	Listening on port 37871
+WebDriver BiDi listening on ws://localhost:52219
+Read port: 37871
+1660852738733	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofiletLBF53/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:52219/devtools/browser/ecee73c3-694a-42eb-9a5a-ffb3e2ed8b59
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17880049812&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 955 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 653 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1766 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1762 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 3144 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660852865859	Marionette	INFO	Stopped listening on port 37871
+1660852868529	geckodriver	INFO	Listening on 127.0.0.1:44127
+1660852869083	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "48131" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileg9pINX"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660852869722	Marionette	INFO	Marionette enabled
+1660852869726	Marionette	INFO	Listening on port 34209
+WebDriver BiDi listening on ws://localhost:48131
+Read port: 34209
+1660852869861	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileg9pINX/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:48131/devtools/browser/18d9b3ab-db31-4b48-ae53-31a6aa2ae63e
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17880049812&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 3575 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+1660852900643	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 2029 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660852901490	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:237:24
+TimedPromise@chrome://remote/content/marionette/sync.js:222:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1660852902427	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:237:24
+TimedPromise@chrome://remote/content/marionette/sync.js:222:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1660852912111	Marionette	INFO	Stopped listening on port 34209
+1660852915249	geckodriver	INFO	Listening on 127.0.0.1:52629
+1660852915816	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "51221" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileSMP48r"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660852916520	Marionette	INFO	Marionette enabled
+1660852916525	Marionette	INFO	Listening on port 46315
+WebDriver BiDi listening on ws://localhost:51221
+Read port: 46315
+1660852916832	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileSMP48r/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51221/devtools/browser/1056081e-2906-45d3-9d69-11891bf43f5a
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6895 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 3081 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 2185 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660853081137	Marionette	INFO	Stopped listening on port 46315
+1660853084061	geckodriver	INFO	Listening on 127.0.0.1:47813
+1660853084633	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "46561" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileAPCIgH"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660853085351	Marionette	INFO	Marionette enabled
+1660853085357	Marionette	INFO	Listening on port 43915
+WebDriver BiDi listening on ws://localhost:46561
+Read port: 43915
+1660853085517	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileAPCIgH/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:46561/devtools/browser/7ca6f371-cf6f-460d-b909-efab318c2bb1
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17880049812&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6953 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1135 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+1660853186950	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1288 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660853197372	Marionette	INFO	Stopped listening on port 43915
+1660853200528	geckodriver	INFO	Listening on 127.0.0.1:34603
+1660853200573	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "42585" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileGamLHD"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660853201291	Marionette	INFO	Marionette enabled
+1660853201295	Marionette	INFO	Listening on port 35639
+WebDriver BiDi listening on ws://localhost:42585
+Read port: 35639
+1660853201446	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileGamLHD/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:42585/devtools/browser/c3d40eff-55c4-4cf9-b7aa-a276cb70c556
+1660853206664	Marionette	INFO	Stopped listening on port 35639
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1660853207441	geckodriver	INFO	Listening on 127.0.0.1:54959
+1660853207480	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "53701" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilerTBXyg"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660853208194	Marionette	INFO	Marionette enabled
+1660853208199	Marionette	INFO	Listening on port 34003
+WebDriver BiDi listening on ws://localhost:53701
+Read port: 34003
+1660853208364	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilerTBXyg/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53701/devtools/browser/cd23ccff-99a2-4f45-9e52-35b980aff178
+1660853215642	Marionette	INFO	Stopped listening on port 34003
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1660853216503	geckodriver	INFO	Listening on 127.0.0.1:42081
+1660853216540	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "56407" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilenjZCdM"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660853217198	Marionette	INFO	Marionette enabled
+1660853217203	Marionette	INFO	Listening on port 45307
+WebDriver BiDi listening on ws://localhost:56407
+Read port: 45307
+1660853217428	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilenjZCdM/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:56407/devtools/browser/6ef203fb-7004-4ca5-a95e-7ecf1475677b
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 7661 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1660853287356	geckodriver	INFO	Listening on 127.0.0.1:57779
+1660853287400	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "59223" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileRfDl5O"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660853288031	Marionette	INFO	Marionette enabled
+1660853288036	Marionette	INFO	Listening on port 41135
+WebDriver BiDi listening on ws://localhost:59223
+Read port: 41135
+1660853288163	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileRfDl5O/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:59223/devtools/browser/4c354d70-8e38-4682-8060-b11520af27f4
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1402 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 4304 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660853297312	Marionette	INFO	Stopped listening on port 41135
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1660853298043	geckodriver	INFO	Listening on 127.0.0.1:44639
+1660853298135	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "48795" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileL2gYwa"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660853298806	Marionette	INFO	Marionette enabled
+1660853298810	Marionette	INFO	Listening on port 41007
+WebDriver BiDi listening on ws://localhost:48795
+Read port: 41007
+1660853298998	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1660854041701	geckodriver	INFO	Listening on 127.0.0.1:57533
+1660854042258	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "54107" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileRSMaqB"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660854042886	Marionette	INFO	Marionette enabled
+1660854042890	Marionette	INFO	Listening on port 38911
+WebDriver BiDi listening on ws://localhost:54107
+Read port: 38911
+1660854043007	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileRSMaqB/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:54107/devtools/browser/daec7329-2c79-4155-a8d5-2f1ed317ea0c
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1660854070859	geckodriver	INFO	Listening on 127.0.0.1:56467
+1660854071427	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "44831" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileJ5Xdzm"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660854072080	Marionette	INFO	Marionette enabled
+1660854072085	Marionette	INFO	Listening on port 43169
+WebDriver BiDi listening on ws://localhost:44831
+Read port: 43169
+1660854072226	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileJ5Xdzm/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:44831/devtools/browser/a5ef8ced-5842-49f5-8f1d-281c7682e1fc
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 656 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 4551 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 607 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 4930 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 4730 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 3536 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 7460 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 7017 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660854214731	Marionette	INFO	Stopped listening on port 43169
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+1660854217235	geckodriver	INFO	Listening on 127.0.0.1:44633
+1660854217270	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "42027" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofile8MVikW"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660854217983	Marionette	INFO	Marionette enabled
+1660854217987	Marionette	INFO	Listening on port 38621
+WebDriver BiDi listening on ws://localhost:42027
+Read port: 38621
+1660854218303	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile8MVikW/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:42027/devtools/browser/84bb8ba8-ff6f-4dc9-b965-49a643ce0af4
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17880049812&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6465 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6321 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 4226 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1318 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 509 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 5505 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 3684 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660854333447	Marionette	INFO	Stopped listening on port 38621
+1660854336894	geckodriver	INFO	Listening on 127.0.0.1:58739
+1660854336946	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "60829" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileC1jj0G"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660854337741	Marionette	INFO	Marionette enabled
+1660854337745	Marionette	INFO	Listening on port 43101
+WebDriver BiDi listening on ws://localhost:60829
+Read port: 43101
+1660854337931	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileC1jj0G/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:60829/devtools/browser/ea4e7659-3f82-4f0c-b07f-44129e72c8a6
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1660854352648	geckodriver	INFO	Listening on 127.0.0.1:41239
+1660854352682	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "53061" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofile9A7m70"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660854353303	Marionette	INFO	Marionette enabled
+1660854353307	Marionette	INFO	Listening on port 42525
+WebDriver BiDi listening on ws://localhost:53061
+Read port: 42525
+1660854353427	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile9A7m70/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53061/devtools/browser/d9b2047a-86d2-42de-863d-3bf814359ed1
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 2813 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 7252 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+1660854454603	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 177 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660854464615	Marionette	INFO	Stopped listening on port 42525
+1660854467184	geckodriver	INFO	Listening on 127.0.0.1:44091
+1660854467740	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "35277" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilegGOLbt"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660854468439	Marionette	INFO	Marionette enabled
+1660854468443	Marionette	INFO	Listening on port 34385
+WebDriver BiDi listening on ws://localhost:35277
+Read port: 34385
+1660854468680	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilegGOLbt/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:35277/devtools/browser/ea3d2039-68cb-4fac-adaa-f09c479e5ac7
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6840 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6882 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 7376 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660854568194	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 2690 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660854578223	Marionette	INFO	Stopped listening on port 34385
+1660854580656	geckodriver	INFO	Listening on 127.0.0.1:53969
+1660854580693	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "53619" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileS8khih"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660854581356	Marionette	INFO	Marionette enabled
+1660854581360	Marionette	INFO	Listening on port 32873
+WebDriver BiDi listening on ws://localhost:53619
+Read port: 32873
+1660854581483	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileS8khih/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:53619/devtools/browser/a3775697-467e-47b2-9a5b-225057da4fc6
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 4801 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+1660854682169	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 7617 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660854692843	Marionette	INFO	Stopped listening on port 32873
+1660854695437	geckodriver	INFO	Listening on 127.0.0.1:49339
+1660854695496	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "38919" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilepj0Bmk"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660854696193	Marionette	INFO	Marionette enabled
+1660854696197	Marionette	INFO	Listening on port 40813
+Read port: 40813
+WebDriver BiDi listening on ws://localhost:38919
+1660854696328	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilepj0Bmk/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:38919/devtools/browser/9e427050-c649-443a-a2cf-c17738b5f0d4
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1184 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 4096 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 5112 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1813 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660854830782	Marionette	INFO	Stopped listening on port 40813
+1660854833725	geckodriver	INFO	Listening on 127.0.0.1:41169
+1660854833760	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "41427" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilej1KNrw"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660854834416	Marionette	INFO	Marionette enabled
+1660854834420	Marionette	INFO	Listening on port 46085
+WebDriver BiDi listening on ws://localhost:41427
+Read port: 46085
+1660854834630	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilej1KNrw/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:41427/devtools/browser/7cf223db-8fcb-405a-95e7-b599e1bd15b2
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17880049812&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1156 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 5917 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+1660854853496	Marionette	INFO	Stopped listening on port 46085
+1660854856298	geckodriver	INFO	Listening on 127.0.0.1:60017
+1660854856337	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "59645" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilei93lB6"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660854856978	Marionette	INFO	Marionette enabled
+1660854856983	Marionette	INFO	Listening on port 35721
+WebDriver BiDi listening on ws://localhost:59645
+Read port: 35721
+1660854857120	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilei93lB6/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:59645/devtools/browser/f740654c-e63d-44b9-836e-3ddfdec2bd6a
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1045 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 2241 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+1660854908192	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 5847 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660854918398	Marionette	INFO	Stopped listening on port 35721
+1660854921184	geckodriver	INFO	Listening on 127.0.0.1:35733
+1660854921217	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "44473" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilecXzhel"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660854921859	Marionette	INFO	Marionette enabled
+1660854921863	Marionette	INFO	Listening on port 44891
+WebDriver BiDi listening on ws://localhost:44473
+Read port: 44891
+1660854921982	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilecXzhel/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:44473/devtools/browser/16d5a7a7-18e3-4482-aafe-af3d4515ed2f
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 626 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 3114 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 1346 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 2729 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 7182 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660854965758	Marionette	INFO	Stopped listening on port 44891
+1660854971726	geckodriver	INFO	Listening on 127.0.0.1:50465
+1660854972308	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "35989" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileBhyXEc"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660854973033	Marionette	INFO	Marionette enabled
+1660854973038	Marionette	INFO	Listening on port 44957
+WebDriver BiDi listening on ws://localhost:35989
+Read port: 44957
+1660854973238	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileBhyXEc/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:35989/devtools/browser/03bcc51f-50b9-4ead-9cea-1586863947fb
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 3786 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 444 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 2788 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 2360 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660854989462	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:237:24
+TimedPromise@chrome://remote/content/marionette/sync.js:222:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6835 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660854990377	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:237:24
+TimedPromise@chrome://remote/content/marionette/sync.js:222:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1660854998304	Marionette	INFO	Stopped listening on port 44957
+1660855000935	geckodriver	INFO	Listening on 127.0.0.1:52153
+1660855000992	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "38555" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilerqhWb7"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660855001685	Marionette	INFO	Marionette enabled
+1660855001690	Marionette	INFO	Listening on port 41151
+Read port: 41151
+WebDriver BiDi listening on ws://localhost:38555
+1660855001834	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilerqhWb7/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:38555/devtools/browser/890fdb32-7d7c-495b-a63f-463bd0ec4906
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 3397 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 5990 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 5051 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660855024105	Marionette	INFO	Stopped listening on port 41151
+1660855027170	geckodriver	INFO	Listening on 127.0.0.1:45643
+1660855027203	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "33229" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileiY6kDX"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660855027880	Marionette	INFO	Marionette enabled
+1660855027885	Marionette	INFO	Listening on port 35221
+WebDriver BiDi listening on ws://localhost:33229
+Read port: 35221
+1660855028017	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileiY6kDX/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:33229/devtools/browser/55866899-760a-419d-8668-ad7a8852f3b8
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 2368 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6982 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 354 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 7658 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660855128947	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6448 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660855138615	Marionette	INFO	Stopped listening on port 35221
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+1660855141168	geckodriver	INFO	Listening on 127.0.0.1:47287
+1660855141730	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "36007" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilexQh23S"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660855142406	Marionette	INFO	Marionette enabled
+1660855142410	Marionette	INFO	Listening on port 44409
+WebDriver BiDi listening on ws://localhost:36007
+Read port: 44409
+1660855142602	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilexQh23S/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:36007/devtools/browser/c9aa52bd-9feb-4ad0-a1f6-1ba7ffc71e86
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 4168 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6517 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6162 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 2933 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 5779 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 5843 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660855344940	Marionette	INFO	Stopped listening on port 44409
+1660855347442	geckodriver	INFO	Listening on 127.0.0.1:57539
+1660855347993	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "58277" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilePCfADN"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660855348657	Marionette	INFO	Marionette enabled
+1660855348661	Marionette	INFO	Listening on port 34997
+WebDriver BiDi listening on ws://localhost:58277
+Read port: 34997
+1660855348789	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilePCfADN/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:58277/devtools/browser/bb0f7724-27bf-4f47-9ee1-a4000f59d759
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17882763482&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 2067 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 288 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 170 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 5855 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1660855469456	Marionette	INFO	Stopped listening on port 34997
+1660855472702	geckodriver	INFO	Listening on 127.0.0.1:42859
+1660855472737	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "43057" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofile3YxpNM"
+[GFX1-]: glxtest: VA-API test failed: failed to initialise VAAPI connection.
+1660855473406	Marionette	INFO	Marionette enabled
+1660855473410	Marionette	INFO	Listening on port 43547
+WebDriver BiDi listening on ws://localhost:43057
+Read port: 43547
+1660855473612	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile3YxpNM/search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:43057/devtools/browser/8fa0ad6b-1df9-444c-8850-0ca48f8e2bd9
+JavaScript warning: https://z.moatads.com/xaxislatam2020dv360display388660445777/moatad.js#moatClientLevel1=1008452105&moatClientLevel2=17880049812&moatClientLevel3=1&moatClientLevel4=436766806&zMoatAS=DV360&zMoatXDV=Xaxis_DV360, line 237: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 6615 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 4861 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript error: https://eus.rubiconproject.com/usync.js, line 4: SecurityError: The operation is insecure.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/BcUHUABoavvpRAX3o-C5BfAq8AHsMXRVb9HgeqDHxZ8.js line 2 > eval line 3856 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.

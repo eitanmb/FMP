@@ -48,6 +48,11 @@ def string_to_tuple(cadena: str) -> tuple:
     return tuple(cadena.split(','))
 
 
+def is_empty_file(file):
+    if os.stat(file).st_size == 0:
+        return True
+    return False
+
 def write_lastTicker_file(last_ticker: str, caller: str, ticker_position: str) -> None:
     File.write(last_ticker, f'{caller},{ticker_position}')
 
@@ -66,3 +71,11 @@ def print_messages(*messages):
     print(*messages)
 
 
+def get_download_ticker_possition(tickers_list, ticker):
+        return tickers_list.index(ticker)
+
+
+def return_start_from_tickers(how_many_tickers, last_ticker):
+    if how_many_tickers == 0:
+        return 0
+    return int(get_lastTicker_info(last_ticker)[1])

@@ -8,10 +8,10 @@ import pandas as pd
 from selenium.webdriver.common.by import By
 import time
 
-from config.investing.inv_scraping_setup import INV_URLS, AVAILABLE_PAIRS, SCRAP_FX, SCRAP_POPUP_PROMO, fx_date_range
+from config.investing.inv_scraping_setup import INV_URLS, AVAILABLE_PAIRS, SCRAP_FX, fx_date_range
 from helpers.File import File
+from helpers.utilities import return_start_from_tickers, get_download_ticker_possition, write_lastTicker_file, is_empty_file, print_messages
 from helpers.scraping_utilities import driver_init, get_doc_from_url
-
 
 def select_fx_date_range_from_calendar(driver, main_window):
     
@@ -35,12 +35,6 @@ def select_fx_date_range_from_calendar(driver, main_window):
     
     
 
-def close_popup_promo_modal(driver):
-    element = driver.find_element(By.XPATH, SCRAP_POPUP_PROMO["close"])
-    element.click()
-    
-
-
 def set_fx_date_range(driver, main_window):
     if driver is None:
         return None
@@ -54,11 +48,10 @@ def set_fx_date_range(driver, main_window):
         return select_fx_date_range_from_calendar(driver, main_window)
         # close_popup_promo_modal(driver)
         # print(driver.current_window_handle)
-
     
-    if  driver.current_window_handle != main_window:
-        driver.switch_to.window(main_window)
-        return select_fx_date_range_from_calendar(driver, main_window)
+    # if  driver.current_window_handle != main_window:
+    #     driver.switch_to.window(main_window)
+    #     return select_fx_date_range_from_calendar(driver, main_window)
 
 
 
@@ -92,34 +85,48 @@ def build_dataframe_from_table(pair, doc):
 
 def init(DIRS):
     BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
-    PATH:str = f"{BASE_FOLDER}/forex/"
+    FOLDER:str = f"{BASE_FOLDER}/forex/"
     url_prefix = f"{INV_URLS['base']}{INV_URLS['fx']}"
+    tracker_file = 'inv_fetch_tracker.txt'
+    how_many_tickers = File.count_files_in_folder(FOLDER)
+    _from = 0
+    
+    if is_empty_file(tracker_file) == False:
+       _from = return_start_from_tickers(how_many_tickers, tracker_file)
 
-    for currency in AVAILABLE_PAIRS:
-        base_currency = currency[0]
-        quote_currency = currency[1]
+    print_messages("How many tickers:", how_many_tickers)
+    print_messages("Desde:", _from)
+
+    for i in range(_from, len(AVAILABLE_PAIRS)):
+        base_currency = AVAILABLE_PAIRS[i][0]
+        quote_currency = AVAILABLE_PAIRS[i][1]
         pair = base_currency + quote_currency
-        file = f"{PATH}{pair}.json"
+        file = f"{FOLDER}{pair}.json"
         url = f"{url_prefix}/{base_currency.lower()}-{quote_currency.lower()}-historical-data"
         
-        print(pair)
-        print(url)
+        try:
+            driver = driver_init(url)
+            main_window = driver.current_window_handle
+            query_driver = set_fx_date_range(driver, main_window)
+            doc = get_doc_from_url(query_driver)
 
-        driver = driver_init(url)
-        main_window = driver.current_window_handle
-
-        query_driver = set_fx_date_range(driver, main_window)
-        doc = get_doc_from_url(query_driver)
-
-        if driver is None:
-            print(f"ERROR - NO HAY DATOS SOBRE {currency[0]} en Investing")
+            if driver is None:
+                print(f"ERROR - NO HAY DATOS SOBRE {pair} en Investing")
+            
+            driver.quit()
+            currencydata = build_dataframe_from_table(pair, doc)
+            result = currencydata.to_json(orient="records")
+            parsed = json.loads(result)
+            File.write_json(file, parsed)
         
-        driver.quit()
-        currencydata = build_dataframe_from_table(pair, doc)
-        print(currencydata)
+            print(json.dumps(parsed, indent=4))
+       
+        except Exception as error:
+            print_messages(error, pair)
 
-        result = currencydata.to_json(orient="records")
-        parsed = json.loads(result)
-        File.write_json(file, parsed)
-        
-        print(json.dumps(parsed, indent=4))
+        finally:
+            ticker_position = get_download_ticker_possition(AVAILABLE_PAIRS, (base_currency, quote_currency))
+            write_lastTicker_file(tracker_file,'fx', ticker_position)
+            print_messages('pair', pair)
+            how_many_tickers += 1
+            print_messages('How many: ', how_many_tickers)

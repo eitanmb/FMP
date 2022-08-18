@@ -3,4 +3,5 @@ bitacora/
 *.json
 .env
 lastTicker.txt
+inv_fecth_tracker.txt
 core/investin/get_currencies_exchange copy.py
