@@ -1,7 +1,7 @@
 import sys
 sys.path.append("..")
 
-from core.investing import get_currencies_exchange
+from core.investing import inv_fx
 
 def init(DIRS):
-    get_currencies_exchange.init(DIRS)
+    inv_fx.init(DIRS)
