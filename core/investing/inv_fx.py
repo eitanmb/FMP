@@ -13,6 +13,70 @@ from helpers.File import File
 from helpers.utilities import return_start_from_tickers, get_download_ticker_possition, write_lastTicker_file, print_messages, make_directory
 from helpers.scraping_utilities import driver_init, get_doc_from_url
 
+
+def init(inputs):
+
+    TRACKER_FILE = inputs['TRACKER_FILE']
+    AVAILABLE_PAIRS = inputs['AVAILABLE_PAIRS']
+    FOLDER = inputs['fx_kwargs']['folder']
+    url_prefix = inputs['fx_kwargs']['url_prefix']
+    scrap_rules = inputs['fx_kwargs']['scrap']
+    date_range = inputs['fx_kwargs']['date_range']
+
+    make_directory(FOLDER)
+
+    how_many_tickers = File.count_files_in_folder(FOLDER)
+    _from = 0
+    
+    if File.file_is_empty(TRACKER_FILE) == False:
+       _from = return_start_from_tickers(how_many_tickers, TRACKER_FILE)
+
+    print_messages("How many tickers:", how_many_tickers)
+    print_messages("Desde:", _from)
+
+    for i in range(_from, len(AVAILABLE_PAIRS)):
+        base_currency = AVAILABLE_PAIRS[i][0]
+        quote_currency = AVAILABLE_PAIRS[i][1]
+        pair = base_currency + quote_currency
+        file = f"{FOLDER}/{pair}.json"
+        url = f"{url_prefix}/{base_currency.lower()}-{quote_currency.lower()}-historical-data"
+        
+        if File.file_exist(file):
+            print_messages(f"{file} exist, continue next pair")
+            continue
+
+        print_messages('Downloading:', pair)
+        print_messages('Pair URL:', url)
+
+        try:
+            driver = driver_init(url)
+            main_window = driver.current_window_handle
+            query_driver = set_fx_date_range(driver, main_window, date_range, scrap_rules)
+            doc = get_doc_from_url(query_driver)
+
+            if driver is None:
+                print(f"ERROR - NO HAY DATOS SOBRE {pair} en Investing")
+            
+            driver.quit()
+            currencydata = build_dataframe_from_table(pair, doc, scrap_rules)
+            result = currencydata.to_json(orient="records")
+            parsed = json.loads(result)
+            
+            File.write_json(file, parsed)
+            
+            how_many_tickers += 1
+            print_messages(pair, "has been downloaded")
+       
+        except Exception as error:
+            print_messages("ERROR:", error, pair)
+
+        finally:
+            ticker_position = get_download_ticker_possition(AVAILABLE_PAIRS, (base_currency, quote_currency))
+            write_lastTicker_file(TRACKER_FILE,'fx', ticker_position)
+            print_messages('How many: ', how_many_tickers)
+
+
+
 def set_fx_date_range_from_calendar(driver, main_window, date_range, scrap_rules):
     
     while (driver.current_window_handle == main_window):
@@ -88,66 +152,3 @@ def build_dataframe_from_table(pair, doc, scrap_rules):
 
     data = change_fx_date_format(values)
     return pd.DataFrame(data, columns=header)
-
-
-
-def init(inputs):
-
-    TRACKER_FILE = inputs['TRACKER_FILE']
-    AVAILABLE_PAIRS = inputs['AVAILABLE_PAIRS']
-    FOLDER = inputs['fx_kwargs']['folder']
-    url_prefix = inputs['fx_kwargs']['url_prefix']
-    scrap_rules = inputs['fx_kwargs']['scrap']
-    date_range = inputs['fx_kwargs']['date_range']
-
-    make_directory(FOLDER)
-
-    how_many_tickers = File.count_files_in_folder(FOLDER)
-    _from = 0
-    
-    if File.file_is_empty(TRACKER_FILE) == False:
-       _from = return_start_from_tickers(how_many_tickers, TRACKER_FILE)
-
-    print_messages("How many tickers:", how_many_tickers)
-    print_messages("Desde:", _from)
-
-    for i in range(_from, len(AVAILABLE_PAIRS)):
-        base_currency = AVAILABLE_PAIRS[i][0]
-        quote_currency = AVAILABLE_PAIRS[i][1]
-        pair = base_currency + quote_currency
-        file = f"{FOLDER}/{pair}.json"
-        url = f"{url_prefix}/{base_currency.lower()}-{quote_currency.lower()}-historical-data"
-        
-        if File.file_exist(file):
-            print_messages(f"{file} exist, continue next pair")
-            continue
-
-        print_messages('Downloading:', pair)
-        print_messages('Pair URL:', url)
-
-        try:
-            driver = driver_init(url)
-            main_window = driver.current_window_handle
-            query_driver = set_fx_date_range(driver, main_window, date_range, scrap_rules)
-            doc = get_doc_from_url(query_driver)
-
-            if driver is None:
-                print(f"ERROR - NO HAY DATOS SOBRE {pair} en Investing")
-            
-            driver.quit()
-            currencydata = build_dataframe_from_table(pair, doc, scrap_rules)
-            result = currencydata.to_json(orient="records")
-            parsed = json.loads(result)
-            
-            File.write_json(file, parsed)
-            
-            how_many_tickers += 1
-            print_messages(pair, "has been downloaded")
-       
-        except Exception as error:
-            print_messages("ERROR:", error, pair)
-
-        finally:
-            ticker_position = get_download_ticker_possition(AVAILABLE_PAIRS, (base_currency, quote_currency))
-            write_lastTicker_file(TRACKER_FILE,'fx', ticker_position)
-            print_messages('How many: ', how_many_tickers)
