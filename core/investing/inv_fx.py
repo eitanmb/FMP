@@ -69,7 +69,6 @@ def change_fx_date_format(values):
 def normalized_currency_values_data(values, pair):
 
     for value in values:
-        print_messages('length', len(value))
         if len(value) < 7:
             value.insert(5, 'Null')
         value.insert(0,pair)
