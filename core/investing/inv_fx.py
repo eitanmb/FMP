@@ -13,7 +13,7 @@ from helpers.File import File
 from helpers.utilities import return_start_from_tickers, get_download_ticker_possition, write_lastTicker_file, print_messages
 from helpers.scraping_utilities import driver_init, get_doc_from_url
 
-def select_fx_date_range_from_calendar(driver, main_window):
+def set_fx_date_range_from_calendar(driver, main_window):
     
     while (driver.current_window_handle == main_window):
         element = driver.find_element(By.CLASS_NAME, SCRAP_FX["pick_calendar"])
@@ -36,12 +36,12 @@ def select_fx_date_range_from_calendar(driver, main_window):
     
 
 def set_fx_date_range(driver, main_window):
+    
     if driver is None:
         return None
-    
+
     try:
-        return select_fx_date_range_from_calendar(driver, main_window)
-    
+        return set_fx_date_range_from_calendar(driver, main_window)
     except Exception as error:
         print('ERROR::: ', error)
         print_messages('POPUP:', driver.current_window_handle)
@@ -64,6 +64,7 @@ def change_fx_date_format(values):
         element[1] = date_formated
     
     return data
+
 
 
 def normalized_currency_values_data(values, pair):
