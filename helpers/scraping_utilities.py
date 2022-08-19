@@ -14,7 +14,11 @@ from webdriver_manager.firefox import GeckoDriverManager
 def is_404(driver):
     if re.search('Error 404: Page Not Found',driver.page_source):
         driver.quit()
-        return None
+        return True
+    
+    return False
+
+
 
 def driver_init(url):
     firefox_options = Options()
@@ -23,10 +27,13 @@ def driver_init(url):
     driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=firefox_options)
     driver.get(url)
 
-    # if is_404(driver) is None:
-    #     print_messages("Error 404 - Página no encontrada: ",url)
-    #     return None
+    if is_404(driver) == True:
+        print_messages("Error 404 - Página no encontrada: ", url)
+        return None
+    
     return driver
+
+
 
 
 def get_doc_from_url(driver):
