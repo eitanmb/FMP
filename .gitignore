@@ -2,7 +2,5 @@ bitacora/
 /json
 *.json
 .env
-lastTicker.txt
-inv_fecth_tracker.txt
 geckodriver.log
-core/investin/get_currencies_exchange copy.py
+mongo_fmp.py

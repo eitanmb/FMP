@@ -76,7 +76,7 @@ class FmpTickers:
 class FmpAPI:
     apikey = os.environ.get("APIKEY")
     url_base = os.environ.get("FMP_URL_BASE")
-    last_ticker = 'lastTicker.txt'
+    last_ticker = 'fmp_fetch_tracker.txt'
 
     def get_jsonparsed_data(url: str):
         response = urlopen(url)

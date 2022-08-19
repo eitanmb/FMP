@@ -38,7 +38,7 @@ def init(DIRS):
 
 
     def current_download_data():
-        return get_lastTicker_info('lastTicker.txt')[0]
+        return get_lastTicker_info('fmp_fetch_tracker.txt')[0]
 
 
     def halt():
@@ -48,7 +48,7 @@ def init(DIRS):
     def download_routine(data):
         print_messages("START:", data['current'])
         get_data_download(data['kwargs'])
-        write_lastTicker_file('lastTicker.txt', data['next'], '0')
+        write_lastTicker_file('fmp_fetch_tracker.txt', data['next'], '0')
         print_messages("END:", data['current'])
 
 
@@ -70,7 +70,7 @@ def init(DIRS):
         print_messages('FINISHED')
         halt()
 
-    if File.file_is_empty('lastTicker.txt'):
+    if File.file_is_empty('fmp_fetch_tracker.txt'):
         current_download = 'profile'
     else:
         current_download = current_download_data()
