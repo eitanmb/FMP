@@ -8,7 +8,7 @@ import pandas as pd
 from selenium.webdriver.common.by import By
 import time
 
-from config.investing.inv_scraping_setup import INV_URLS, AVAILABLE_PAIRS, SCRAP_FX, fx_date_range
+from config.investing.inv_scraping_setup import INV_URLS, AVAILABLE_PAIRS, SCRAP_FX, fx_date_range, TRACKER_FILE
 from helpers.File import File
 from helpers.utilities import return_start_from_tickers, get_download_ticker_possition, write_lastTicker_file, print_messages
 from helpers.scraping_utilities import driver_init, get_doc_from_url
@@ -45,9 +45,14 @@ def set_fx_date_range(driver, main_window):
     except Exception as error:
         print('ERROR::: ', error)
         print_messages('POPUP:', driver.current_window_handle)
+        html = driver.page_source.encode('utf-8')
+        File.write('popupSource.html', html)
         # driver.switch_to.window(main_window)
         # return select_fx_date_range_from_calendar(driver, main_window)
 
+
+def insert_pair_into_header(header):
+    header.insert(0, "Pair")
 
 
 def change_fx_date_format(values):
@@ -61,17 +66,25 @@ def change_fx_date_format(values):
     return data
 
 
+def normalized_currency_values_data(values, pair):
+
+    for value in values:
+        print_messages('length', len(value))
+        if len(value) < 7:
+            value.insert(5, 'Null')
+        value.insert(0,pair)
+    
+    values.pop()
+
+
 
 def build_dataframe_from_table(pair, doc):
-    
     header = [ th for th in doc.xpath( SCRAP_FX["price_table"]["theader_th"] )]
     values = [[td for td in tr.xpath( SCRAP_FX["price_table"]["tbody_td"] )]  
                 for tr in doc.xpath( SCRAP_FX["price_table"]["tbody_tr"] )]
 
-    header.insert(0, "Pair")
-    for element in values:
-        element.insert(0,pair)
-    values.pop()
+    insert_pair_into_header(header)
+    normalized_currency_values_data(values, pair)
 
     data = change_fx_date_format(values)
     return pd.DataFrame(data, columns=header)
@@ -82,12 +95,11 @@ def init(DIRS):
     BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
     FOLDER:str = f"{BASE_FOLDER}/forex/"
     url_prefix = f"{INV_URLS['base']}{INV_URLS['fx']}"
-    tracker_file = 'inv_fetch_tracker.txt'
     how_many_tickers = File.count_files_in_folder(FOLDER)
     _from = 0
     
-    if File.file_is_empty(tracker_file) == False:
-       _from = return_start_from_tickers(how_many_tickers, tracker_file)
+    if File.file_is_empty(TRACKER_FILE) == False:
+       _from = return_start_from_tickers(how_many_tickers, TRACKER_FILE)
 
     print_messages("How many tickers:", how_many_tickers)
     print_messages("Desde:", _from)
@@ -128,5 +140,5 @@ def init(DIRS):
 
         finally:
             ticker_position = get_download_ticker_possition(AVAILABLE_PAIRS, (base_currency, quote_currency))
-            write_lastTicker_file(tracker_file,'fx', ticker_position)
+            write_lastTicker_file(TRACKER_FILE,'fx', ticker_position)
             print_messages('How many: ', how_many_tickers)

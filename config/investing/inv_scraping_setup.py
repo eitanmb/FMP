@@ -4,6 +4,8 @@ INV_URLS = {
     "fx": "/currencies"
 }
 
+TRACKER_FILE = 'inv_fetch_tracker.txt'
+
 fx_date_range = {
     "start": "2008-01-01",
     "end":"2022-07-31"
