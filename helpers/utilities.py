@@ -48,11 +48,6 @@ def string_to_tuple(cadena: str) -> tuple:
     return tuple(cadena.split(','))
 
 
-def is_empty_file(file):
-    if os.stat(file).st_size == 0:
-        return True
-    return False
-
 def write_lastTicker_file(last_ticker: str, caller: str, ticker_position: str) -> None:
     File.write(last_ticker, f'{caller},{ticker_position}')
 

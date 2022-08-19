@@ -18,8 +18,8 @@ def is_404(driver):
 
 def driver_init(url):
     firefox_options = Options()
-    # firefox_options.add_argument("-incognito")
-    # firefox_options.add_argument("--headless")
+    firefox_options.add_argument("-incognito")
+    firefox_options.add_argument("--headless")
     driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=firefox_options)
     driver.get(url)
 

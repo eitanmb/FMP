@@ -10,7 +10,7 @@ import time
 
 from config.investing.inv_scraping_setup import INV_URLS, AVAILABLE_PAIRS, SCRAP_FX, fx_date_range
 from helpers.File import File
-from helpers.utilities import return_start_from_tickers, get_download_ticker_possition, write_lastTicker_file, is_empty_file, print_messages
+from helpers.utilities import return_start_from_tickers, get_download_ticker_possition, write_lastTicker_file, print_messages
 from helpers.scraping_utilities import driver_init, get_doc_from_url
 
 def select_fx_date_range_from_calendar(driver, main_window):
@@ -46,12 +46,6 @@ def set_fx_date_range(driver, main_window):
         print('ERROR::: ', error)
         driver.switch_to.window(main_window)
         return select_fx_date_range_from_calendar(driver, main_window)
-        # close_popup_promo_modal(driver)
-        # print(driver.current_window_handle)
-    
-    # if  driver.current_window_handle != main_window:
-    #     driver.switch_to.window(main_window)
-    #     return select_fx_date_range_from_calendar(driver, main_window)
 
 
 
@@ -91,7 +85,7 @@ def init(DIRS):
     how_many_tickers = File.count_files_in_folder(FOLDER)
     _from = 0
     
-    if is_empty_file(tracker_file) == False:
+    if File.file_is_empty(tracker_file) == False:
        _from = return_start_from_tickers(how_many_tickers, tracker_file)
 
     print_messages("How many tickers:", how_many_tickers)
@@ -104,6 +98,13 @@ def init(DIRS):
         file = f"{FOLDER}{pair}.json"
         url = f"{url_prefix}/{base_currency.lower()}-{quote_currency.lower()}-historical-data"
         
+        if File.file_exist(file):
+            print_messages(f"{file} exist, continue next pair")
+            continue
+
+        print_messages('Downloading:', pair)
+        print_messages('Pair URL:', url)
+
         try:
             driver = driver_init(url)
             main_window = driver.current_window_handle
@@ -118,8 +119,8 @@ def init(DIRS):
             result = currencydata.to_json(orient="records")
             parsed = json.loads(result)
             File.write_json(file, parsed)
-        
             print(json.dumps(parsed, indent=4))
+            how_many_tickers += 1
        
         except Exception as error:
             print_messages(error, pair)
@@ -127,6 +128,5 @@ def init(DIRS):
         finally:
             ticker_position = get_download_ticker_possition(AVAILABLE_PAIRS, (base_currency, quote_currency))
             write_lastTicker_file(tracker_file,'fx', ticker_position)
-            print_messages('pair', pair)
-            how_many_tickers += 1
+            print_messages(pair, "has been downloaded")
             print_messages('How many: ', how_many_tickers)
