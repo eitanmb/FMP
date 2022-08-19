@@ -44,8 +44,9 @@ def set_fx_date_range(driver, main_window):
     
     except Exception as error:
         print('ERROR::: ', error)
-        driver.switch_to.window(main_window)
-        return select_fx_date_range_from_calendar(driver, main_window)
+        print_messages('POPUP:', driver.current_window_handle)
+        # driver.switch_to.window(main_window)
+        # return select_fx_date_range_from_calendar(driver, main_window)
 
 
 
@@ -119,14 +120,13 @@ def init(DIRS):
             result = currencydata.to_json(orient="records")
             parsed = json.loads(result)
             File.write_json(file, parsed)
-            print(json.dumps(parsed, indent=4))
             how_many_tickers += 1
+            print_messages(pair, "has been downloaded")
        
         except Exception as error:
-            print_messages(error, pair)
+            print_messages("ERROR:", error, pair)
 
         finally:
             ticker_position = get_download_ticker_possition(AVAILABLE_PAIRS, (base_currency, quote_currency))
             write_lastTicker_file(tracker_file,'fx', ticker_position)
-            print_messages(pair, "has been downloaded")
             print_messages('How many: ', how_many_tickers)
