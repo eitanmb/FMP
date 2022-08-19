@@ -33,15 +33,18 @@ class NoSqlDataPersistence():
             f = os.path.join(self.folder, filename)
 
             if os.path.isfile(f):
-                company_data = open(f)
+                collection_data = open(f)
 
             try:
-                doc = json.load(company_data)
+                doc = json.load(collection_data)
+                
                 if len(doc) > 0:
                     print(counter)
                     if self.domain == "outlook":
                         print(self.collection.insert_one(doc))
-                    else:
+                    elif self.domain == "forex":
+                        print(self.collection.insert_many(doc))
+                    else:    
                         print(self.collection.insert_one(doc[0]))
 
             except Exception as e:

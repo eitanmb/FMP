@@ -8,24 +8,24 @@ import pandas as pd
 from selenium.webdriver.common.by import By
 import time
 
-from config.investing.inv_scraping_setup import INV_URLS, AVAILABLE_PAIRS, SCRAP_FX, fx_date_range, TRACKER_FILE
+from config.investing import inv_scraping_setup
 from helpers.File import File
-from helpers.utilities import return_start_from_tickers, get_download_ticker_possition, write_lastTicker_file, print_messages
+from helpers.utilities import return_start_from_tickers, get_download_ticker_possition, write_lastTicker_file, print_messages, make_directory
 from helpers.scraping_utilities import driver_init, get_doc_from_url
 
-def set_fx_date_range_from_calendar(driver, main_window):
+def set_fx_date_range_from_calendar(driver, main_window, date_range, scrap_rules):
     
     while (driver.current_window_handle == main_window):
-        element = driver.find_element(By.CLASS_NAME, SCRAP_FX["pick_calendar"])
+        element = driver.find_element(By.CLASS_NAME, scrap_rules["pick_calendar"])
         element.click()
 
-        start_date = driver.find_element(By.XPATH, SCRAP_FX["start_date"])
-        start_date.send_keys(fx_date_range["start"])
+        start_date = driver.find_element(By.XPATH, scrap_rules["start_date"])
+        start_date.send_keys(date_range["start"])
         
-        end_date = driver.find_element(By.XPATH, SCRAP_FX["end_date"])
-        end_date.send_keys(fx_date_range["end"])
+        end_date = driver.find_element(By.XPATH, scrap_rules["end_date"])
+        end_date.send_keys(date_range["end"])
 
-        apply_date_range = driver.find_element(By.XPATH, SCRAP_FX["apply_date_range"])
+        apply_date_range = driver.find_element(By.XPATH, scrap_rules["apply_date_range"])
         apply_date_range.click()
 
         time.sleep(2)
@@ -35,13 +35,13 @@ def set_fx_date_range_from_calendar(driver, main_window):
     
     
 
-def set_fx_date_range(driver, main_window):
+def set_fx_date_range(driver, main_window, date_range, scrap_rules):
     
     if driver is None:
         return None
 
     try:
-        return set_fx_date_range_from_calendar(driver, main_window)
+        return set_fx_date_range_from_calendar(driver, main_window, date_range, scrap_rules)
     except Exception as error:
         print('ERROR::: ', error)
         print_messages('POPUP:', driver.current_window_handle)
@@ -78,10 +78,10 @@ def normalized_currency_values_data(values, pair):
 
 
 
-def build_dataframe_from_table(pair, doc):
-    header = [ th for th in doc.xpath( SCRAP_FX["price_table"]["theader_th"] )]
-    values = [[td for td in tr.xpath( SCRAP_FX["price_table"]["tbody_td"] )]  
-                for tr in doc.xpath( SCRAP_FX["price_table"]["tbody_tr"] )]
+def build_dataframe_from_table(pair, doc, scrap_rules):
+    header = [ th for th in doc.xpath( scrap_rules["price_table"]["theader_th"] )]
+    values = [[td for td in tr.xpath( scrap_rules["price_table"]["tbody_td"] )]  
+                for tr in doc.xpath( scrap_rules["price_table"]["tbody_tr"] )]
 
     insert_pair_into_header(header)
     normalized_currency_values_data(values, pair)
@@ -91,10 +91,17 @@ def build_dataframe_from_table(pair, doc):
 
 
 
-def init(DIRS):
-    BASE_FOLDER: str = DIRS['CURRENT_JSON_FOLDER']
-    FOLDER:str = f"{BASE_FOLDER}/forex/"
-    url_prefix = f"{INV_URLS['base']}{INV_URLS['fx']}"
+def init(inputs):
+
+    TRACKER_FILE = inputs['TRACKER_FILE']
+    AVAILABLE_PAIRS = inputs['AVAILABLE_PAIRS']
+    FOLDER = inputs['fx_kwargs']['folder']
+    url_prefix = inputs['fx_kwargs']['url_prefix']
+    scrap_rules = inputs['fx_kwargs']['scrap']
+    date_range = inputs['fx_kwargs']['date_range']
+
+    make_directory(FOLDER)
+
     how_many_tickers = File.count_files_in_folder(FOLDER)
     _from = 0
     
@@ -108,7 +115,7 @@ def init(DIRS):
         base_currency = AVAILABLE_PAIRS[i][0]
         quote_currency = AVAILABLE_PAIRS[i][1]
         pair = base_currency + quote_currency
-        file = f"{FOLDER}{pair}.json"
+        file = f"{FOLDER}/{pair}.json"
         url = f"{url_prefix}/{base_currency.lower()}-{quote_currency.lower()}-historical-data"
         
         if File.file_exist(file):
@@ -121,17 +128,19 @@ def init(DIRS):
         try:
             driver = driver_init(url)
             main_window = driver.current_window_handle
-            query_driver = set_fx_date_range(driver, main_window)
+            query_driver = set_fx_date_range(driver, main_window, date_range, scrap_rules)
             doc = get_doc_from_url(query_driver)
 
             if driver is None:
                 print(f"ERROR - NO HAY DATOS SOBRE {pair} en Investing")
             
             driver.quit()
-            currencydata = build_dataframe_from_table(pair, doc)
+            currencydata = build_dataframe_from_table(pair, doc, scrap_rules)
             result = currencydata.to_json(orient="records")
             parsed = json.loads(result)
+            
             File.write_json(file, parsed)
+            
             how_many_tickers += 1
             print_messages(pair, "has been downloaded")
        

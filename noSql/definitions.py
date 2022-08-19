@@ -37,3 +37,11 @@ OUTLOOK_NOSQL = {
     'collection_name':f'{_date}_outlook',
     'indexes': None
 }
+
+FX_NOSQl = {
+    'collection_name':'forex',
+     'indexes':
+    {   
+        'pair_index':'[("Pair",1)], name="pair_index", unique=False',
+    }
+}
