@@ -17,7 +17,7 @@ from helpers.scraping_utilities import driver_init, get_doc_from_url
 def init(inputs):
 
     TRACKER_FILE = inputs['TRACKER_FILE']
-    AVAILABLE_PAIRS = inputs['USDBASE_AVAILABLE_PAIRS']
+    AVAILABLE_PAIRS = inputs['AVAILABLE_PAIRS']
     FOLDER = inputs['fx_kwargs']['folder']
     url_prefix = inputs['fx_kwargs']['url_prefix']
     scrap_rules = inputs['fx_kwargs']['scrap']

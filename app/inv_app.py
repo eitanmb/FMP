@@ -13,7 +13,6 @@ def init(DIRS):
 
 
 def create_data_persistence_noSQL(kargs):
-        noSql = NoSqlDataPersistence(**kargs)
-        noSql.create_collection()
-        noSql.insert_collection_data_from_json_files()
-        noSql.create_indexes()
+    noSql = NoSqlDataPersistence(**kargs)
+    noSql.insert_collection_data_from_json_files()
+    noSql.create_indexes()

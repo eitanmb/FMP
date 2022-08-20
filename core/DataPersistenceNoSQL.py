@@ -55,12 +55,14 @@ class NoSqlDataPersistence():
 
     def create_collection(self):
         self.collection = self.db[self.collection_name]
-        self.collection.drop()
         print(f'current folder: {self.folder}')
 
     
+    def drop_collection(self):
+        self.collection.drop()
+    
+    
     def create_indexes(self):
-
         if self.indexes[0] is None:
             return
 
