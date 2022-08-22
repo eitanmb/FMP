@@ -114,7 +114,7 @@ db.forex.aggregate(
       Base: { $substrCP: ['$Pair', 0, 3] },
       Quote: { $substrCP: ['$Pair', 3, { $strLenCP: '$Pair' }]},
       Date: 1,
-      Price:1,
+      Price:{ $toDouble:"$Price" },
       Year: { $year: "$formatedDate" },
       Month: { $month: "$formatedDate" },
       Day: { $dayOfMonth: "$formatedDate" },
@@ -145,7 +145,6 @@ db.forex.aggregate(
  ])
 
 
-
  db.forex.aggregate(
   [
     {
@@ -155,7 +154,7 @@ db.forex.aggregate(
           Pair:1,
           Date:1,
           formatedDate: {$toDate:"$Date"},
-          Price:1
+          Price:{ $replaceOne: { input: "$Price", find: ",", replacement: "" } }
          
         }
     },
@@ -165,14 +164,14 @@ db.forex.aggregate(
         Base: { $substrCP: ['$Pair', 0, 3] },
         Quote: { $substrCP: ['$Pair', 3, { $strLenCP: '$Pair' }]},
         Date: 1,
-        Price:1,
+        Price:{ "$toDouble":"$Price" },
         Year: { $year: "$formatedDate" },
         Month: { $month: "$formatedDate" },
         Day: { $dayOfMonth: "$formatedDate" },
       }
     },
     {
-      $match: { Month: 12}
+      $match: { Month: 12, Day:{$gte:25,$lte:31}}
     },
     {
       $project: {
@@ -188,16 +187,26 @@ db.forex.aggregate(
       }
     },
     {
-      $sort: {Pair:1, Day:-1}
-    },
-    {
-      $group: {
-        _id:{"Pair":"$Pair", "Year":"$Year", "Month":"$Month","Day":"$Day"},
-        last_ex: {$max:"$Day"}
+      $match: {
+          $and:[{Quote:"GBP"}, {Year:"2021"}]
       }
     },
     {
-      $sort: {"_id.Pair":1, "_id.Year":-1}
+      $project: {
+        Pair:1,
+        Quote:1,
+        Date:1,
+        Price:1
+      }
     },
-    
+    {
+      "$sort": {"Day":-1}
+    },
+    {
+      "$limit":1
+    }
    ])
+  
+
+
+   $and:[{Quote:reported_currency}, {Year:calendar_year}]

@@ -36,7 +36,7 @@ def create_usd_financial_report_collections_version(db, coll_params, fields):
                     'Price': 1
                 }
         else:
-            fx_results = get_exchange_by_date_and_quote(db, 'fx_last_exrate', reported_currency, calendar_year)
+            fx_results = get_exchange_by_date_and_quote(db, 'forex', reported_currency, calendar_year)
             for fx in fx_results:
                 exchange_rate = {
                     'Pair':fx['Pair'],
@@ -51,7 +51,7 @@ def create_usd_financial_report_collections_version(db, coll_params, fields):
         
         result['exchange_rate'] = exchange_rate
         print(result)
-        print(inset_values_into_usd_collection_version(db, coll_params, result))
+        # print(inset_values_into_usd_collection_version(db, coll_params, result))
 
 
 def inset_values_into_usd_collection_version(db, coll_params, data):
@@ -63,31 +63,51 @@ def inset_values_into_usd_collection_version(db, coll_params, data):
 
 def get_company_reports_data(db, coll_params):
     coll_name = coll_params['collection_name']
-    return db[coll_name].find().limit(10)
+    return db[coll_name].find()
     
 
 
 def get_exchange_by_date_and_quote(db, coll_name, reported_currency, calendar_year):
    return db[coll_name].aggregate([
-
         {
-            "$match": {
-                "$and":[{"Quote":reported_currency}, {"Year":calendar_year}]
+            '$project': {
+                'Pair': 1, 
+                'Date': 1, 
+                'formatedDate': {'$toDate': '$Date'}, 
+                'Price': {
+                    '$replaceOne': {'input': '$Price', 'find': ',', 'replacement': ''}
+                }
             }
-        },
+        }, 
         {
-            "$project": {
-                "Pair":1,
-                "Quote":1,
-                "Date":1,
-                "Price":{ "$toDouble":"$Price" }
+            '$addFields': {
+                'Quote': {'$substrCP': ['$Pair', 3, {'$strLenCP': '$Pair'}]}, 
+                'Price': {'$toDouble': '$Price'}, 
+                'Year': {'$year': '$formatedDate'}, 
+                'Month': {'$month': '$formatedDate'}, 
+                'Day': {'$dayOfMonth': '$formatedDate'}
             }
-        },
+        }, 
         {
-            "$sort": {"Day":-1}
-        },
+            '$addFields': {
+                'Year': {'$toString': '$Year'}
+            }
+        }, 
         {
-            "$limit":1
+            '$match': {
+                '$and': [ {'Month': 12}, {"Quote":reported_currency}, {"Year":calendar_year} ]
+            }
+        }, 
+        {
+            '$project': {
+                'Pair': 1, 
+                'Quote': 1, 
+                'Date': 1, 
+                'Price': 1
+            }
+        }, 
+        {
+            '$limit': 1
         }
     ])
 
