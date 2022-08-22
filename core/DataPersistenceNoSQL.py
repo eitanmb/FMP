@@ -20,7 +20,8 @@ class NoSqlDataPersistence():
         self.domain = kwargs['domain']
         self.db = self.get_database()
         self.collection = self.db[self.collection_name]
-
+    
+    # TODO: Rehacer
     def get_database(self):
         client = MongoClient(MONGO_DB)
         return client['ptraDB']
@@ -52,7 +53,7 @@ class NoSqlDataPersistence():
 
             counter = counter + 1
 
-
+    
     def create_collection(self):
         self.collection = self.db[self.collection_name]
         print(f'current folder: {self.folder}')
