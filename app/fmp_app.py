@@ -21,6 +21,11 @@ def init(DIRS):
         download.fetch_data()
 
 
+    def is_financial_report(report):
+        if (report == "IS" or report == "BS" or report == "CF"):
+            return True
+
+
     def create_data_persistence_sql(kargs):
         sql = SqlDataPersistence(mysql_engine, **kargs)
         sql.drop_table()
@@ -32,9 +37,10 @@ def init(DIRS):
 
     def create_data_persistence_noSQL(kargs):
         noSql = NoSqlDataPersistence(**kargs)
-        noSql.create_collection()
         noSql.insert_collection_data_from_json_files()
-        noSql.create_indexes()
+        
+        if is_financial_report(kargs['domain']):
+            noSql.create_usd_financial_report_collections_version()
 
 
     def current_download_data():
@@ -93,3 +99,5 @@ def init(DIRS):
         print_messages("NoSql executions on:", data['current'])
         if data['kwargs']['noSql'] is not None:
              create_data_persistence_noSQL(data['kwargs'])
+
+    
