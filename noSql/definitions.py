@@ -114,7 +114,9 @@ IS_NOSQl = {
     'collection_name_usd':f'{_date}_incomeStatements_usd',
     'fields': IS_FIELDS,
     'indexes': {   
-        'symbol_index':'[("symbol",1)], name="symbol_index", unique=False',    
+        'symbol_index':'[("symbol",1)], name="symbol_index", unique=False',
+        'revenue_index':'[("revenue",1)], name="revenue_index", unique=False',    
+        'calendarYear_index':'[("calendarYear",1)], name="calendarYear_index", unique=False'    
     }
 }
 
@@ -123,7 +125,9 @@ BS_NOSQl =  {
     'collection_name_usd':f'{_date}_balanceSheet_usd',
     'fields': BS_FIELDS,
     'indexes': {   
-        'symbol_index':'[("symbol",1)], name="symbol_index", unique=False',    
+        'symbol_index':'[("symbol",1)], name="symbol_index", unique=False',
+        'revenue_index':'[("revenue",1)], name="revenue_index", unique=False',
+        'calendarYear_index':'[("calendarYear",1)], name="calendarYear_index", unique=False'    
     }
 }
 
@@ -132,7 +136,9 @@ CF_NOSQl =   {
     'collection_name_usd':f'{_date}_cashFlow_usd',
     'fields': CF_FIELDS,
     'indexes': {   
-        'symbol_index':'[("symbol",1)], name="symbol_index", unique=False',    
+        'symbol_index':'[("symbol",1)], name="symbol_index", unique=False',
+        'revenue_index':'[("revenue",1)], name="revenue_index", unique=False',
+        'calendarYear_index':'[("calendarYear",1)], name="calendarYear_index", unique=False'   
     }
 }
 

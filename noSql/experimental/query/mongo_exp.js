@@ -209,4 +209,25 @@ db.forex.aggregate(
   
 
 
-   $and:[{Quote:reported_currency}, {Year:calendar_year}]
+
+   ([
+       {
+        $match: {
+            $and: [ {"Quote":reported_currency}, {"Year":calendar_year} ]
+        }
+    }, 
+    {
+        $project: {
+            'Pair': 1, 
+            'Quote': 1, 
+            'Date': 1, 
+            'Price': 1
+        }
+    },
+    {
+      $sort: { Day: -1}
+    },
+    {
+        $limit:1
+    }
+])

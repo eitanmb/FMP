@@ -133,9 +133,7 @@ for elem in exec_order:
     noSql = elem['kwargs']['noSql']
 
     if (domain == "IS" or domain == "BS" or domain == "CF"):
-        print(noSql)
         create_data_persistence_noSQL(elem['kwargs'])
-
 
 # create_usd_financial_report_collections_version(db, IS_NOSQl, IS_FIELDS)
 # create_usd_financial_report_collections_version(db, BS_NOSQl, BS_FIELDS)

@@ -17,6 +17,10 @@ def get_month() -> str:
     return "01"
     # return datetime.now().strftime('%m')
 
+def get_string_timestamp():
+    return datetime.now().strftime("%d-%m-%Y_%H:%M:%S")
+
+    
 def get_subdirectories_by_date(date: str) -> list:
     return date.split('-')
 
