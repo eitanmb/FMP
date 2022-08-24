@@ -126,8 +126,6 @@ BS_NOSQl =  {
     'fields': BS_FIELDS,
     'indexes': {   
         'symbol_index':'[("symbol",1)], name="symbol_index", unique=False',
-        'revenue_index':'[("revenue",1)], name="revenue_index", unique=False',
-        'calendarYear_index':'[("calendarYear",1)], name="calendarYear_index", unique=False'    
     }
 }
 
@@ -137,8 +135,6 @@ CF_NOSQl =   {
     'fields': CF_FIELDS,
     'indexes': {   
         'symbol_index':'[("symbol",1)], name="symbol_index", unique=False',
-        'revenue_index':'[("revenue",1)], name="revenue_index", unique=False',
-        'calendarYear_index':'[("calendarYear",1)], name="calendarYear_index", unique=False'   
     }
 }
 
