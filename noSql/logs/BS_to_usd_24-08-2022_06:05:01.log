@@ -1,0 +1,11 @@
+Domain: BS
+Start: 24-08-2022_06:05:01
+Insert records finished
+Index created in: BS, {'_id_': {'v': 2, 'key': [('_id', 1)]}, 'symbol_index': {'v': 2, 'key': [('symbol', 1)]}, 'calendarYear_index': {'v': 2, 'key': [('calendarYear', 1)]}}
+Total records: 38327
+Total records inserted: 32942
+Report Skiped cause calendarYear: 5385
+End: 24-08-2022_06:07:20
+* * * *
+
+

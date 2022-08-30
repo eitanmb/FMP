@@ -10,7 +10,7 @@ from sql.definitions import CONNECTION
 
 
 def set_dbname():
-    CONNECTION['database'] = f'FMP_{ get_year() }_{ get_month() }'
+    CONNECTION['database'] = f'PTRA_{ get_year() }_{ get_month() }'
 
 def create_db():
     set_dbname()
@@ -20,7 +20,7 @@ def create_db():
         password=CONNECTION['password']
     )
     cursor = conn.cursor()
-    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {CONNECTION['database']}")
+    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {CONNECTION['database']} /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE latin1_swedish_ci */ /*!80016 DEFAULT ENCRYPTION='N' */")
 
 
 def engine_connetion():
