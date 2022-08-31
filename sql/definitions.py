@@ -290,23 +290,22 @@ CF_OPERATIONS = {
 
 
 FX_DROP_TABLE = f"DROP TABLE IF EXISTS forex"
-FX_CREATE_TABLE = f"CREATE TABLE `forex` ( \
-          `Pair` varchar(10) NOT NULL, \
-          `Date` datetime DEFAULT NULL, \
-          `Price` varchar(100) NOT NULL, \
-          `Open` varchar(100) NOT NULL, \
-          `High` varchar(100) NOT NULL, \
-          `Low` varchar(100) NOT NULL, \
-          `Vol.` varchar(100) DEFAULT NULL, \
-          `Change %` varchar(100) DEFAULT NULL \
-          ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+
+FX_CHANGE_COLUMNS = f"ALTER TABLE `forex` \
+  CHANGE COLUMN `Pair` `pair` TEXT NULL DEFAULT NULL , \
+  CHANGE COLUMN `Date` `date` DATE NULL DEFAULT NULL , \
+  CHANGE COLUMN `Price` `price` DOUBLE NULL DEFAULT NULL , \
+  CHANGE COLUMN `Open` `open` DOUBLE NULL DEFAULT NULL , \
+  CHANGE COLUMN `High` `high` DOUBLE NULL DEFAULT NULL , \
+  CHANGE COLUMN `Low` `low` DOUBLE NULL DEFAULT NULL , \
+  CHANGE COLUMN `Vol.` `vol` TEXT NULL DEFAULT NULL ;"
+
 
 FX_OPERATIONS = {
     "table": "forex",
-    "drop_table": None,
+    "drop_table": FX_DROP_TABLE,
     "create_table": None,
-    "alter_table": None,
+    "alter_table": FX_CHANGE_COLUMNS,
     "delete_null": None,
     "add_indexes": None
-
 }

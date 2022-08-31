@@ -29,7 +29,7 @@ def init(inputs):
     make_directory(FOLDER)
 
     #TEMPORAL - ESTO DEBE SER LLAMADO ABAJO: JUSTO ANTES DE ESCRIBIR EL ARCHIVO JSON
-    # remove_commas_from_values_in_json_files(FOLDER)
+    remove_commas_from_values_in_json_files(FOLDER)
     # remove_percent_symbol_from_json_files_header(FOLDER)
     sys.exit()
 
@@ -88,8 +88,6 @@ def init(inputs):
 
 
 def remove_commas_from_values_in_json_files(folder):
-    replace_data = []
-
     for file in File.files_in_folder(folder):
         parsed_file = File.read_json(f"{folder}/{file}")
             
@@ -97,12 +95,8 @@ def remove_commas_from_values_in_json_files(folder):
             for key, value in doc.items():
                 if value and re.search("\,", value):
                     doc[key] = value.replace(",", "")
-                    replace_data.append(doc)
             
-        if len(replace_data) > 0:
-            File.write_json(f"{folder}/{file}", replace_data)
-
-        replace_data = []
+        File.write_json(f"{folder}/{file}", parsed_file)
 
 
 

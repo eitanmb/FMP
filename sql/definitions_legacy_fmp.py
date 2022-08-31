@@ -281,11 +281,23 @@ CF_OPERATIONS = {
 
 FX_DROP_TABLE = f"DROP TABLE IF EXISTS forex"
 
+
+FX_CHANGE_COLUMNS = f"ALTER TABLE `forex` \
+  CHANGE COLUMN `Pair` `pair` VARCHAR(20) NULL DEFAULT NULL , \
+  CHANGE COLUMN `Date` `date` DATE NULL DEFAULT NULL , \
+  CHANGE COLUMN `Price` `price` DOUBLE NULL DEFAULT NULL , \
+  CHANGE COLUMN `Open` `open` DOUBLE NULL DEFAULT NULL , \
+  CHANGE COLUMN `High` `high` DOUBLE NULL DEFAULT NULL , \
+  CHANGE COLUMN `Low` `low` DOUBLE NULL DEFAULT NULL , \
+  CHANGE COLUMN `Vol.` `vol` TEXT NULL DEFAULT NULL ;"
+
+
+
 FX_OPERATIONS = {
     "table": "forex",
-    "drop_table": None,
+    "drop_table": FX_DROP_TABLE,
     "create_table": None,
-    "alter_table": None,
+    "alter_table": FX_CHANGE_COLUMNS,
     "delete_null": None,
     "add_indexes": None
 }

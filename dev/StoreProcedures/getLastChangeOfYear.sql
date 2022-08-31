@@ -1,4 +1,4 @@
-CREATE DEFINER=`eitan`@`localhost` PROCEDURE `proc_cursor_getLastChangeOfYear`(
+PROCEDURE `proc_getLastChangeOfYear`(
 	fromYear int,
 	toYear int
 )
