@@ -72,22 +72,22 @@ def init(DIRS):
     
     current_download = ''
 
-    if current_download_data() == 'finished':
-        print_messages('FINISHED')
-        halt()
+    # if current_download_data() == 'finished':
+    #     print_messages('FINISHED')
+    #     halt()
 
-    if File.file_is_empty('fmp_fetch_tracker.txt'):
-        current_download = 'profile'
-    else:
-        current_download = current_download_data()
+    # if File.file_is_empty('fmp_fetch_tracker.txt'):
+    #     current_download = 'profile'
+    # else:
+    #     current_download = current_download_data()
 
-    for data in exec_order:
-        print_messages(data['current'], ": expected to download ->", current_download)
-        if data['current'] == current_download:
-            download_routine(data)
-            current_download = current_download_data()
+    # for data in exec_order:
+    #     print_messages(data['current'], ": expected to download ->", current_download)
+    #     if data['current'] == current_download:
+    #         download_routine(data)
+    #         current_download = current_download_data()
 
-    drop_create_procedures()
+    # drop_create_procedures()
 
     for data in exec_order:
         print_messages("Sql executions on:", data['current'])
@@ -95,9 +95,9 @@ def init(DIRS):
             create_data_persistence_sql(data['kwargs'])
 
     
-    for data in exec_order:
-        print_messages("NoSql executions on:", data['current'])
-        if data['kwargs']['noSql'] is not None:
-             create_data_persistence_noSQL(data['kwargs'])
+    # for data in exec_order:
+    #     print_messages("NoSql executions on:", data['current'])
+    #     if data['kwargs']['noSql'] is not None:
+    #          create_data_persistence_noSQL(data['kwargs'])
 
     

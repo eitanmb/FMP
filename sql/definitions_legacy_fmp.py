@@ -1,3 +1,5 @@
+# from .forex_data import FOREX_DATA
+
 CONNECTION: object = {
   'user': 'eitan',
   'host': 'localhost',
@@ -44,7 +46,7 @@ PROFILE_CREATE_TABLE = f'CREATE TABLE profile ( \
                         `isAdr` tinyint(1) DEFAULT NULL, \
                         `isFund` tinyint(1) DEFAULT NULL, \
                         PRIMARY KEY (`symbol`) \
-                      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4'
+                      ) ENGINE=InnoDB DEFAULT CHARSET=utf8'
 
 
 PROFILE_INDEXES = f'ALTER TABLE `profile` \
@@ -108,7 +110,7 @@ IS_CREATE_TABLE = f'CREATE TABLE `incomeStatement` (\
                       `link` text,\
                       `finalLink` text,\
                       PRIMARY KEY (`id`) \
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4'
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8'
 
 IS_CHANGE_COLUMNS = f'ALTER TABLE `incomeStatement` \
               CHANGE COLUMN `link` `linkIncomeStatement` TEXT NULL DEFAULT NULL , \
@@ -184,7 +186,7 @@ BS_CREATE_TABLE = f"CREATE TABLE `balanceSheet` ( \
                       `link` text, \
                       `finalLink` text, \
                       PRIMARY KEY (`id`) \
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4"
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8"
 
 
 BS_CHANGE_COLUMNS = f'ALTER TABLE `balanceSheet` \
@@ -251,7 +253,7 @@ CF_CREATE_TABLE = f'CREATE TABLE `cashFlow` (\
                       `link` text,\
                       `finalLink` text,\
                       PRIMARY KEY (`id`)\
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4'
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8'
 
 CF_CHANGE_COLUMNS = f'ALTER TABLE cashFlow \
               CHANGE COLUMN `link` `linkCashFlow` TEXT NULL DEFAULT NULL, \
@@ -260,11 +262,11 @@ CF_CHANGE_COLUMNS = f'ALTER TABLE cashFlow \
 CF_DELETE_NO_SYMBOL = f'DELETE FROM cashFlow where symbol is NULL;'
 
 CF_FK = f'ALTER TABLE `cashFlow` \
-                ADD CONSTRAINT `fk_symbol_cf` \
-                FOREIGN KEY (`symbol`) \
-                REFERENCES `profile` (`symbol`) \
-                ON DELETE NO ACTION \
-                ON UPDATE NO ACTION;'
+          ADD CONSTRAINT `fk_symbol_cf` \
+          FOREIGN KEY (`symbol`) \
+          REFERENCES `profile` (`symbol`) \
+          ON DELETE NO ACTION \
+          ON UPDATE NO ACTION;'
 
 CF_OPERATIONS = {
     "table": "cashFlow",
@@ -277,14 +279,15 @@ CF_OPERATIONS = {
 
 
 
-# FX_DROP_TABLE = f"DROP TABLE IF EXISTS fx"
+FX_DROP_TABLE = f"DROP TABLE IF EXISTS forex"
 
-# FX_OPERATIONS = {
-#     "table": "fx",
-#     "drop_table": FX_DROP_TABLE,
-#     "create_table": None,
-#     "alter_table": None,
-#     "delete_null": None,
-#     "add_indexes": None
+FX_OPERATIONS = {
+    "table": "forex",
+    "drop_table": None,
+    "create_table": None,
+    "alter_table": None,
+    "delete_null": None,
+    "add_indexes": None
+}
 
-# }
+

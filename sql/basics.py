@@ -20,7 +20,7 @@ def create_db():
         password=CONNECTION['password']
     )
     cursor = conn.cursor()
-    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {CONNECTION['database']} /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE latin1_swedish_ci */ /*!80016 DEFAULT ENCRYPTION='N' */")
+    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {CONNECTION['database']} DEFAULT CHARACTER SET utf8")
 
 
 def engine_connetion():
@@ -32,6 +32,7 @@ def create_table_from_dataframe(df, engine, table_name):
     try:
         df.to_sql(table_name, engine, index=False, if_exists='append')
         return f"Tabla {table_name} y datos añadidos"
+
     except Exception as e:
         return e
 
@@ -53,7 +54,7 @@ def creat_dataframe_from_data(folder: str, engine, table_name: str):
             df = pd.read_json(f"{folder}/{file}", orient='columns')
 
             if df.empty == False:
-                print(file, df)
+                print(file, '\n',df)
                 print(create_table_from_dataframe(df, engine, table_name))
             else:
                 print("Dataframe vacío")

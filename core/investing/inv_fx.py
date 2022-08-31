@@ -4,6 +4,7 @@ sys.path.append("..")
 
 from datetime import datetime
 import json
+import re
 import pandas as pd
 from selenium.webdriver.common.by import By
 import time
@@ -13,6 +14,8 @@ from helpers.File import File
 from helpers.utilities import return_start_from_tickers, get_download_ticker_possition, write_lastTicker_file, print_messages, make_directory
 from helpers.scraping_utilities import driver_init, get_doc_from_url
 
+# TODO:
+# ANTES de escribir los json files de cada pair, debe quitarse las comas en los precios y el % en la cabecera Change
 
 def init(inputs):
 
@@ -24,6 +27,11 @@ def init(inputs):
     date_range = inputs['fx_kwargs']['date_range']
 
     make_directory(FOLDER)
+
+    #TEMPORAL - ESTO DEBE SER LLAMADO ABAJO: JUSTO ANTES DE ESCRIBIR EL ARCHIVO JSON
+    # remove_commas_from_values_in_json_files(FOLDER)
+    # remove_percent_symbol_from_json_files_header(FOLDER)
+    sys.exit()
 
     how_many_tickers = File.count_files_in_folder(FOLDER)
     _from = 0
@@ -62,6 +70,8 @@ def init(inputs):
             result = currencydata.to_json(orient="records")
             parsed = json.loads(result)
             
+            # TODO: llamar aquí función de limpieza de comas y arreglo de cabecera
+
             File.write_json(file, parsed)
             
             how_many_tickers += 1
@@ -74,6 +84,26 @@ def init(inputs):
             ticker_position = get_download_ticker_possition(AVAILABLE_PAIRS, (base_currency, quote_currency))
             write_lastTicker_file(TRACKER_FILE,'fx', ticker_position)
             print_messages('How many: ', how_many_tickers)
+
+
+
+def remove_commas_from_values_in_json_files(folder):
+    replace_data = []
+
+    for file in File.files_in_folder(folder):
+        parsed_file = File.read_json(f"{folder}/{file}")
+            
+        for doc in parsed_file:
+            for key, value in doc.items():
+                if value and re.search("\,", value):
+                    doc[key] = value.replace(",", "")
+                    replace_data.append(doc)
+            
+        if len(replace_data) > 0:
+            File.write_json(f"{folder}/{file}", replace_data)
+
+        replace_data = []
+
 
 
 
@@ -119,6 +149,7 @@ def insert_pair_into_header(header):
     header.insert(0, "Pair")
 
 
+
 def change_fx_date_format(values):
     data = values.copy()
 
@@ -132,13 +163,13 @@ def change_fx_date_format(values):
 
 
 def normalized_currency_values_data(values, pair):
-
     for value in values:
         if len(value) < 7:
             value.insert(5, 'Null')
         value.insert(0,pair)
     
     values.pop()
+
 
 
 
