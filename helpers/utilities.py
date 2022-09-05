@@ -6,7 +6,7 @@ def set_datetime_now() -> str:
     return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 def get_date() -> str:
-    return '2021-09'
+    return '2021-05'
     # return datetime.now().strftime('%Y-%m')
 
 def get_year() -> str:
@@ -14,7 +14,7 @@ def get_year() -> str:
     # return datetime.now().strftime('%Y')
 
 def get_month() -> str:
-    return "09"
+    return "05"
     # return datetime.now().strftime('%m')
 
 def get_string_timestamp():

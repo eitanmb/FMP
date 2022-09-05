@@ -95,15 +95,14 @@ def init(DIRS):
     #         download_routine(data)
     #         current_download = current_download_data()
 
+    for data in exec_order:
+        print_messages("Sql executions on:", data['current'])
+        if data['kwargs']['sql'] is not None:
+            create_data_persistence_sql(data['kwargs'])
+
     drop_create_call_procedures()
-    
 
-    # for data in exec_order:
-    #     print_messages("Sql executions on:", data['current'])
-    #     if data['kwargs']['sql'] is not None:
-    #         create_data_persistence_sql(data['kwargs'])
 
-    
     # for data in exec_order:
     #     print_messages("NoSql executions on:", data['current'])
     #     if data['kwargs']['noSql'] is not None:

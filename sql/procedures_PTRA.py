@@ -271,8 +271,8 @@ create_proc_companies_search_results = "CREATE DEFINER=`eitan`@`localhost` PROCE
                 DECLARE CURSOR_SYMBOL_QUERY VARCHAR(200);\
                 DECLARE symbol_condition LONGBLOB;\
                 DECLARE done INT DEFAULT FALSE;\
-                DECLARE operator_or VARCHAR(10) DEFAULT ' OR ';\
-                DECLARE operator_and VARCHAR(10) DEFAULT ' AND ';\
+                DECLARE operator_or VARCHAR(10) DEFAULT \" OR \";\
+                DECLARE operator_and VARCHAR(10) DEFAULT \" AND \";\
                 DECLARE companies_query_condition LONGBLOB;\
                 DECLARE rows_number INT;\
                 DECLARE count INT DEFAULT 1;\
@@ -299,7 +299,7 @@ create_proc_companies_search_results = "CREATE DEFINER=`eitan`@`localhost` PROCE
                     LEAVE loop_through_rows;\
                     END IF;\
                     \
-                    SET CURSOR_SYMBOL_QUERY = CONCAT('`Symbol` = ',  '"', CURSOR_SYMBOL, '"');\
+                    SET CURSOR_SYMBOL_QUERY = CONCAT('`Symbol` = ',  '\"', CURSOR_SYMBOL, '\"');\
                     \
                     IF rows_number = 1 THEN\
                     SET companies_query_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, ')');\
