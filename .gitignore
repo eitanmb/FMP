@@ -4,3 +4,4 @@ bitacora/
 .env
 geckodriver.log
 mongo_fmp.py
+dev/
