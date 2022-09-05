@@ -2,14 +2,14 @@ import os
 import sys
 sys.path.append("..")
 
-from core.DataPersistenceSQL import SqlDataPersistence, drop_create_procedure
+from core.DataPersistenceSQL import SqlDataPersistence, drop_create_procedure, call_procedures
 from core.DataPersistenceNoSQL import NoSqlDataPersistence
 from core.fmp.FmpDataDownload import DataDownload
 from config.fmp import fmp_tickers
 from config.fmp import fmp_exec_order
 from helpers.utilities import *
 from helpers.File import File
-from sql.procedures import *
+from sql.procedures_PTRA import *
 from sql.basics import *
 
 
@@ -58,10 +58,18 @@ def init(DIRS):
         print_messages("END:", data['current'])
 
 
-    def drop_create_procedures():
-        drop_create_procedure(stp_getLastChangeOfYear, mysql_engine)
-        drop_create_procedure(stp_to_exRate, mysql_engine)
-        drop_create_procedure(stp_to_usd, mysql_engine)
+    def drop_create_call_procedures():
+        drop_create_procedure(stp_exec_procedures, mysql_engine)
+        drop_create_procedure(stp_proc_fieldExists, mysql_engine)
+        drop_create_procedure(stp_proc_fx_outer, mysql_engine)
+        drop_create_procedure(stp_proc_fx_inner, mysql_engine)
+        drop_create_procedure(stp_proc_fx_add_usd, mysql_engine)
+        drop_create_procedure(stp_proc_fx_exRate, mysql_engine)
+        drop_create_procedure(stp_proc_create_base_query_data, mysql_engine)
+        drop_create_procedure(stp_proc_create_base_query_data_usd, mysql_engine)
+        drop_create_procedure(stp_proc_general_date_filters, mysql_engine)
+        drop_create_procedure(stp_proc_companies_search_results, mysql_engine)
+        call_procedures(stp_exec_procedures, mysql_engine)
 
     
 
@@ -87,12 +95,13 @@ def init(DIRS):
     #         download_routine(data)
     #         current_download = current_download_data()
 
-    # drop_create_procedures()
+    drop_create_call_procedures()
+    
 
-    for data in exec_order:
-        print_messages("Sql executions on:", data['current'])
-        if data['kwargs']['sql'] is not None:
-            create_data_persistence_sql(data['kwargs'])
+    # for data in exec_order:
+    #     print_messages("Sql executions on:", data['current'])
+    #     if data['kwargs']['sql'] is not None:
+    #         create_data_persistence_sql(data['kwargs'])
 
     
     # for data in exec_order:

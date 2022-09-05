@@ -45,6 +45,6 @@ def init(DIRS, TICKERS_FILES):
         # balanceSheet,
         # cashFlow,
         # outlook,
-        forex
+        # forex
     ]
     

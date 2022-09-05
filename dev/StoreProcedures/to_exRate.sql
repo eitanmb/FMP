@@ -43,3 +43,21 @@ BEGIN
   END LOOP;
   CLOSE cursor_exRate;
 END
+
+
+
+
+
+INSERT into base_query_data_usd (`Company Name`,`Symbol`,`Exchange Short Name`,`Industry`,`Website`,`Description`,`Sector`,`Country`,`Full Time Employees`,
+  `Date`,`Reported Currency`,`Period`,`Revenue`,`Cost Of Revenue`,`Gross Profit`,`Research And Development Expenses`,
+  `General And Administrative Expenses`,`Selling And Marketing Expenses`,`Other Expenses`,`Operating Expenses`,`Cost And Expenses`,
+  `Interest Expense`,`Depreciation And Amortization`,`Operating Income`,`Link Incomestatement`,`Final Link Incomestatement`,`Cash And Cash Equivalents`,
+  `Net Receivables`,`Inventory`,`Total Current Assets`,`Total Non Current Assets`,`Total Assets`,`Account Payables`,`Total Current Liabilities`,
+  `Total Non Current Liabilities`,`Total Liabilities`,`Link Balancesheet`,`Final Link Balancesheet`, `Year`) 
+   SELECT `Company Name`,`Symbol`,`Exchange Short Name`,`Industry`,`Website`,`Description`,`Sector`,`Country`,`Full Time Employees`,
+  `Date`,`Reported Currency`,`Period`,`Revenue`,`Cost Of Revenue`,`Gross Profit`,`Research And Development Expenses`,
+  `General And Administrative Expenses`,`Selling And Marketing Expenses`,`Other Expenses`,`Operating Expenses`,`Cost And Expenses`,
+  `Interest Expense`,`Depreciation And Amortization`,`Operating Income`,`Link Incomestatement`,`Final Link Incomestatement`,
+  `Cash And Cash Equivalents`,`Net Receivables`,`Inventory`,`Total Current Assets`,`Total Non Current Assets`,`Total Assets`,
+  `Account Payables`,`Total Current Liabilities`,`Total Non Current Liabilities`,`Total Liabilities`,`Link Balancesheet`,`Final Link Balancesheet`,`Year` FROM base_query_data
+   WHERE Year = CURSOR_CALENDAR_YEAR and (`Reported Currency` = CURSOR_REPORTED_CURRENCY OR `Reported Currency` = 'USD');
