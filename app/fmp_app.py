@@ -68,7 +68,11 @@ def init(DIRS):
         drop_create_procedure(stp_proc_create_base_query_data, mysql_engine)
         drop_create_procedure(stp_proc_create_base_query_data_usd, mysql_engine)
         drop_create_procedure(stp_proc_general_date_filters, mysql_engine)
+        drop_create_procedure(stp_proc_general_date_filters_selected_companies, mysql_engine)
         drop_create_procedure(stp_proc_companies_search_results, mysql_engine)
+        drop_create_procedure(stp_proc_companies_search_results_usd, mysql_engine)
+        drop_create_procedure(stp_proc_companies_search_selected_results_usd, mysql_engine)
+        drop_create_procedure(stp_proc_companies_search_selected_results, mysql_engine)
         call_procedures(stp_exec_procedures, mysql_engine)
 
     
@@ -80,20 +84,20 @@ def init(DIRS):
     
     current_download = ''
 
-    # if current_download_data() == 'finished':
-    #     print_messages('FINISHED')
-    #     halt()
+    if current_download_data() == 'finished':
+        print_messages('FINISHED')
+        halt()
 
-    # if File.file_is_empty('fmp_fetch_tracker.txt'):
-    #     current_download = 'profile'
-    # else:
-    #     current_download = current_download_data()
+    if File.file_is_empty('fmp_fetch_tracker.txt'):
+        current_download = 'profile'
+    else:
+        current_download = current_download_data()
 
-    # for data in exec_order:
-    #     print_messages(data['current'], ": expected to download ->", current_download)
-    #     if data['current'] == current_download:
-    #         download_routine(data)
-    #         current_download = current_download_data()
+    for data in exec_order:
+        print_messages(data['current'], ": expected to download ->", current_download)
+        if data['current'] == current_download:
+            download_routine(data)
+            current_download = current_download_data()
 
     for data in exec_order:
         print_messages("Sql executions on:", data['current'])

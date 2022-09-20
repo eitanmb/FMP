@@ -1,11 +1,10 @@
 import sys
 sys.path.append("..")
 
-from sql.definitions_legacy_fmp import IS_OPERATIONS, BS_OPERATIONS, CF_OPERATIONS, PROFILE_OPERATIONS, FX_OPERATIONS
+# from sql.definitions_legacy_fmp import IS_OPERATIONS, BS_OPERATIONS, CF_OPERATIONS, PROFILE_OPERATIONS, FX_OPERATIONS
 from noSql.definitions import PROFILE_NOSQl, IS_NOSQl, BS_NOSQl, CF_NOSQl, OUTLOOK_NOSQL
 from .fmp_endpoints import ENDPOINTS
-
-# from sql.definitions import IS_OPERATIONS, BS_OPERATIONS, CF_OPERATIONS, PROFILE_OPERATIONS, FX_OPERATIONS
+from sql.definitions import IS_OPERATIONS, BS_OPERATIONS, CF_OPERATIONS, PROFILE_OPERATIONS, FX_OPERATIONS
 
 
 def init(DIRS, TICKERS_FILES):
