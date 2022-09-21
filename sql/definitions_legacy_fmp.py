@@ -1,3 +1,5 @@
+# from .forex_data import FOREX_DATA
+
 CONNECTION: object = {
   'user': 'eitan',
   'host': 'localhost',
@@ -44,7 +46,7 @@ PROFILE_CREATE_TABLE = f'CREATE TABLE profile ( \
                         `isAdr` tinyint(1) DEFAULT NULL, \
                         `isFund` tinyint(1) DEFAULT NULL, \
                         PRIMARY KEY (`symbol`) \
-                      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4'
+                      ) ENGINE=InnoDB DEFAULT CHARSET=utf8'
 
 
 PROFILE_INDEXES = f'ALTER TABLE `profile` \
@@ -75,10 +77,8 @@ IS_CREATE_TABLE = f'CREATE TABLE `incomeStatement` (\
                       `date` datetime DEFAULT NULL,\
                       `symbol` varchar(25) NOT NULL,\
                       `reportedCurrency` text,\
-                      `cik` bigint DEFAULT NULL,\
                       `fillingDate` text,\
                       `acceptedDate` text,\
-                      `calendarYear` bigint DEFAULT NULL,\
                       `period` text,\
                       `revenue` bigint DEFAULT NULL,\
                       `costOfRevenue` bigint DEFAULT NULL,\
@@ -91,7 +91,6 @@ IS_CREATE_TABLE = f'CREATE TABLE `incomeStatement` (\
                       `otherExpenses` bigint DEFAULT NULL,\
                       `operatingExpenses` bigint DEFAULT NULL,\
                       `costAndExpenses` bigint DEFAULT NULL,\
-                      `interestIncome` bigint DEFAULT NULL,\
                       `interestExpense` bigint DEFAULT NULL,\
                       `depreciationAndAmortization` bigint DEFAULT NULL,\
                       `ebitda` bigint DEFAULT NULL,\
@@ -111,7 +110,7 @@ IS_CREATE_TABLE = f'CREATE TABLE `incomeStatement` (\
                       `link` text,\
                       `finalLink` text,\
                       PRIMARY KEY (`id`) \
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4'
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8'
 
 IS_CHANGE_COLUMNS = f'ALTER TABLE `incomeStatement` \
               CHANGE COLUMN `link` `linkIncomeStatement` TEXT NULL DEFAULT NULL , \
@@ -142,10 +141,8 @@ BS_CREATE_TABLE = f"CREATE TABLE `balanceSheet` ( \
                       `date` datetime DEFAULT NULL, \
                       `symbol` varchar(25) NOT NULL, \
                       `reportedCurrency` text, \
-                      `cik` bigint DEFAULT NULL, \
                       `fillingDate` text, \
                       `acceptedDate` text, \
-                      `calendarYear` bigint DEFAULT NULL, \
                       `period` text, \
                       `cashAndCashEquivalents` bigint DEFAULT NULL, \
                       `shortTermInvestments` bigint DEFAULT NULL, \
@@ -176,25 +173,20 @@ BS_CREATE_TABLE = f"CREATE TABLE `balanceSheet` ( \
                       `otherNonCurrentLiabilities` bigint DEFAULT NULL, \
                       `totalNonCurrentLiabilities` bigint DEFAULT NULL, \
                       `otherLiabilities` bigint DEFAULT NULL, \
-                      `capitalLeaseObligations` bigint DEFAULT NULL, \
                       `totalLiabilities` bigint DEFAULT NULL, \
-                      `preferredStock` bigint DEFAULT NULL, \
                       `commonStock` bigint DEFAULT NULL, \
                       `retainedEarnings` bigint DEFAULT NULL, \
                       `accumulatedOtherComprehensiveIncomeLoss` bigint DEFAULT NULL, \
                       `othertotalStockholdersEquity` bigint DEFAULT NULL, \
                       `totalStockholdersEquity` bigint DEFAULT NULL, \
                       `totalLiabilitiesAndStockholdersEquity` bigint DEFAULT NULL, \
-                      `minorityInterest` bigint DEFAULT NULL, \
-                      `totalEquity` bigint DEFAULT NULL, \
-                      `totalLiabilitiesAndTotalEquity` bigint DEFAULT NULL, \
                       `totalInvestments` bigint DEFAULT NULL, \
                       `totalDebt` bigint DEFAULT NULL, \
                       `netDebt` bigint DEFAULT NULL, \
                       `link` text, \
                       `finalLink` text, \
                       PRIMARY KEY (`id`) \
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4"
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8"
 
 
 BS_CHANGE_COLUMNS = f'ALTER TABLE `balanceSheet` \
@@ -225,10 +217,8 @@ CF_CREATE_TABLE = f'CREATE TABLE `cashFlow` (\
                       `date` datetime NOT NULL,\
                       `symbol` varchar(25) NOT NULL,\
                       `reportedCurrency` text,\
-                      `cik` bigint DEFAULT NULL,\
                       `fillingDate` text,\
                       `acceptedDate` text,\
-                      `calendarYear` bigint DEFAULT NULL,\
                       `period` text,\
                       `netIncome` bigint DEFAULT NULL,\
                       `depreciationAndAmortization` bigint DEFAULT NULL,\
@@ -263,7 +253,7 @@ CF_CREATE_TABLE = f'CREATE TABLE `cashFlow` (\
                       `link` text,\
                       `finalLink` text,\
                       PRIMARY KEY (`id`)\
-                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4'
+                    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8'
 
 CF_CHANGE_COLUMNS = f'ALTER TABLE cashFlow \
               CHANGE COLUMN `link` `linkCashFlow` TEXT NULL DEFAULT NULL, \
@@ -272,11 +262,11 @@ CF_CHANGE_COLUMNS = f'ALTER TABLE cashFlow \
 CF_DELETE_NO_SYMBOL = f'DELETE FROM cashFlow where symbol is NULL;'
 
 CF_FK = f'ALTER TABLE `cashFlow` \
-                ADD CONSTRAINT `fk_symbol_cf` \
-                FOREIGN KEY (`symbol`) \
-                REFERENCES `profile` (`symbol`) \
-                ON DELETE NO ACTION \
-                ON UPDATE NO ACTION;'
+          ADD CONSTRAINT `fk_symbol_cf` \
+          FOREIGN KEY (`symbol`) \
+          REFERENCES `profile` (`symbol`) \
+          ON DELETE NO ACTION \
+          ON UPDATE NO ACTION;'
 
 CF_OPERATIONS = {
     "table": "cashFlow",
@@ -291,14 +281,16 @@ CF_OPERATIONS = {
 
 FX_DROP_TABLE = f"DROP TABLE IF EXISTS forex"
 
+
 FX_CHANGE_COLUMNS = f"ALTER TABLE `forex` \
-  CHANGE COLUMN `Pair` `pair` TEXT NULL DEFAULT NULL , \
+  CHANGE COLUMN `Pair` `pair` VARCHAR(20) NULL DEFAULT NULL , \
   CHANGE COLUMN `Date` `date` DATE NULL DEFAULT NULL , \
   CHANGE COLUMN `Price` `price` DOUBLE NULL DEFAULT NULL , \
   CHANGE COLUMN `Open` `open` DOUBLE NULL DEFAULT NULL , \
   CHANGE COLUMN `High` `high` DOUBLE NULL DEFAULT NULL , \
   CHANGE COLUMN `Low` `low` DOUBLE NULL DEFAULT NULL , \
   CHANGE COLUMN `Vol.` `vol` TEXT NULL DEFAULT NULL ;"
+
 
 
 FX_OPERATIONS = {
@@ -309,3 +301,5 @@ FX_OPERATIONS = {
     "delete_null": None,
     "add_indexes": None
 }
+
+

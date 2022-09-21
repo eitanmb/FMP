@@ -2,4 +2,6 @@ bitacora/
 /json
 *.json
 .env
-lastTicker.txt
+geckodriver.log
+mongo_fmp.py
+dev/

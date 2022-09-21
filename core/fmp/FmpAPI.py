@@ -76,7 +76,7 @@ class FmpTickers:
 class FmpAPI:
     apikey = os.environ.get("APIKEY")
     url_base = os.environ.get("FMP_URL_BASE")
-    last_ticker = 'lastTicker.txt'
+    last_ticker = 'fmp_fetch_tracker.txt'
 
     def get_jsonparsed_data(url: str):
         response = urlopen(url)
@@ -122,8 +122,7 @@ class FmpAPI:
             finally:
                 ticker_position = FmpAPI.get_download_ticker_possition(
                     tickers_list, ticker)
-                util.write_lastTicker_file(FmpAPI.last_ticker,
-                                           caller, ticker_position)
+                util.write_lastTicker_file(FmpAPI.last_ticker,caller, ticker_position)
                 util.print_messages('ticker', ticker)
                 how_many_tickers += 1
                 util.print_messages('How many: ', how_many_tickers)

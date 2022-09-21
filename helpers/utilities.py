@@ -5,17 +5,22 @@ from helpers.File import File
 def set_datetime_now() -> str:
     return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-
 def get_date() -> str:
-    # return '2023-01'
+    # return '2022-08'
     return datetime.now().strftime('%Y-%m')
 
 def get_year() -> str:
+    # return "2022"
     return datetime.now().strftime('%Y')
 
 def get_month() -> str:
+    # return "08"
     return datetime.now().strftime('%m')
 
+def get_string_timestamp():
+    return datetime.now().strftime("%d-%m-%Y_%H:%M:%S")
+
+    
 def get_subdirectories_by_date(date: str) -> list:
     return date.split('-')
 
@@ -65,3 +70,11 @@ def print_messages(*messages):
     print(*messages)
 
 
+def get_download_ticker_possition(tickers_list, ticker):
+        return tickers_list.index(ticker)
+
+
+def return_start_from_tickers(how_many_tickers, last_ticker):
+    if how_many_tickers == 0:
+        return 0
+    return int(get_lastTicker_info(last_ticker)[1])

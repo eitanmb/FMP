@@ -1,5 +1,6 @@
 import json
 import os
+import os.path
 
 
 class File:
@@ -55,6 +56,12 @@ class File:
 
     @staticmethod
     def file_is_empty(file):
-        if os.path.getsize(file) != 0:
-            return False
-        return True
+        if os.stat(file).st_size == 0:
+            return True
+        return False
+
+    @staticmethod
+    def file_exist(file):
+        if os.path.exists(file):
+            return True
+        return False

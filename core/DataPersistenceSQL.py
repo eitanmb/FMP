@@ -45,3 +45,7 @@ def drop_create_procedure(stp, engine):
                    execute_query(stp['drop'], engine))
     print_messages(f"Create {stp['name']} Procedure",
                    execute_query(stp['create'], engine))
+
+def call_procedures(stp,engine):
+    print_messages(f"Calling {stp['name']} Procedure",
+                   execute_query(stp['call'], engine))
