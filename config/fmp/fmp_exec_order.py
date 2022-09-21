@@ -40,11 +40,11 @@ def init(DIRS, TICKERS_FILES):
     }
     
     return  [
-        profile,
-        incomeStatement,
-        balanceSheet,
-        cashFlow,
+        # profile,
+        # incomeStatement,
+        # balanceSheet,
+        # cashFlow,
         outlook,
-        forex
+        # forex
     ]
     

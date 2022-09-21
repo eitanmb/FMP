@@ -29,9 +29,9 @@ def init(inputs):
     make_directory(FOLDER)
 
     #TEMPORAL - ESTO DEBE SER LLAMADO ABAJO: JUSTO ANTES DE ESCRIBIR EL ARCHIVO JSON
-    remove_commas_from_values_in_json_files(FOLDER)
+    # remove_commas_from_values_in_json_files(FOLDER)
     # remove_percent_symbol_from_json_files_header(FOLDER)
-    sys.exit()
+    # sys.exit()
 
     how_many_tickers = File.count_files_in_folder(FOLDER)
     _from = 0
@@ -71,6 +71,7 @@ def init(inputs):
             parsed = json.loads(result)
             
             # TODO: llamar aquí función de limpieza de comas y arreglo de cabecera
+            remove_commas_from_values_in_json_files(FOLDER)
 
             File.write_json(file, parsed)
             

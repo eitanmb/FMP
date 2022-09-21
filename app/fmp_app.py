@@ -107,9 +107,9 @@ def init(DIRS):
     drop_create_call_procedures()
 
 
-    # for data in exec_order:
-    #     print_messages("NoSql executions on:", data['current'])
-    #     if data['kwargs']['noSql'] is not None:
-    #          create_data_persistence_noSQL(data['kwargs'])
+    for data in exec_order:
+        print_messages("NoSql executions on:", data['current'])
+        if data['kwargs']['noSql'] is not None:
+             create_data_persistence_noSQL(data['kwargs'])
 
     
