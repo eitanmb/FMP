@@ -73,6 +73,8 @@ def init(DIRS):
         drop_create_procedure(stp_proc_companies_search_results_usd, mysql_engine)
         drop_create_procedure(stp_proc_companies_search_selected_results_usd, mysql_engine)
         drop_create_procedure(stp_proc_companies_search_selected_results, mysql_engine)
+        drop_create_procedure(stp_proc_db_general_summaries, mysql_engine)
+        drop_create_procedure(stp_proc_db_revenue_summaries, mysql_engine)
         call_procedures(stp_exec_procedures, mysql_engine)
 
     
