@@ -242,27 +242,14 @@ create_proc_create_base_query_data_usd = "CREATE DEFINER = `eitan` @`localhost` 
                                             DECLARE CURSOR_VALUE DOUBLE;\
                                             DECLARE done INT DEFAULT FALSE;\
                                             DECLARE cursor_exRate CURSOR FOR\
-                                            SELECT\
-                                                ReportedCurrency,\
-                                                CalendarYear,\
-                                                Value\
-                                            FROM\
-                                                exRate;\
+                                            SELECT ReportedCurrency, CalendarYear, Value FROM exRate;\
                                             DECLARE CONTINUE HANDLER FOR NOT FOUND\
-                                            SET\
-                                                done = TRUE;\
+                                            SET done = TRUE;\
                                             DROP TABLE IF EXISTS base_query_data_usd;\
                                             CREATE TABLE base_query_data_usd AS\
-                                            SELECT\
-                                                *\
-                                            FROM\
-                                                base_query_data;\
-                                            ALTER TABLE\
-                                                base_query_data_usd\
-                                            ADD\
-                                                COLUMN `Indexed` TINYINT NULL DEFAULT 0\
-                                            AFTER\
-                                                `Year`;\
+                                            SELECT * FROM base_query_data;\
+                                            ALTER TABLE base_query_data_usd\
+                                            ADD COLUMN `Indexed` TINYINT NULL DEFAULT 0 AFTER `Year`;\
                                             OPEN cursor_exRate;\
                                             loop_through_rows: LOOP FETCH cursor_exRate INTO CURSOR_REPORTED_CURRENCY,\
                                             CURSOR_CALENDAR_YEAR,\
@@ -270,9 +257,7 @@ create_proc_create_base_query_data_usd = "CREATE DEFINER = `eitan` @`localhost` 
                                             IF done THEN CLOSE cursor_exRate;\
                                             LEAVE loop_through_rows;\
                                             END IF;\
-                                            UPDATE\
-                                                base_query_data_usd\
-                                            SET\
+                                            UPDATE base_query_data_usd SET\
                                                 `Revenue` = `Revenue` / CURSOR_VALUE,\
                                                 `Cost Of Revenue` = `Cost Of Revenue` / CURSOR_VALUE,\
                                                 `Gross Profit` = `Gross Profit` / CURSOR_VALUE,\
@@ -296,32 +281,17 @@ create_proc_create_base_query_data_usd = "CREATE DEFINER = `eitan` @`localhost` 
                                                 `Total Non Current Liabilities` = `Total Non Current Liabilities` / CURSOR_VALUE,\
                                                 `Total Liabilities` = `Total Liabilities` / CURSOR_VALUE,\
                                                 `Indexed` = 1\
-                                            WHERE\
-                                                Year = CURSOR_CALENDAR_YEAR\
-                                                and `Reported Currency` = CURSOR_REPORTED_CURRENCY;\
+                                            WHERE Year = CURSOR_CALENDAR_YEAR and `Reported Currency` = CURSOR_REPORTED_CURRENCY;\
                                             END LOOP;\
-                                            DELETE FROM\
-                                                `base_query_data_usd`\
-                                            WHERE\
-                                                Indexed = 0;\
-                                            ALTER TABLE\
-                                                `base_query_data_usd` DROP COLUMN `Indexed`;\
-                                            ALTER TABLE\
-                                                `base_query_data_usd`\
-                                            ADD\
-                                                FULLTEXT INDEX `Search` (`Description`),\
-                                            ADD\
-                                                INDEX `ISector` (`Sector` ASC),\
-                                            ADD\
-                                                INDEX `IIndustry` (`Industry` ASC),\
-                                            ADD\
-                                                INDEX `IYear` (`Year` DESC),\
-                                            ADD\
-                                                INDEX `ICompany` (`Company Name` ASC);\
-                                            UPDATE\
-                                                base_query_data_usd\
-                                            SET\
-                                                `Reported Currency` = 'USD';\
+                                            DELETE FROM `base_query_data_usd` WHERE Indexed = 0;\
+                                            UPDATE base_query_data_usd SET `Reported Currency` = 'USD';\
+                                            ALTER TABLE `base_query_data_usd` DROP COLUMN `Indexed`;\
+                                            ALTER TABLE `base_query_data_usd` \
+                                                ADD FULLTEXT INDEX `Search` (`Description`),\
+                                                ADD INDEX `ISector` (`Sector` ASC), \
+                                                ADD INDEX `IIndustry` (`Industry` ASC),\
+                                                ADD INDEX `IYear` (`Year` DESC),\
+                                                ADD INDEX `ICompany` (`Company Name` ASC);\
                                             END"
 
 

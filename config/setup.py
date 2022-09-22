@@ -1,7 +1,7 @@
 import os
 import sys
 sys.path.append("..")
-from helpers.utilities import get_date, get_subdirectories_by_date, make_directory, join_path
+from helpers.utilities import get_date_str, get_subdirectories_by_date, make_directory, join_path
 
 def init():
     BASE_DIR: str = os.path.dirname(os.path.abspath('exec.py'))
@@ -13,7 +13,7 @@ def init():
     DIRS['ROOT_JSON_DIR'] = f'{ BASE_DIR }/json'
 
     subdirectories_list: list = []
-    date: str = get_date()
+    date: str = get_date_str()
     subdirectories_list = get_subdirectories_by_date(date)
 
     create_json_directory_structure(DIRS["ROOT_JSON_DIR"], subdirectories_list)

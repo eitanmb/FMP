@@ -3,7 +3,7 @@ sys.path.append("..")
 
 from helpers.utilities import get_year, get_month
 
-
+#Collection prefix
 # _date: str = f"{get_month()}{get_year()}"
 _date: str = "082022"
 

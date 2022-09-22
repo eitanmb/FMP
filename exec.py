@@ -1,7 +1,7 @@
 from config import setup
 from app import fmp_app
-from app import inv_app
+from app import currency_app
 
 DIRS = setup.init()
-fmp_app.init(DIRS)
-# inv_app.init(DIRS)
+currency_app.init(DIRS)
+# fmp_app.init(DIRS)

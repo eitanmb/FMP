@@ -5,7 +5,12 @@ from helpers.File import File
 def set_datetime_now() -> str:
     return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-def get_date() -> str:
+
+def get_date():
+    return datetime.now()
+
+    
+def get_date_str() -> str:
     # return '2022-08'
     return datetime.now().strftime('%Y-%m')
 
