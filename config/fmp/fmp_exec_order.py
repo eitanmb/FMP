@@ -29,7 +29,7 @@ def init(DIRS, TICKERS_FILES):
     
     outlook = {
         'current': 'outlook',
-        'next': 'forex',
+        'next': 'finished',
         'kwargs': fmp_arguments["outlook_kwargs"]
     }
     
@@ -40,11 +40,11 @@ def init(DIRS, TICKERS_FILES):
     }
     
     return  [
-        # profile,
-        # incomeStatement,
-        # balanceSheet,
-        # cashFlow,
+        profile,
+        incomeStatement,
+        balanceSheet,
+        cashFlow,
         outlook,
-        # forex
+        forex
     ]
     

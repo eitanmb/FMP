@@ -8,10 +8,10 @@ create_exec_procedures = "CREATE DEFINER = `eitan` @`localhost` PROCEDURE `exec_
                             CALL proc_create_base_query_data();\
                             SELECT 'CALL proc_create_base_query_data_usd()';\
                             CALL proc_create_base_query_data_usd();\
-                            SELECT 'CALL proc_db_general_summaries()';\
-                            CALL proc_db_general_summaries();\
-                            SELECT 'CALL proc_db_revenue_summaries()';\
-                            CALL proc_db_revenue_summaries();\
+                            SELECT 'CALL db_general_summaries()';\
+                            CALL db_general_summaries();\
+                            SELECT 'CALL db_revenue_summaries()';\
+                            CALL db_revenue_summaries();\
                             END"
 
 
@@ -223,16 +223,16 @@ create_proc_create_base_query_data = "CREATE DEFINER = `eitan` @`localhost` PROC
                                         END IF;\
                                         ALTER TABLE\
                                             `base_query_data`\
-                                        ADD\
-                                            FULLTEXT INDEX `Search` (`Description`),\
-                                        ADD\
-                                            INDEX `ISector` (`Sector` ASC),\
-                                        ADD\
-                                            INDEX `IIndustry` (`Industry` ASC),\
-                                        ADD\
-                                            INDEX `IYear` (`Year` DESC),\
-                                        ADD\
-                                            INDEX `ICompany` (`Company Name` ASC);\
+                                        ADD FULLTEXT INDEX `Search` (`Description`),\
+                                        ADD INDEX `ISectorYear` (`Sector` ASC, `Year` DESC) VISIBLE,\
+                                        ADD INDEX `IIndustryYear` (`Industry` ASC, `Year` DESC) VISIBLE,\
+                                        ADD INDEX `ICompanyYear` (`Company Name` ASC, `Year` DESC) VISIBLE,\
+                                        ADD INDEX `ISymbolYear` (`Symbol` ASC, `Year` DESC) VISIBLE,\
+                                        ADD INDEX `ISymbolYearRevenue` (`Symbol` ASC, `Year` DESC, `Revenue` ASC) VISIBLE,\
+                                        ADD INDEX `ICountryYear` (`Country` ASC, `Year` DESC) VISIBLE,\
+                                        ADD INDEX `ISectorIndustryYear` (`Sector` ASC, `Industry` ASC,`Year` DESC) VISIBLE,\
+                                        ADD INDEX `ISectorIndustryRevenueYear` (`Sector` ASC, `Industry` ASC, `Revenue` ASC, `Year` DESC) VISIBLE,\
+                                        ADD FULLTEXT INDEX `Search` (`Description`) VISIBLE;\
                                         END"
 
 
@@ -300,469 +300,24 @@ create_proc_create_base_query_data_usd = "CREATE DEFINER = `eitan` @`localhost` 
                                                 Year = CURSOR_CALENDAR_YEAR\
                                                 and `Reported Currency` = CURSOR_REPORTED_CURRENCY;\
                                             END LOOP;\
-                                            DELETE FROM\
-                                                `base_query_data_usd`\
-                                            WHERE\
-                                                Indexed = 0;\
-                                            ALTER TABLE\
-                                                `base_query_data_usd` DROP COLUMN `Indexed`;\
-                                            ALTER TABLE\
-                                                `base_query_data_usd`\
-                                            ADD\
-                                                FULLTEXT INDEX `Search` (`Description`),\
-                                            ADD\
-                                                INDEX `ISector` (`Sector` ASC),\
-                                            ADD\
-                                                INDEX `IIndustry` (`Industry` ASC),\
-                                            ADD\
-                                                INDEX `IYear` (`Year` DESC),\
-                                            ADD\
-                                                INDEX `ICompany` (`Company Name` ASC);\
-                                            UPDATE\
-                                                base_query_data_usd\
-                                            SET\
-                                                `Reported Currency` = 'USD';\
+                                            DELETE FROM `base_query_data_usd` WHERE Indexed = 0;\
+                                            ALTER TABLE `base_query_data_usd` DROP COLUMN `Indexed`;\
+                                            UPDATE base_query_data_usd SET `Reported Currency` = 'USD';\
+                                            ALTER TABLE `base_query_data_usd`\
+                                            ADD FULLTEXT INDEX `Search` (`Description`),\
+                                            ADD INDEX `ISectorYear` (`Sector` ASC, `Year` DESC) VISIBLE,\
+                                            ADD INDEX `IIndustryYear` (`Industry` ASC, `Year` DESC) VISIBLE,\
+                                            ADD INDEX `ICompanyYear` (`Company Name` ASC, `Year` DESC) VISIBLE,\
+                                            ADD INDEX `ISymbolYear` (`Symbol` ASC, `Year` DESC) VISIBLE,\
+                                            ADD INDEX `ISymbolYearRevenue` (`Symbol` ASC, `Year` DESC, `Revenue` ASC) VISIBLE,\
+                                            ADD INDEX `ICountryYear` (`Country` ASC, `Year` DESC) VISIBLE,\
+                                            ADD INDEX `ISectorIndustryYear` (`Sector` ASC, `Industry` ASC,`Year` DESC) VISIBLE,\
+                                            ADD INDEX `ISectorIndustryRevenueYear` (`Sector` ASC, `Industry` ASC, `Revenue` ASC, `Year` DESC) VISIBLE,\
+                                            ADD FULLTEXT INDEX `Search` (`Description`) VISIBLE;\
                                             END"
 
 
-drop_proc_general_date_filters = f'DROP procedure IF EXISTS `proc_general_date_filters`;'
-create_proc_general_date_filters = "CREATE DEFINER = `eitan` @`localhost` PROCEDURE `proc_general_date_filters`(IN object_params JSON) BEGIN DECLARE base_query TEXT;\
-                                    DECLARE username varchar(50);\
-                                    DECLARE general_filters_param TEXT default 'Revenue <> Null';\
-                                    DECLARE date_filters_param TEXT;\
-                                    DECLARE num_years INT DEFAULT 3;\
-                                    DECLARE append_query TEXT;\
-                                    DECLARE operator TEXT;\
-                                    DECLARE general_date_filters_query TEXT;\
-                                    SET\
-                                        username = (\
-                                            SELECT\
-                                                JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.username'))\
-                                        );\
-                                    SET\
-                                        base_query = CONCAT(\
-                                            'CREATE OR REPLACE VIEW ',\
-                                            username,\
-                                            '_general_date_filters_selection AS SELECT DISTINCT(`Company Name`),Symbol, count(*) from base_query_data t0 WHERE '\
-                                        );\
-                                    SET\
-                                        append_query = ' GROUP BY `Company Name`, Symbol HAVING COUNT(*) = ';\
-                                    SET\
-                                        operator = \" AND \";\
-                                    SET\
-                                        general_filters_param = (\
-                                            SELECT\
-                                                JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.general_filters'))\
-                                        );\
-                                    SET\
-                                        date_filters_param = (\
-                                            SELECT\
-                                                JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.date_filters'))\
-                                        );\
-                                    SET\
-                                        num_years = (\
-                                            SELECT\
-                                                JSON_EXTRACT(object_params, '$.num_years')\
-                                        );\
-                                    IF general_filters_param <> '' THEN\
-                                    SET\
-                                        @general_date_filters_query = CONCAT(\
-                                            base_query,\
-                                            general_filters_param,\
-                                            operator,\
-                                            date_filters_param,\
-                                            append_query,\
-                                            num_years\
-                                        );\
-                                    ELSE\
-                                    SET\
-                                        @general_date_filters_query = CONCAT(\
-                                            base_query,\
-                                            date_filters_param,\
-                                            append_query,\
-                                            num_years\
-                                        );\
-                                    END IF;\
-                                    PREPARE result_general_date_filters\
-                                    FROM\
-                                        @general_date_filters_query;\
-                                    EXECUTE result_general_date_filters;\
-                                    END"
-
-
-drop_proc_general_date_filters_selected_companies = f'DROP procedure IF EXISTS `proc_general_date_filters_selected_companies`;'
-create_proc_general_date_filters_selected_companies = f"CREATE DEFINER = `eitan` @`localhost` PROCEDURE `proc_general_date_filters_selected_companies`(IN object_params JSON) BEGIN DECLARE base_query TEXT;\
-                                                        DECLARE username varchar(50);\
-                                                        DECLARE general_filters_param TEXT default 'Revenue <> Null';\
-                                                        DECLARE date_filters_param TEXT;\
-                                                        DECLARE num_years INT DEFAULT 3;\
-                                                        DECLARE append_query TEXT;\
-                                                        DECLARE operator TEXT;\
-                                                        DECLARE general_date_filters_query TEXT;\
-                                                        SET\
-                                                            username = (\
-                                                                SELECT\
-                                                                    JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.username'))\
-                                                            );\
-                                                        SET\
-                                                            base_query = CONCAT(\
-                                                                'CREATE OR REPLACE VIEW ',\
-                                                                username,\
-                                                                '_general_date_filters_selected_companies AS SELECT DISTINCT(`Company Name`),Symbol, count(*) \
-                                                                            from base_query_data t0 WHERE '\
-                                                            );\
-                                                        SET\
-                                                            append_query = ' GROUP BY `Company Name`, Symbol HAVING COUNT(*) = ';\
-                                                        SET\
-                                                            operator = \" AND \";\
-                                                        SET\
-                                                            general_filters_param = (\
-                                                                SELECT\
-                                                                    JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.general_filters'))\
-                                                            );\
-                                                        SET\
-                                                            date_filters_param = (\
-                                                                SELECT\
-                                                                    JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.date_filters'))\
-                                                            );\
-                                                        SET\
-                                                            num_years = (\
-                                                                SELECT\
-                                                                    JSON_EXTRACT(object_params, '$.num_years')\
-                                                            );\
-                                                        IF general_filters_param <> '' THEN\
-                                                        SET\
-                                                            @general_date_filters_query = CONCAT(\
-                                                                base_query,\
-                                                                general_filters_param,\
-                                                                operator,\
-                                                                date_filters_param,\
-                                                                append_query,\
-                                                                num_years\
-                                                            );\
-                                                        ELSE\
-                                                        SET\
-                                                            @general_date_filters_query = CONCAT(\
-                                                                base_query,\
-                                                                date_filters_param,\
-                                                                append_query,\
-                                                                num_years\
-                                                            );\
-                                                        END IF;\
-                                                        PREPARE result_general_date_filters\
-                                                        FROM\
-                                                            @general_date_filters_query;\
-                                                        EXECUTE result_general_date_filters;\
-                                                        deallocate prepare result_general_date_filters;\
-                                                        END"\
-
-
-drop_proc_companies_search_results = f'DROP procedure IF EXISTS `proc_companies_search_results`;'
-create_proc_companies_search_results = "CREATE DEFINER=`eitan`@`localhost` PROCEDURE `proc_companies_search_results`(\
-                                            IN object_params JSON\
-                                        )\
-                                        BEGIN\
-                                        DECLARE CURSOR_SYMBOL VARCHAR(200);\
-                                        DECLARE CURSOR_SYMBOL_QUERY VARCHAR(200);\
-                                        DECLARE symbol_condition LONGBLOB;\
-                                        DECLARE done INT DEFAULT FALSE;\
-                                        DECLARE operator_or VARCHAR(10) DEFAULT ' OR ';\
-                                        DECLARE operator_and VARCHAR(10) DEFAULT ' AND ';\
-                                        DECLARE companies_query_condition LONGBLOB;\
-                                        DECLARE rows_number INT;\
-                                        DECLARE count INT DEFAULT 1;\
-                                        DECLARE username varchar(50);\
-                                        DECLARE date_filters_param TEXT;\
-                                        DECLARE filters_query TEXT;\
-                                        DECLARE result_base_query TEXT;\
-                                        DECLARE result_search_filters TEXT;\
-                                        DECLARE cursor_general_date_filters CURSOR FOR SELECT `Symbol` from tmp_companies_search_result_usd;\
-                                        DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;\
-                                        \
-                                        SET username = (SELECT JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.username')));\
-                                        SET @cursor_table = CONCAT('CREATE OR REPLACE VIEW tmp_companies_search_result_usd as SELECT Symbol FROM ', username, '_companies_search_result_usd');\
-                                        PREPARE create_cursor_table FROM @cursor_table;\
-                                        EXECUTE create_cursor_table;\
-                                        DEALLOCATE PREPARE create_cursor_table;\
-                                        \
-                                        SET symbol_condition = '(';\
-                                        \
-                                        OPEN cursor_general_date_filters;\
-                                        SET rows_number = (SELECT FOUND_ROWS());\
-                                        \
-                                        IF rows_number > 0 THEN\
-                                            loop_through_rows: LOOP\
-                                                FETCH cursor_general_date_filters INTO CURSOR_SYMBOL;\
-                                                \
-                                                IF done THEN\
-                                                CLOSE cursor_general_date_filters;\
-                                                LEAVE loop_through_rows;\
-                                                END IF;\
-                                                \
-                                                SET CURSOR_SYMBOL_QUERY = CONCAT('`Symbol` = ',  '\"', CURSOR_SYMBOL, '\"');\
-                                                \
-                                                IF rows_number = 1 THEN\
-                                                    SET companies_query_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, ')');\
-                                                ELSE\
-                                                    IF count < rows_number THEN\
-                                                        SET symbol_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, operator_or);\
-                                                    else\
-                                                        SET companies_query_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, ')');\
-                                                    END IF;\
-                                                END IF;\
-                                                \
-                                                SET count = count + 1;\
-                                            END LOOP;\
-                                            \
-                                            SET result_base_query = CONCAT('CREATE OR REPLACE VIEW ', username, '_companies_search_result AS SELECT * from base_query_data t0 WHERE ');\
-                                            SET date_filters_param = (SELECT JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.date_filters')));\
-                                            SET @filters_query = CONCAT(result_base_query, companies_query_condition,  operator_and, date_filters_param);\
-                                            \
-                                            ELSE\
-                                                SET @filters_query = CONCAT('CREATE OR REPLACE VIEW ', username, '_companies_search_result AS SELECT * from base_query_data t0 WHERE 1=2');\
-                                            END IF;\
-                                            \
-                                            PREPARE result_search_filters FROM @filters_query;\
-                                            EXECUTE result_search_filters;\
-                                            DEALLOCATE PREPARE result_search_filters;\
-                                            \
-                                            DROP VIEW IF EXISTS tmp_companies_search_result_usd;\
-                                            END"
-
-
-drop_proc_companies_search_results_usd = f'DROP procedure IF EXISTS `proc_companies_search_results_usd`;'
-create_proc_companies_search_results_usd = f"CREATE DEFINER=`eitan`@`localhost` PROCEDURE `proc_companies_search_results_usd`(\
-                                                IN object_params JSON\
-                                            )\
-                                            BEGIN\
-                                            DECLARE CURSOR_SYMBOL VARCHAR(200);\
-                                            DECLARE CURSOR_SYMBOL_QUERY VARCHAR(200);\
-                                            DECLARE symbol_condition LONGBLOB;\
-                                            DECLARE done INT DEFAULT FALSE;\
-                                            DECLARE operator_or VARCHAR(10) DEFAULT ' OR ';\
-                                            DECLARE operator_and VARCHAR(10) DEFAULT ' AND ';\
-                                            DECLARE companies_query_condition LONGBLOB;\
-                                            DECLARE rows_number INT;\
-                                            DECLARE count INT DEFAULT 1;\
-                                            DECLARE username varchar(50);\
-                                            DECLARE fundamental_filters_param TEXT;\
-                                            DECLARE date_filters_param TEXT;\
-                                            DECLARE fundamental_filters_query TEXT;\
-                                            DECLARE result_base_query TEXT;\
-                                            DECLARE result_search_filters TEXT;\
-                                            \
-                                            DECLARE cursor_general_date_filters CURSOR FOR SELECT `Symbol` from tmp_general_date_filters_selection;\
-                                            DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;\
-                                            \
-                                            SET username = (SELECT JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.username')));\
-                                            SET @cursor_table = concat('CREATE OR REPLACE VIEW tmp_general_date_filters_selection as SELECT Symbol FROM ', username, '_general_date_filters_selection');\
-                                            PREPARE create_cursor_table FROM @cursor_table;\
-                                            EXECUTE create_cursor_table;\
-                                            DEALLOCATE PREPARE create_cursor_table;\
-                                            \
-                                            SET symbol_condition = '(';\
-                                            \
-                                            OPEN cursor_general_date_filters;\
-                                            SET rows_number = (SELECT FOUND_ROWS());\
-                                            \
-                                            IF rows_number > 0 THEN\
-                                                loop_through_rows: LOOP\
-                                                    FETCH cursor_general_date_filters INTO CURSOR_SYMBOL;\
-                                                    \
-                                                    IF done THEN\
-                                                        CLOSE cursor_general_date_filters;\
-                                                    LEAVE loop_through_rows;\
-                                                    END IF;\
-                                                    \
-                                                    SET CURSOR_SYMBOL_QUERY = CONCAT('`Symbol` = ',  '\"', CURSOR_SYMBOL, '\"');\
-                                                    \
-                                                    IF rows_number = 1 THEN\
-                                                        SET companies_query_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, ')');\
-                                                    ELSE\
-                                                        IF count < rows_number THEN\
-                                                            SET symbol_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, operator_or);\
-                                                        else\
-                                                            SET companies_query_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, ')');\
-                                                        END IF;\
-                                                    END IF;\
-                                                    \
-                                                    SET count = count + 1;\
-                                                END LOOP;\
-                                                \
-                                                SET result_base_query = CONCAT('CREATE OR REPLACE VIEW ', username, '_companies_search_result_usd AS SELECT * from base_query_data_usd t0 WHERE ');\
-                                                SET date_filters_param = (SELECT JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.date_filters')));\
-                                                SET fundamental_filters_param = (SELECT JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.fundamental_filters')));\
-                                                    \
-                                                IF fundamental_filters_param <> '' THEN\
-                                                    SET @fundamental_filters_query = CONCAT(result_base_query, companies_query_condition, operator_and, fundamental_filters_param, operator_and, date_filters_param);\
-                                                ELSE\
-                                                    SET @fundamental_filters_query = CONCAT(result_base_query, companies_query_condition,  operator_and, date_filters_param);\
-                                                END IF;\
-                                            \
-                                            ELSE\
-                                                SET @fundamental_filters_query = CONCAT('CREATE OR REPLACE VIEW ', username, '_companies_search_result_usd AS SELECT * from base_query_data_usd t0 WHERE 1=2');\
-                                            END IF;\
-                                            \
-                                            PREPARE result_search_filters FROM @fundamental_filters_query;\
-                                            EXECUTE result_search_filters;\
-                                            DEALLOCATE PREPARE result_search_filters;\
-                                            \
-                                            DROP VIEW IF EXISTS tmp_general_date_filters_selection;\
-                                            END"
-
-
-drop_proc_companies_search_selected_results_usd = f'DROP procedure IF EXISTS `proc_companies_search_selected_results_usd`;'
-create_proc_companies_search_selected_results_usd = f"CREATE DEFINER=`eitan`@`localhost` PROCEDURE `proc_companies_search_selected_results_usd`(\
-                                                        IN object_params JSON\
-                                                    )\
-                                                    BEGIN\
-                                                    DECLARE CURSOR_SYMBOL VARCHAR(200);\
-                                                    DECLARE CURSOR_SYMBOL_QUERY VARCHAR(200);\
-                                                    DECLARE symbol_condition LONGBLOB;\
-                                                    DECLARE done INT DEFAULT FALSE;\
-                                                    DECLARE operator_or VARCHAR(10) DEFAULT ' OR ';\
-                                                    DECLARE operator_and VARCHAR(10) DEFAULT ' AND ';\
-                                                    DECLARE companies_query_condition LONGBLOB;\
-                                                    DECLARE rows_number INT;\
-                                                    DECLARE count INT DEFAULT 1;\
-                                                    DECLARE fundamental_filters_param TEXT;\
-                                                    DECLARE username varchar(50);\
-                                                    DECLARE date_filters_param TEXT;\
-                                                    DECLARE fundamental_filters_query TEXT;\
-                                                    DECLARE result_base_query TEXT;\
-                                                    DECLARE result_search_filters TEXT;\
-                                                    DECLARE cursor_general_date_filters CURSOR FOR SELECT `Symbol` from `tmp_general_date_filters_selected_companies`;\
-                                                    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;\
-                                                    \
-                                                    SET username = (SELECT JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.username')));\
-                                                    SET @cursor_table = concat('CREATE OR REPLACE VIEW tmp_general_date_filters_selected_companies as SELECT Symbol FROM ', username, '_general_date_filters_selected_companies');\
-                                                    PREPARE create_cursor_table FROM @cursor_table;\
-                                                    EXECUTE create_cursor_table;\
-                                                    DEALLOCATE PREPARE create_cursor_table;\
-                                                    \
-                                                    SET symbol_condition = '(';\
-                                                    \
-                                                    OPEN cursor_general_date_filters;\
-                                                    SET rows_number = (SELECT FOUND_ROWS());\
-\
-                                                    IF rows_number > 0 THEN\
-                                                        loop_through_rows: LOOP\
-                                                            FETCH cursor_general_date_filters INTO CURSOR_SYMBOL;\
-                                                            \
-                                                            IF done THEN\
-                                                                CLOSE cursor_general_date_filters;\
-                                                            LEAVE loop_through_rows;\
-                                                            END IF;\
-                                                            \
-                                                            SET CURSOR_SYMBOL_QUERY = CONCAT('`Symbol` = ',  '\"', CURSOR_SYMBOL, '\"');\
-                                                            \
-                                                            IF rows_number = 1 THEN\
-                                                                SET companies_query_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, ')');\
-                                                            ELSE\
-                                                                IF count < rows_number THEN\
-                                                                    SET symbol_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, operator_or);\
-                                                                else\
-                                                                    SET companies_query_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, ')');\
-                                                                END IF;\
-                                                            END IF;\
-                                                            \
-                                                            SET count = count + 1;\
-                                                        END LOOP;\
-                                                        \
-                                                        SET result_base_query = CONCAT('CREATE OR REPLACE VIEW ', username, '_companies_search_selected_result_usd AS SELECT * from base_query_data_usd t0 WHERE ');\
-                                                        SET date_filters_param = (SELECT JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.date_filters')));\
-                                                        SET fundamental_filters_param = (SELECT JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.fundamental_filters')));\
-                                                            \
-                                                        IF fundamental_filters_param <> '' THEN\
-                                                            SET @fundamental_filters_query = CONCAT(result_base_query, companies_query_condition, operator_and, fundamental_filters_param, operator_and, date_filters_param);\
-                                                        ELSE\
-                                                            SET @fundamental_filters_query = CONCAT(result_base_query, companies_query_condition,  operator_and, date_filters_param);\
-                                                        END IF;\
-                                                    \
-                                                    ELSE\
-                                                        SET @fundamental_filters_query = CONCAT('CREATE OR REPLACE VIEW ', username, '_companies_search_selected_result_usd AS SELECT * from base_query_data_usd t0 WHERE 1=2');\
-                                                    END IF;\
-                                                    \
-                                                    PREPARE result_search_filters FROM @fundamental_filters_query;\
-                                                    EXECUTE result_search_filters;\
-                                                    DEALLOCATE PREPARE result_search_filters;\
-                                                    DROP VIEW IF EXISTS tmp_general_date_filters_selected_companies;\
-                                                    END"
-
-
-drop_proc_companies_search_selected_results = f'DROP procedure IF EXISTS `proc_companies_search_selected_results`;'
-create_proc_companies_search_selected_results = f"CREATE DEFINER=`eitan`@`localhost` PROCEDURE `proc_companies_search_selected_results`(\
-                                                    IN object_params JSON\
-                                                )\
-                                                BEGIN\
-                                                DECLARE CURSOR_SYMBOL VARCHAR(200);\
-                                                DECLARE CURSOR_SYMBOL_QUERY VARCHAR(200);\
-                                                DECLARE symbol_condition LONGBLOB;\
-                                                DECLARE done INT DEFAULT FALSE;\
-                                                DECLARE operator_or VARCHAR(10) DEFAULT ' OR ';\
-                                                DECLARE operator_and VARCHAR(10) DEFAULT ' AND ';\
-                                                DECLARE companies_query_condition LONGBLOB;\
-                                                DECLARE rows_number INT;\
-                                                DECLARE count INT DEFAULT 1;\
-                                                DECLARE username varchar(50);\
-                                                DECLARE date_filters_param TEXT;\
-                                                DECLARE filters_query TEXT;\
-                                                DECLARE result_base_query TEXT;\
-                                                DECLARE result_search_filters TEXT;\
-                                                DECLARE cursor_general_date_filters CURSOR FOR SELECT `Symbol` from tmp_companies_search_selected_result_usd;\
-                                                DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;\
-                                                \
-                                                SET username = (SELECT JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.username')));\
-                                                SET @cursor_table = concat('CREATE OR REPLACE VIEW tmp_companies_search_selected_result_usd as SELECT Symbol FROM ', username, '_companies_search_selected_result_usd');\
-                                                PREPARE create_cursor_table FROM @cursor_table;\
-                                                EXECUTE create_cursor_table;\
-                                                DEALLOCATE PREPARE create_cursor_table;\
-                                                \
-                                                SET symbol_condition = '(';\
-                                                \
-                                                OPEN cursor_general_date_filters;\
-                                                SET rows_number = (SELECT FOUND_ROWS());\
-                                                \
-                                                IF rows_number > 0 THEN\
-                                                    loop_through_rows: LOOP\
-                                                        FETCH cursor_general_date_filters INTO CURSOR_SYMBOL;\
-                                                        \
-                                                        IF done THEN\
-                                                            CLOSE cursor_general_date_filters;\
-                                                        LEAVE loop_through_rows;\
-                                                        END IF;\
-                                                        \
-                                                        SET CURSOR_SYMBOL_QUERY = CONCAT('`Symbol` = ',  '\"', CURSOR_SYMBOL, '\"');\
-                                                        \
-                                                        IF rows_number = 1 THEN\
-                                                            SET companies_query_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, ')');\
-                                                        ELSE\
-                                                            IF count < rows_number THEN\
-                                                                SET symbol_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, operator_or);\
-                                                            else\
-                                                                SET companies_query_condition = CONCAT(symbol_condition, CURSOR_SYMBOL_QUERY, ')');\
-                                                            END IF;\
-                                                        END IF;\
-                                                        \
-                                                        SET count = count + 1;\
-                                                    END LOOP;\
-                                                    \
-                                                    SET result_base_query = CONCAT('CREATE OR REPLACE VIEW ', username, '_companies_search_selected_result AS SELECT * from base_query_data t0 WHERE ');\
-                                                    SET date_filters_param = (SELECT JSON_UNQUOTE(JSON_EXTRACT(object_params, '$.date_filters')));\
-                                                    SET @filters_query = CONCAT(result_base_query, companies_query_condition,  operator_and, date_filters_param);\
-                                                \
-                                                ELSE\
-                                                    SET @filters_query = CONCAT('CREATE OR REPLACE VIEW ', username, '_companies_search_selected_result AS SELECT * from base_query_data t0 WHERE 1=2');\
-                                                END IF;\
-                                                \
-                                                PREPARE result_search_filters FROM @filters_query;\
-                                                EXECUTE result_search_filters;\
-                                                DEALLOCATE PREPARE result_search_filters;\
-                                                DROP VIEW IF EXISTS tmp_companies_search_selected_result_usd;\
-                                                END"
-
-
-drop_proc_db_general_summaries = f'DROP procedure IF EXISTS `proc_db_general_summaries`;'
+drop_proc_db_general_summaries = f'DROP procedure IF EXISTS `db_general_summaries`;'
 create_proc_db_general_summaries = f"CREATE DEFINER=`eitan`@`localhost` PROCEDURE `db_general_summaries`()\
                                     BEGIN\
                                         DECLARE companies_sql TEXT;\
@@ -799,7 +354,7 @@ create_proc_db_general_summaries = f"CREATE DEFINER=`eitan`@`localhost` PROCEDUR
                                     END"
 
 
-drop_proc_db_revenue_summaries = f'DROP procedure IF EXISTS `proc_db_revenue_summaries`;'
+drop_proc_db_revenue_summaries = f'DROP procedure IF EXISTS `db_revenue_summaries`;'
 create_proc_db_revenue_summaries = f"CREATE DEFINER=`eitan`@`localhost` PROCEDURE `db_revenue_summaries`()\
                                     BEGIN\
                                     DECLARE comercial_year double;\
@@ -882,58 +437,17 @@ stp_proc_create_base_query_data_usd = {
     'name': 'proc_create_base_query_data_usd'
 }
 
-stp_proc_general_date_filters = {
-    'drop': drop_proc_general_date_filters,
-    'create': create_proc_general_date_filters,
-    'name': 'proc_general_date_filters'
-}
-
-stp_proc_general_date_filters_selected_companies = {
-    'drop': drop_proc_general_date_filters_selected_companies,
-    'create': create_proc_general_date_filters_selected_companies,
-    'name': 'proc_general_date_filters_selected_companies'
-}
-
-stp_proc_companies_search_results = {
-    'drop': drop_proc_companies_search_results,
-    'create': create_proc_companies_search_results,
-    'name': 'proc_companies_search_results'
-}
-
-
-stp_proc_companies_search_results_usd = {
-    'drop': drop_proc_companies_search_results_usd,
-    'create': create_proc_companies_search_results_usd,
-    'name': 'proc_companies_search_results_usd'
-}
-
-stp_proc_companies_search_results = {
-    'drop': drop_proc_companies_search_results,
-    'create': create_proc_companies_search_results,
-    'name': 'proc_companies_search_results'
-}
-
-
-stp_proc_companies_search_selected_results_usd = {
-    'drop': drop_proc_companies_search_selected_results_usd,
-    'create': create_proc_companies_search_selected_results_usd,
-    'name': 'proc_companies_search_selected_results_usd'
-}
-
-stp_proc_companies_search_selected_results = {
-    'drop': drop_proc_companies_search_selected_results,
-    'create': create_proc_companies_search_selected_results,
-    'name': 'proc_companies_search_selected_results'
-}
 
 stp_proc_db_general_summaries = {
     'drop': drop_proc_db_general_summaries,
     'create': create_proc_db_general_summaries,
-    'name': 'proc_db_general_summaries'
+    'name': 'db_general_summaries',
+    'call': 'CALL db_general_summaries()'
 }
 
 stp_proc_db_revenue_summaries = {
     'drop': drop_proc_db_revenue_summaries,
     'create': create_proc_db_revenue_summaries,
-    'name': 'proc_db_revenue_summaries'
+    'name': 'db_revenue_summaries',
+    'call': 'CALL db_revenue_summaries()'
 }
