@@ -26,10 +26,16 @@ def init(DIRS, TICKERS_FILES):
         'next': 'finished',
         'kwargs': fmp_arguments["cash_flow_kwargs"]
     }
+
+    ownership = {
+        'current': 'ownership',
+        'next': 'finished',
+        'kwargs': fmp_arguments["ownership_kwargs"]
+    }
     
     outlook = {
         'current': 'outlook',
-        'next': 'forex',
+        'next': 'finished',
         'kwargs': fmp_arguments["outlook_kwargs"]
     }
     
@@ -40,11 +46,12 @@ def init(DIRS, TICKERS_FILES):
     }
     
     return  [
-        profile,
-        incomeStatement,
-        balanceSheet,
-        cashFlow,
-        outlook,
-        forex
+        # profile,
+        # incomeStatement,
+        # balanceSheet,
+        # cashFlow,
+        ownership,
+        # outlook,
+        # forex
     ]
     

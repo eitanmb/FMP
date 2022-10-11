@@ -11,6 +11,7 @@ class DataDownload(FmpAPI):
         self.endpoint = kwargs['endpoint']
         self.folder = kwargs['folder']
         self.tickers_path = kwargs['tickers_list']
+        self.dates_available = kwargs['dates_available']
         self.store_ticket_list()
 
     def store_ticket_list(self):
@@ -23,9 +24,18 @@ class DataDownload(FmpAPI):
             print(error)
 
     def fetch_data(self):
-        FmpAPI.download_companies_data({
-            'domain':self.domain,
-            'tickers_list':self.tickers_list,
-            'endpoint':self.endpoint,
-            'folder':self.folder,
-        })
+        if self.domain == "ownership":
+            FmpAPI.download_ownership_data({
+                'domain':self.domain,
+                'tickers_list':self.tickers_list,
+                'endpoint':self.endpoint,
+                'folder':self.folder,
+                'dates_available': self.dates_available
+            })
+        else:
+            FmpAPI.download_companies_data({
+                'domain':self.domain,
+                'tickers_list':self.tickers_list,
+                'endpoint':self.endpoint,
+                'folder':self.folder,
+            })

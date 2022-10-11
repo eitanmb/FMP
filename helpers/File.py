@@ -26,6 +26,12 @@ class File:
             json.dump(data, fp)
 
     @staticmethod
+    def append_json(file, data):
+        with open(file, 'a') as fp:
+            json.dump(data, fp)
+            
+
+    @staticmethod
     def read_json(file):
         jd = open(file)
         data = json.load(jd)

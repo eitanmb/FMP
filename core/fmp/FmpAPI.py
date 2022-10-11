@@ -126,3 +126,51 @@ class FmpAPI:
                 util.print_messages('ticker', ticker)
                 how_many_tickers += 1
                 util.print_messages('How many: ', how_many_tickers)
+
+    
+    
+    def download_ownership_data(domain) -> None:
+        tickers_list = domain["tickers_list"]
+        folder = domain['folder']
+        partial_endpoint = domain["endpoint"]
+        caller = domain["domain"]
+        dates = domain['dates_available']
+        
+        how_many_tickers = File.count_files_in_folder(folder)
+        _from = FmpAPI.return_start_from_tickers(how_many_tickers)
+
+        util.print_messages("How many tickers:", how_many_tickers)
+        util.print_messages("Desde:", _from)
+
+        for i in range(_from, len(tickers_list)):
+            ticker = FmpTickers.clean_ticker(tickers_list[i])
+            file = FmpImplementation.get_path_to_file(folder, f"{ticker}.json")
+            
+
+            for date in dates:
+                page = 0
+                while True:
+                    endpoint = partial_endpoint.format(url_base=FmpAPI.url_base, date=date, ticker=ticker, page=page,apikey=FmpAPI.apikey)
+                    util.print_messages(endpoint)
+              
+                    try:
+                        data = FmpAPI.get_jsonparsed_data(endpoint)
+                        if FmpImplementation.is_valid_data(data):
+                            File.append_json(file, data)
+                        else:
+                            util.print_messages("No hay datos:", ticker)
+
+                    except Exception as error:
+                        util.print_messages(error, endpoint)
+                            
+                    page += 1
+
+                    if len(data) == 0:
+                        break
+                
+
+            ticker_position = FmpAPI.get_download_ticker_possition(tickers_list, ticker)
+            util.write_lastTicker_file(FmpAPI.last_ticker,caller, ticker_position)
+            util.print_messages('ticker', ticker)
+            how_many_tickers += 1
+            util.print_messages('How many: ', how_many_tickers)

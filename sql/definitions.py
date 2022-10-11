@@ -287,7 +287,16 @@ CF_OPERATIONS = {
     "add_indexes": CF_FK
 }
 
+OWNERSHIP_DROP_TABLE = f"DROP TABLE IF EXISTS ownership"
 
+OWNERSHIP_OPERATIONS = {
+    "table": "ownership",
+    "drop_table": OWNERSHIP_DROP_TABLE,
+    "create_table": None,
+    "alter_table": None,
+    "delete_null": None,
+    "add_indexes": None
+}
 
 FX_DROP_TABLE = f"DROP TABLE IF EXISTS forex"
 
