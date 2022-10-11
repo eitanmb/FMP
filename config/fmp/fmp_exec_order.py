@@ -23,13 +23,13 @@ def init(DIRS, TICKERS_FILES):
     
     cashFlow = {
         'current': 'CF',
-        'next': 'outlook',
+        'next': 'finished',
         'kwargs': fmp_arguments["cash_flow_kwargs"]
     }
     
     outlook = {
         'current': 'outlook',
-        'next': 'finished',
+        'next': 'forex',
         'kwargs': fmp_arguments["outlook_kwargs"]
     }
     

@@ -67,15 +67,9 @@ def init(DIRS):
         drop_create_procedure(stp_proc_fx_exRate, mysql_engine)
         drop_create_procedure(stp_proc_create_base_query_data, mysql_engine)
         drop_create_procedure(stp_proc_create_base_query_data_usd, mysql_engine)
-        drop_create_procedure(stp_proc_general_date_filters, mysql_engine)
-        drop_create_procedure(stp_proc_general_date_filters_selected_companies, mysql_engine)
-        drop_create_procedure(stp_proc_companies_search_results, mysql_engine)
-        drop_create_procedure(stp_proc_companies_search_results_usd, mysql_engine)
-        drop_create_procedure(stp_proc_companies_search_selected_results_usd, mysql_engine)
-        drop_create_procedure(stp_proc_companies_search_selected_results, mysql_engine)
         drop_create_procedure(stp_proc_db_general_summaries, mysql_engine)
         drop_create_procedure(stp_proc_db_revenue_summaries, mysql_engine)
-        
+        call_procedures(stp_exec_procedures, mysql_engine)
 
     
     mysql_engine = engine_connetion()
@@ -105,8 +99,7 @@ def init(DIRS):
         if data['kwargs']['sql'] is not None:
             create_data_persistence_sql(data['kwargs'])
 
-    drop_create_call_procedures()
-
+    # drop_create_call_procedures()
 
     # for data in exec_order:
     #     print_messages("NoSql executions on:", data['current'])

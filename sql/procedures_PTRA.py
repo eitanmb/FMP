@@ -223,7 +223,6 @@ create_proc_create_base_query_data = "CREATE DEFINER = `eitan` @`localhost` PROC
                                         END IF;\
                                         ALTER TABLE\
                                             `base_query_data`\
-                                        ADD FULLTEXT INDEX `Search` (`Description`),\
                                         ADD INDEX `ISectorYear` (`Sector` ASC, `Year` DESC) VISIBLE,\
                                         ADD INDEX `IIndustryYear` (`Industry` ASC, `Year` DESC) VISIBLE,\
                                         ADD INDEX `ICompanyYear` (`Company Name` ASC, `Year` DESC) VISIBLE,\
@@ -304,7 +303,6 @@ create_proc_create_base_query_data_usd = "CREATE DEFINER = `eitan` @`localhost` 
                                             ALTER TABLE `base_query_data_usd` DROP COLUMN `Indexed`;\
                                             UPDATE base_query_data_usd SET `Reported Currency` = 'USD';\
                                             ALTER TABLE `base_query_data_usd`\
-                                            ADD FULLTEXT INDEX `Search` (`Description`),\
                                             ADD INDEX `ISectorYear` (`Sector` ASC, `Year` DESC) VISIBLE,\
                                             ADD INDEX `IIndustryYear` (`Industry` ASC, `Year` DESC) VISIBLE,\
                                             ADD INDEX `ICompanyYear` (`Company Name` ASC, `Year` DESC) VISIBLE,\
