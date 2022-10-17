@@ -11,6 +11,6 @@ ENDPOINTS = {
     "tradeble_list"           : "{url_base}/v3/available-traded/list?apikey={apikey}",
     "stock_list"              : "{url_base}/v3/stock/list?apikey={apikey}",
     "forex_pairs"             : "{url_base}/v3/symbol/available-forex-currency-pairs?apikey={apikey}",
-    "stock_ownership"         : "{url_base}/v4/institutional-ownership/institutional-holders/symbol-ownership?date={date}&symbol={ticker}&page={page}&apikey={apikey}",
+    "holders_ownership"       : "{url_base}/v4/institutional-ownership/institutional-holders/symbol-ownership-percent?date={date}&symbol={ticker}&page={page}&apikey={apikey}",
+    "institutional_ownership" : "{url_base}/v4/institutional-ownership/symbol-ownership?symbol={ticker}&includeCurrentQuarter=false&apikey={apikey}"
 }
-

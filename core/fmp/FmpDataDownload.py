@@ -24,7 +24,7 @@ class DataDownload(FmpAPI):
             print(error)
 
     def fetch_data(self):
-        if self.domain == "ownership":
+        if self.domain == "holders":
             FmpAPI.download_ownership_data({
                 'domain':self.domain,
                 'tickers_list':self.tickers_list,

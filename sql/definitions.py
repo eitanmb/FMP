@@ -5,6 +5,8 @@ CONNECTION: object = {
 }
 
 
+#COMPANY PROFILE
+
 PROFILE_DROP_TABLE = f"DROP TABLE IF EXISTS profile"
 PROFILE_CREATE_TABLE = f'CREATE TABLE profile ( \
                         `symbol` varchar(25) NOT NULL, \
@@ -68,6 +70,8 @@ PROFILE_OPERATIONS = {
     "delete_null": None
 
 }
+
+#FINANCIAL STATEMENTS
 
 IS_DROP_TABLE = f"DROP TABLE IF EXISTS incomeStatement"
 IS_CREATE_TABLE = f'CREATE TABLE `incomeStatement` (\
@@ -287,16 +291,42 @@ CF_OPERATIONS = {
     "add_indexes": CF_FK
 }
 
-OWNERSHIP_DROP_TABLE = f"DROP TABLE IF EXISTS ownership"
 
-OWNERSHIP_OPERATIONS = {
-    "table": "ownership",
-    "drop_table": OWNERSHIP_DROP_TABLE,
+# OWNERSHIP
+
+HOLDERS_OWNERSHIP_DROP_TABLE = f"DROP TABLE IF EXISTS holdersOwnership"
+
+HOLDERS_OWNERSHIP_INDEX = f'ALTER TABLE `holdersOwnership` \
+                            ADD INDEX `HSymbol` (`symbol` ASC) VISIBLE'
+
+
+
+HOLDERS_OWNERSHIP_OPERATIONS = {
+    "table": "holdersOwnership",
+    "drop_table": HOLDERS_OWNERSHIP_DROP_TABLE,
     "create_table": None,
     "alter_table": None,
     "delete_null": None,
-    "add_indexes": None
+    "add_indexes": HOLDERS_OWNERSHIP_INDEX
 }
+
+INSTITUTIONAL_OWNERSHIP_DROP_TABLE = f"DROP TABLE IF EXISTS institutionalOwnership"
+
+INSTITUTIONAL_OWNERSHIP_INDEX = f'ALTER TABLE `institutionalOwnership` \
+                            ADD INDEX `InsSymbol` (`symbol` ASC) VISIBLE'
+
+
+INSTITUTIONAL_OWNERSHIP_OPERATIONS = {
+    "table": "institutionalOwnership",
+    "drop_table": INSTITUTIONAL_OWNERSHIP_DROP_TABLE,
+    "create_table": None,
+    "alter_table": None,
+    "delete_null": None,
+    "add_indexes": INSTITUTIONAL_OWNERSHIP_INDEX
+}
+
+
+# FOREX
 
 FX_DROP_TABLE = f"DROP TABLE IF EXISTS forex"
 

@@ -23,14 +23,20 @@ def init(DIRS, TICKERS_FILES):
     
     cashFlow = {
         'current': 'CF',
-        'next': 'finished',
+        'next': 'holders',
         'kwargs': fmp_arguments["cash_flow_kwargs"]
     }
 
-    ownership = {
-        'current': 'ownership',
+    holders = {
+        'current': 'holders',
+        'next': 'institutional',
+        'kwargs': fmp_arguments["holders_ownership_kwargs"]
+    }
+
+    institutional = {
+        'current': 'institutional',
         'next': 'finished',
-        'kwargs': fmp_arguments["ownership_kwargs"]
+        'kwargs': fmp_arguments["institutional_ownership_kwargs"]
     }
     
     outlook = {
@@ -50,7 +56,8 @@ def init(DIRS, TICKERS_FILES):
         # incomeStatement,
         # balanceSheet,
         # cashFlow,
-        ownership,
+        holders,
+        institutional,
         # outlook,
         # forex
     ]

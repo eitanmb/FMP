@@ -5,7 +5,7 @@ sys.path.append("..")
 from noSql.definitions import PROFILE_NOSQl, IS_NOSQl, BS_NOSQl, CF_NOSQl, OUTLOOK_NOSQL
 from .fmp_endpoints import ENDPOINTS
 from .fmp_variables import holder_dates_available
-from sql.definitions import IS_OPERATIONS, BS_OPERATIONS, CF_OPERATIONS, PROFILE_OPERATIONS, FX_OPERATIONS, OWNERSHIP_OPERATIONS
+from sql.definitions import IS_OPERATIONS, BS_OPERATIONS, CF_OPERATIONS, PROFILE_OPERATIONS, FX_OPERATIONS, HOLDERS_OWNERSHIP_OPERATIONS, INSTITUTIONAL_OWNERSHIP_OPERATIONS
 
 
 def init(DIRS, TICKERS_FILES):
@@ -52,13 +52,23 @@ def init(DIRS, TICKERS_FILES):
         'noSql': CF_NOSQl
     }
 
-    ownership_kwargs = {
-    'domain':'ownership',
+    holders_ownership_kwargs = {
+    'domain':'holders',
     'tickers_list': TICKERS_FILES['stock']['path_to_file'],
-    'endpoint': ENDPOINTS['stock_ownership'], 
+    'endpoint': ENDPOINTS['holders_ownership'], 
     'dates_available': holder_dates_available,
-    'folder': f'{BASE_FOLDER}/ownership',
-    'sql': OWNERSHIP_OPERATIONS,
+    'folder': f'{BASE_FOLDER}/ownership/holders',
+    'sql': HOLDERS_OWNERSHIP_OPERATIONS,
+    'noSql': None
+    }
+
+    institutional_ownership_kwargs = {
+    'domain':'institutional',
+    'tickers_list': TICKERS_FILES['stock']['path_to_file'],
+    'endpoint': ENDPOINTS['institutional_ownership'], 
+    'dates_available': None,
+    'folder': f'{BASE_FOLDER}/ownership/institutional',
+    'sql': INSTITUTIONAL_OWNERSHIP_OPERATIONS,
     'noSql': None
     }
 
@@ -89,7 +99,8 @@ def init(DIRS, TICKERS_FILES):
         "income_statements_kwargs": income_statements_kwargs,
         "balance_sheet_kwargs":balance_sheet_kwargs,
         "cash_flow_kwargs":cash_flow_kwargs,
-        "ownership_kwargs": ownership_kwargs,
+        "holders_ownership_kwargs": holders_ownership_kwargs,
+        "institutional_ownership_kwargs": institutional_ownership_kwargs,
         "outlook_kwargs":outlook_kwargs,
         "forex_kwargs":forex_kwargs,
 
