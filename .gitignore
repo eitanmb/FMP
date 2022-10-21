@@ -3,7 +3,6 @@ bitacora/
 *.json
 .env
 geckodriver.log
-mongo_fmp.py
 dev/
 fmp_fetch_tracker.txt
 inv_fetch_tracker.txt
